@@ -26,7 +26,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
@@ -360,9 +360,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\..\documentation\Changes.rtf">
-      <Link>Resources\Changes.rtf</Link>
-    </EmbeddedResource>
+    <EmbeddedResource Include="..\CHANGELOG.txt" />
     <EmbeddedResource Include="FormAbout.ja.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
     </EmbeddedResource>
@@ -436,9 +434,7 @@
     <None Include="Images\saveHS.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\..\license.txt">
-      <Link>Resources\license.txt</Link>
-    </EmbeddedResource>
+    <EmbeddedResource Include="..\LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\Logo.png" />
