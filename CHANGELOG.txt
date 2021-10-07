@@ -1,5 +1,12 @@
 Version history
 
+1.4.7
+- Improvement: Be.HexEditor is now licensed under the MIT License
+- Improvement: Changes of the byte char converter implementations
+- Improvement: DynamicByteProvider memory management improved
+- Bug fix: PageUp, PageDown is working correctly now
+- Bug fix: BuiltInContextMenu menu items event handlers are fixed now
+
 1.4.6
 - New feature: Italian language added
 

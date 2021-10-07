@@ -47,8 +47,8 @@ namespace Be.HexEditor
                 string resThanksTo = "Be.HexEditor.Resources.ThanksTo.rtf";
                 txtThanksTo.LoadFile(ca.GetManifestResourceStream(resThanksTo), RichTextBoxStreamType.RichText);
 
-                string resLicense = "Be.HexEditor.Resources.License.rtf";
-                txtLicense.LoadFile(ca.GetManifestResourceStream(resLicense), RichTextBoxStreamType.RichText);
+                string resLicense = "Be.HexEditor.Resources.license.txt";
+                txtLicense.LoadFile(ca.GetManifestResourceStream(resLicense), RichTextBoxStreamType.PlainText);
 
                 string resChanges = "Be.HexEditor.Resources.Changes.rtf";
                 txtChanges.LoadFile(ca.GetManifestResourceStream(resChanges), RichTextBoxStreamType.RichText);
@@ -107,148 +107,99 @@ namespace Be.HexEditor
             // 
             // label1
             // 
-            this.label1.AccessibleDescription = null;
-            this.label1.AccessibleName = null;
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
             // lblAuthor
             // 
-            this.lblAuthor.AccessibleDescription = null;
-            this.lblAuthor.AccessibleName = null;
-            resources.ApplyResources(this.lblAuthor, "lblAuthor");
             this.lblAuthor.BackColor = System.Drawing.Color.White;
             this.lblAuthor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.lblAuthor, "lblAuthor");
             this.lblAuthor.Name = "lblAuthor";
             // 
             // lnkWorkspace
             // 
-            this.lnkWorkspace.AccessibleDescription = null;
-            this.lnkWorkspace.AccessibleName = null;
-            resources.ApplyResources(this.lnkWorkspace, "lnkWorkspace");
             this.lnkWorkspace.BackColor = System.Drawing.Color.White;
             this.lnkWorkspace.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.lnkWorkspace, "lnkWorkspace");
             this.lnkWorkspace.Name = "lnkWorkspace";
             this.lnkWorkspace.TabStop = true;
             this.lnkWorkspace.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCompany_LinkClicked);
             // 
             // label5
             // 
-            this.label5.AccessibleDescription = null;
-            this.label5.AccessibleName = null;
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
             // 
             // lblVersion
             // 
-            this.lblVersion.AccessibleDescription = null;
-            this.lblVersion.AccessibleName = null;
-            resources.ApplyResources(this.lblVersion, "lblVersion");
             this.lblVersion.BackColor = System.Drawing.Color.White;
             this.lblVersion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.lblVersion, "lblVersion");
             this.lblVersion.Name = "lblVersion";
             // 
             // label7
             // 
-            this.label7.AccessibleDescription = null;
-            this.label7.AccessibleName = null;
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
             // 
             // tabControl
             // 
-            this.tabControl.AccessibleDescription = null;
-            this.tabControl.AccessibleName = null;
-            resources.ApplyResources(this.tabControl, "tabControl");
-            this.tabControl.BackgroundImage = null;
             this.tabControl.Controls.Add(this.tabThanksTo);
             this.tabControl.Controls.Add(this.tabLicense);
             this.tabControl.Controls.Add(this.tabChanges);
-            this.tabControl.Font = null;
+            resources.ApplyResources(this.tabControl, "tabControl");
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             // 
             // tabThanksTo
             // 
-            this.tabThanksTo.AccessibleDescription = null;
-            this.tabThanksTo.AccessibleName = null;
             resources.ApplyResources(this.tabThanksTo, "tabThanksTo");
-            this.tabThanksTo.BackgroundImage = null;
             this.tabThanksTo.Controls.Add(this.txtThanksTo);
-            this.tabThanksTo.Font = null;
             this.tabThanksTo.Name = "tabThanksTo";
             // 
             // txtThanksTo
             // 
-            this.txtThanksTo.AccessibleDescription = null;
-            this.txtThanksTo.AccessibleName = null;
-            resources.ApplyResources(this.txtThanksTo, "txtThanksTo");
             this.txtThanksTo.BackColor = System.Drawing.Color.White;
-            this.txtThanksTo.BackgroundImage = null;
             this.txtThanksTo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtThanksTo.Font = null;
+            resources.ApplyResources(this.txtThanksTo, "txtThanksTo");
             this.txtThanksTo.Name = "txtThanksTo";
             this.txtThanksTo.ReadOnly = true;
             // 
             // tabLicense
             // 
-            this.tabLicense.AccessibleDescription = null;
-            this.tabLicense.AccessibleName = null;
-            resources.ApplyResources(this.tabLicense, "tabLicense");
-            this.tabLicense.BackgroundImage = null;
             this.tabLicense.Controls.Add(this.txtLicense);
-            this.tabLicense.Font = null;
+            resources.ApplyResources(this.tabLicense, "tabLicense");
             this.tabLicense.Name = "tabLicense";
             // 
             // txtLicense
             // 
-            this.txtLicense.AccessibleDescription = null;
-            this.txtLicense.AccessibleName = null;
-            resources.ApplyResources(this.txtLicense, "txtLicense");
             this.txtLicense.BackColor = System.Drawing.Color.White;
-            this.txtLicense.BackgroundImage = null;
             this.txtLicense.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtLicense.Font = null;
+            resources.ApplyResources(this.txtLicense, "txtLicense");
             this.txtLicense.Name = "txtLicense";
             this.txtLicense.ReadOnly = true;
             // 
             // tabChanges
             // 
-            this.tabChanges.AccessibleDescription = null;
-            this.tabChanges.AccessibleName = null;
-            resources.ApplyResources(this.tabChanges, "tabChanges");
-            this.tabChanges.BackgroundImage = null;
             this.tabChanges.Controls.Add(this.txtChanges);
-            this.tabChanges.Font = null;
+            resources.ApplyResources(this.tabChanges, "tabChanges");
             this.tabChanges.Name = "tabChanges";
             // 
             // txtChanges
             // 
-            this.txtChanges.AccessibleDescription = null;
-            this.txtChanges.AccessibleName = null;
-            resources.ApplyResources(this.txtChanges, "txtChanges");
-            this.txtChanges.BackgroundImage = null;
             this.txtChanges.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtChanges.Font = null;
+            resources.ApplyResources(this.txtChanges, "txtChanges");
             this.txtChanges.Name = "txtChanges";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.AccessibleDescription = null;
-            this.pictureBox1.AccessibleName = null;
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.BackgroundImage = null;
-            this.pictureBox1.Font = null;
-            this.pictureBox1.ImageLocation = null;
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
             // UCAbout
             // 
-            this.AccessibleDescription = null;
-            this.AccessibleName = null;
-            resources.ApplyResources(this, "$this");
-            this.BackgroundImage = null;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.lblVersion);
@@ -257,6 +208,7 @@ namespace Be.HexEditor
             this.Controls.Add(this.lnkWorkspace);
             this.Controls.Add(this.lblAuthor);
             this.Controls.Add(this.label1);
+            resources.ApplyResources(this, "$this");
             this.Name = "UCAbout";
             this.tabControl.ResumeLayout(false);
             this.tabThanksTo.ResumeLayout(false);

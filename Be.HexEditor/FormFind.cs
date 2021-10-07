@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 
 using Be.Windows.Forms;
+using System.Collections.Generic;
 
 namespace Be.HexEditor
 {
@@ -42,7 +43,7 @@ namespace Be.HexEditor
 //			rbString.Enter += new EventHandler(rbString_Enter);
 //			rbHex.Enter += new EventHandler(rbHex_Enter);
 
-			hexBox.ByteProvider = new DynamicByteProvider(new ByteCollection());
+			hexBox.ByteProvider = new DynamicByteProvider(new List<Byte>(new byte[0]));
 		}
 
 		/// <summary>
@@ -172,7 +173,7 @@ namespace Be.HexEditor
 			}
 			else
 			{
-				return ((DynamicByteProvider)hexBox.ByteProvider).Bytes.GetBytes();
+				return ((DynamicByteProvider)hexBox.ByteProvider).Bytes.ToArray();
 			}
 		}
 

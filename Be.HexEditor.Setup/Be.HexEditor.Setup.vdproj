@@ -21,12 +21,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_BDDE4C33CCD2654C05EF6FDB3C2005B6"
-        "OwnerKey" = "8:_C0A8D383189B4BEB96A7188BE47774AA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_C0A8D383189B4BEB96A7188BE47774AA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -37,42 +31,9 @@
         "OwnerKey" = "8:_C0A8D383189B4BEB96A7188BE47774AA"
         "MsmSig" = "8:_UNDEFINED"
         }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BDDE4C33CCD2654C05EF6FDB3C2005B6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
     }
     "Configurations"
     {
-        "ClientProfileRelease"
-        {
-        "DisplayName" = "8:ClientProfileRelease"
-        "IsDebugOnly" = "11:FALSE"
-        "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:ClientProfileRelease\\Be.HexEditor.Setup.msi"
-        "PackageFilesAs" = "3:2"
-        "PackageFileSize" = "3:-2147483648"
-        "CabType" = "3:1"
-        "Compression" = "3:2"
-        "SignOutput" = "11:FALSE"
-        "CertificateFile" = "8:"
-        "PrivateKeyFile" = "8:"
-        "TimeStampServer" = "8:"
-        "InstallerBootstrapper" = "3:1"
-            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
-            {
-            "Enabled" = "11:FALSE"
-            "PromptEnabled" = "11:TRUE"
-            "PrerequisitesLocation" = "2:1"
-            "Url" = "8:"
-            "ComponentsUrl" = "8:"
-                "Items"
-                {
-                }
-            }
-        }
         "Debug"
         {
         "DisplayName" = "8:Debug"
@@ -181,37 +142,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BDDE4C33CCD2654C05EF6FDB3C2005B6"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Be.Windows.Forms.HexBox, Version=1.4.6.13072, Culture=neutral, PublicKeyToken=e0e5adf0ebc99863, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_BDDE4C33CCD2654C05EF6FDB3C2005B6"
-                    {
-                    "Name" = "8:Be.Windows.Forms.HexBox.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Be.Windows.Forms.HexBox.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_0CAB17D6D1674070BB8C6BE67FE1F773"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
         }
         "FileType"
         {
@@ -301,15 +231,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Be.HexEditor"
-        "ProductCode" = "8:{2C3255BF-647E-4250-86AF-D61B7F799ECC}"
-        "PackageCode" = "8:{E7F2BD18-9107-47CD-99A7-B20266D90CAA}"
+        "ProductCode" = "8:{F287FADC-4EA3-4BC8-A471-004B8F944CED}"
+        "PackageCode" = "8:{875DF5F1-AE28-4EAE-A81C-AB237D1A7625}"
         "UpgradeCode" = "8:{18221954-2E4C-4C08-8D52-131154B26126}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.4.6"
+        "ProductVersion" = "8:1.4.7"
         "Manufacturer" = "8:Be"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

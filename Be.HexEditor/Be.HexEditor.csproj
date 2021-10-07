@@ -217,7 +217,6 @@
     <EmbeddedResource Include="FormOptions.zh-Hans.resx">
       <DependentUpon>FormOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\License.rtf" />
     <EmbeddedResource Include="Resources\ThanksTo.rtf" />
     <EmbeddedResource Include="strings.de.resx">
       <SubType>Designer</SubType>
@@ -369,6 +368,11 @@
     <None Include="Images\openHS.png" />
     <None Include="Images\PasteHS.png" />
     <None Include="Images\saveHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\license.txt">
+      <Link>Resources\license.txt</Link>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
