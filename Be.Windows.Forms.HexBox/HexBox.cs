@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Security.Permissions;
 using System.Windows.Forms.VisualStyles;
 using Be.Windows.Forms.Design;
+using System.Text;
 
 namespace Be.Windows.Forms
 {
@@ -231,6 +232,7 @@ namespace Be.Windows.Forms
 				if(realselStart != _hexBox._bytePos || realselLength != _hexBox._selectionLength)
 				{
 					_hexBox.InternalSelect(realselStart, realselLength);
+                    _hexBox.ScrollByteIntoView(_bpi.Index); /// <--- This line is added
 				}
 			}
 
@@ -553,16 +555,16 @@ namespace Be.Windows.Forms
 				else
 				{
 					sel -= _hexBox._iHexMaxHBytes;
-					if(sel < 0)
-					{
+                    if (sel < 0)
+                    {
 						pos = _bpiStart.Index;
 						sel = -sel;
-					}
-					else
-					{
-						pos += _hexBox._iHexMaxHBytes;
-						sel -= _hexBox._iHexMaxHBytes;
-					}
+                    }
+                    else
+                    {
+                        pos += _hexBox._iHexMaxHBytes;
+                        //sel -= _hexBox._iHexMaxHBytes;
+                    }
 
 					_hexBox.InternalSelect(pos, sel);
 					_hexBox.ScrollByteIntoView();
@@ -764,7 +766,7 @@ namespace Be.Windows.Forms
 					bool isInsertMode = (pos == _hexBox._byteProvider.Length);
 
 					// do insert when insertActive = true
-					if(!isInsertMode && si && _hexBox._insertActive && cp == 0)
+					if(!isInsertMode && si && _hexBox.InsertActive && cp == 0)
 						isInsertMode = true;
 
 					if(sd && si	&& sel > 0)
@@ -849,8 +851,7 @@ namespace Be.Windows.Forms
 
 			protected virtual bool PreProcessWmKeyUp_Insert(ref Message m)
 			{
-				_hexBox._insertActive = !_hexBox._insertActive;
-				_hexBox.OnInsertActiveChanged(EventArgs.Empty);
+				_hexBox.InsertActive = !_hexBox.InsertActive;
 				return true;
 			}
 
@@ -1095,7 +1096,7 @@ namespace Be.Windows.Forms
 				bool isInsertMode = (pos == _hexBox._byteProvider.Length);
 
 				// do insert when insertActive = true
-				if(!isInsertMode && si && _hexBox._insertActive)
+				if(!isInsertMode && si && _hexBox.InsertActive)
 					isInsertMode = true;
 
 				if(sd && si && sel > 0)
@@ -1373,6 +1374,16 @@ namespace Be.Windows.Forms
 		/// </summary>
 		[Description("Occurs, when the value of CurrentPositionInLine property has changed.")]
 		public event EventHandler CurrentPositionInLineChanged;
+        /// <summary>
+        /// Occurs, when Copy method was invoked and ClipBoardData changed.
+        /// </summary>
+        [Description("Occurs, when Copy method was invoked and ClipBoardData changed.")]
+        public event EventHandler Copied;
+        /// <summary>
+        /// Occurs, when CopyHex method was invoked and ClipBoardData changed.
+        /// </summary>
+        [Description("Occurs, when CopyHex method was invoked and ClipBoardData changed.")]
+        public event EventHandler CopiedHex;
 		#endregion
 
 		#region Ctors
@@ -1464,35 +1475,43 @@ namespace Be.Windows.Forms
             _lastThumbtrack = Environment.TickCount;
         }
 
-		void UpdateScrollSize()
-		{
-			System.Diagnostics.Debug.WriteLine("UpdateScrollSize()", "HexBox");
+        void UpdateScrollSize()
+        {
+            System.Diagnostics.Debug.WriteLine("UpdateScrollSize()", "HexBox");
 
-			// calc scroll bar info
-			if(VScrollBarVisible && _byteProvider != null && _byteProvider.Length > 0 && _iHexMaxHBytes != 0)
-			{
-				long scrollmax = (long)Math.Ceiling((double)_byteProvider.Length / (double)_iHexMaxHBytes - (double)_iHexMaxVBytes);
-				scrollmax = Math.Max(0, scrollmax);
+            // calc scroll bar info
+            if (VScrollBarVisible && _byteProvider != null && _byteProvider.Length > 0 && _iHexMaxHBytes != 0)
+            {
+                long scrollmax = (long)Math.Ceiling((double)(_byteProvider.Length + 1) / (double)_iHexMaxHBytes - (double)_iHexMaxVBytes);
+                scrollmax = Math.Max(0, scrollmax);
 
-				long scrollpos = _startByte / _iHexMaxHBytes;
+                long scrollpos = _startByte / _iHexMaxHBytes;
 
-				if(scrollmax == _scrollVmax && scrollpos == _scrollVpos)
-					return;
+                if (scrollmax < _scrollVmax)
+                {
+                    /* Data size has been decreased. */
+                    if (_scrollVpos == _scrollVmax)
+                        /* Scroll one line up if we at bottom. */
+                        PerformScrollLineUp();
+                }
 
-				_scrollVmin = 0;
-				_scrollVmax = scrollmax;
-				_scrollVpos = Math.Min(scrollpos, scrollmax);
-				UpdateVScroll();
-			}
-			else if(VScrollBarVisible)
-			{
-				// disable scroll bar
-				_scrollVmin = 0;
-				_scrollVmax = 0;
-				_scrollVpos = 0;
-				UpdateVScroll();
-			}
-		}
+                if (scrollmax == _scrollVmax && scrollpos == _scrollVpos)
+                    return;
+
+                _scrollVmin = 0;
+                _scrollVmax = scrollmax;
+                _scrollVpos = Math.Min(scrollpos, scrollmax);
+                UpdateVScroll();
+            }
+            else if (VScrollBarVisible)
+            {
+                // disable scroll bar
+                _scrollVmin = 0;
+                _scrollVmax = 0;
+                _scrollVpos = 0;
+                UpdateVScroll();
+            }
+        }
 
 		void UpdateVScroll()
 		{
@@ -1756,7 +1775,10 @@ namespace Be.Windows.Forms
 
 			System.Diagnostics.Debug.WriteLine("CreateCaret()", "HexBox");
 
-			NativeMethods.CreateCaret(Handle, IntPtr.Zero, 1, (int)_charSize.Height);
+            // define the caret width depending on InsertActive mode
+            int caretWidth = (this.InsertActive) ? 1 : (int)_charSize.Width;
+            int caretHeight = (int)_charSize.Height;
+			NativeMethods.CreateCaret(Handle, IntPtr.Zero, caretWidth, caretHeight);
 
 			UpdateCaret();
 
@@ -1975,6 +1997,21 @@ namespace Be.Windows.Forms
 		#endregion
 
 		#region Copy, Cut and Paste methods
+        byte[] GetCopyData()
+        {
+            if (!CanCopy()) return new byte[0];
+
+            // put bytes into buffer
+            byte[] buffer = new byte[_selectionLength];
+            int id = -1;
+            for (long i = _bytePos; i < _bytePos + _selectionLength; i++)
+            {
+                id++;
+
+                buffer[id] = _byteProvider.ReadByte(i);
+            }
+            return buffer;
+        }
 		/// <summary>
 		/// Copies the current selection in the hex box to the Clipboard.
 		/// </summary>
@@ -1983,14 +2020,7 @@ namespace Be.Windows.Forms
 			if(!CanCopy()) return;
 
 			// put bytes into buffer
-			byte[] buffer = new byte[_selectionLength];
-			int id = -1;
-			for(long i = _bytePos; i < _bytePos+_selectionLength; i++)
-			{
-				id++;
-
-				buffer[id] = _byteProvider.ReadByte(i);
-			}
+            byte[] buffer = GetCopyData();
 
 			DataObject da = new DataObject();
 
@@ -2006,6 +2036,8 @@ namespace Be.Windows.Forms
 			UpdateCaret();
 			ScrollByteIntoView();
 			Invalidate();
+
+            OnCopied(EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -2069,7 +2101,6 @@ namespace Be.Windows.Forms
 				System.IO.MemoryStream ms = (System.IO.MemoryStream)da.GetData("BinaryData");
 				buffer = new byte[ms.Length];
 				ms.Read(buffer, 0, buffer.Length);
-				
 			}
 			else if(da.GetDataPresent(typeof(string)))
 			{
@@ -2112,6 +2143,86 @@ namespace Be.Windows.Forms
 			else
 				return false;
 		}
+        /// <summary>
+        /// Return true if PasteHex method could be invoked.
+        /// </summary>
+        public bool CanPasteHex()
+        {
+            if (!CanPaste()) return false;
+
+            byte[] buffer = null;
+            IDataObject da = Clipboard.GetDataObject();
+            if (da.GetDataPresent(typeof(string)))
+            {
+                string hexString = (string)da.GetData(typeof(string));
+                buffer = ConvertHexToBytes(hexString);
+                return (buffer != null);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Replaces the current selection in the hex box with the hex string data of the Clipboard.
+        /// </summary>
+        public void PasteHex()
+        {
+            if (!CanPaste()) return;
+
+            byte[] buffer = null;
+            IDataObject da = Clipboard.GetDataObject();
+            if (da.GetDataPresent(typeof(string)))
+            {
+                string hexString = (string)da.GetData(typeof(string));
+                buffer = ConvertHexToBytes(hexString);
+                if (buffer == null)
+                    return;
+            }
+            else
+            {
+                return;
+            }
+
+            if (_selectionLength > 0)
+                _byteProvider.DeleteBytes(_bytePos, _selectionLength);
+
+            _byteProvider.InsertBytes(_bytePos, buffer);
+
+            SetPosition(_bytePos + buffer.Length, 0);
+
+            ReleaseSelection();
+            ScrollByteIntoView();
+            UpdateCaret();
+            Invalidate();
+        }
+
+        /// <summary>
+        /// Copies the current selection in the hex box to the Clipboard in hex format.
+        /// </summary>
+        public void CopyHex()
+        {
+            if (!CanCopy()) return;
+
+            // put bytes into buffer
+            byte[] buffer = GetCopyData();
+
+            DataObject da = new DataObject();
+
+            // set string buffer clipbard data
+            string hexString = ConvertBytesToHex(buffer); ;
+            da.SetData(typeof(string), hexString);
+
+            //set memorystream (BinaryData) clipboard data
+            System.IO.MemoryStream ms = new System.IO.MemoryStream(buffer, 0, buffer.Length, false, true);
+            da.SetData("BinaryData", ms);
+
+            Clipboard.SetDataObject(da, true);
+            UpdateCaret();
+            ScrollByteIntoView();
+            Invalidate();
+
+            OnCopiedHex(EventArgs.Empty);
+        }
+      
 
 		#endregion
 
@@ -2273,9 +2384,7 @@ namespace Be.Windows.Forms
 		{
 			PointF bytePointF = GetBytePointF(gridPoint);
 
-			string sB = b.ToString(_hexStringFormat, System.Threading.Thread.CurrentThread.CurrentCulture);
-			if(sB.Length == 1)
-				sB = "0" + sB;
+            string sB = ConvertByteToHex(b);
 
 			g.DrawString(sB.Substring(0,1), Font, brush, bytePointF, _stringFormat);
 			bytePointF.X += _charSize.Width;
@@ -3132,11 +3241,89 @@ namespace Be.Windows.Forms
 		public bool InsertActive
 		{
 			get { return _insertActive; }
+            set
+            {
+                if (_insertActive == value)
+                    return;
+
+                _insertActive = value;
+
+                // recreate caret
+                DestroyCaret();
+                CreateCaret();
+
+                // raise change event
+                OnInsertActiveChanged(EventArgs.Empty);
+            }
 		}
 
 		#endregion
 
 		#region Misc
+        /// <summary>
+        /// Converts a byte array to a hex string. For example: {10,11} = "0A 0B"
+        /// </summary>
+        /// <param name="data">the byte array</param>
+        /// <returns>the hex string</returns>
+        string ConvertBytesToHex(byte[] data)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in data)
+            {
+                string hex = ConvertByteToHex(b);
+                sb.Append(hex);
+                sb.Append(" ");
+            }
+            if (sb.Length > 0)
+                sb.Remove(sb.Length - 1, 1);
+            string result = sb.ToString();
+            return result;
+        }
+        /// <summary>
+        /// Converts the byte to a hex string. For example: "10" = "0A";
+        /// </summary>
+        /// <param name="b">the byte to format</param>
+        /// <returns>the hex string</returns>
+        string ConvertByteToHex(byte b)
+        {
+            string sB = b.ToString(_hexStringFormat, System.Threading.Thread.CurrentThread.CurrentCulture);
+            if (sB.Length == 1)
+                sB = "0" + sB;
+            return sB;
+        }
+        /// <summary>
+        /// Converts the hex string to an byte array. The hex string must be separated by a space char ' '. If there is any invalid hex information in the string the result will be null.
+        /// </summary>
+        /// <param name="hex">the hex string separated by ' '. For example: "0A 0B 0C"</param>
+        /// <returns>the byte array. null if hex is invalid or empty</returns>
+        byte[] ConvertHexToBytes(string hex)
+        {
+            if (string.IsNullOrEmpty(hex))
+                return null;
+            hex = hex.Trim();
+            var hexArray = hex.Split(' ');
+            var byteArray = new byte[hexArray.Length];
+
+            for(int i = 0; i < hexArray.Length; i++)
+            {
+                var hexValue = hexArray[i];
+
+                byte b;
+                var isByte = ConvertHexToByte(hexValue, out b);
+                if (!isByte)
+                    return null;
+                byteArray[i] = b;
+            }
+
+            return byteArray;
+        }
+
+        bool ConvertHexToByte(string hex, out byte b)
+        {
+            bool isByte = byte.TryParse(hex, System.Globalization.NumberStyles.HexNumber, System.Threading.Thread.CurrentThread.CurrentCulture, out b);
+            return isByte;
+        }
+
 		void SetPosition(long bytePos)
 		{
 			SetPosition(bytePos, _byteCharacterPos);
@@ -3379,6 +3566,27 @@ namespace Be.Windows.Forms
 				CurrentPositionInLineChanged(this, e);
 		}
 
+
+        /// <summary>
+        /// Raises the Copied event.
+        /// </summary>
+        /// <param name="e">An EventArgs that contains the event data.</param>
+        protected virtual void OnCopied(EventArgs e)
+        {
+            if (Copied != null)
+                Copied(this, e);
+        }
+
+        /// <summary>
+        /// Raises the CopiedHex event.
+        /// </summary>
+        /// <param name="e">An EventArgs that contains the event data.</param>
+        protected virtual void OnCopiedHex(EventArgs e)
+        {
+            if (CopiedHex != null)
+                CopiedHex(this, e);
+        }
+
 		/// <summary>
 		/// Raises the MouseDown event.
 		/// </summary>
@@ -3450,5 +3658,5 @@ namespace Be.Windows.Forms
 		}
 		#endregion
 
-	}
+    }
 }

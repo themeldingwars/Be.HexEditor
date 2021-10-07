@@ -96,9 +96,12 @@ namespace Be.HexEditor
         /// </summary>
         void ManageAbilityForCopyAndPaste()
         {
-            copyToolStripButton.Enabled = copyToolStripMenuItem.Enabled = hexBox.CanCopy();
+            copyHexStringToolStripMenuItem.Enabled = 
+                copyToolStripSplitButton.Enabled = copyToolStripMenuItem.Enabled = hexBox.CanCopy();
+
             cutToolStripButton.Enabled = cutToolStripMenuItem.Enabled = hexBox.CanCut();
-            pasteToolStripButton.Enabled = pasteToolStripMenuItem.Enabled = hexBox.CanPaste();
+            pasteToolStripSplitButton.Enabled = pasteToolStripMenuItem.Enabled = hexBox.CanPaste();
+            pasteHexToolStripMenuItem.Enabled = pasteHexToolStripMenuItem1.Enabled = hexBox.CanPasteHex();
         }
 
         /// <summary>
@@ -373,6 +376,16 @@ namespace Be.HexEditor
             }
         }
 
+        void hexBox_Copied(object sender, EventArgs e)
+        {
+            ManageAbilityForCopyAndPaste();
+        }
+
+        void hexBox_CopiedHex(object sender, EventArgs e)
+        {
+            ManageAbilityForCopyAndPaste();
+        }
+
         void hexBox_SelectionLengthChanged(object sender, System.EventArgs e)
         {
             ManageAbilityForCopyAndPaste();
@@ -399,69 +412,71 @@ namespace Be.HexEditor
             UpdateFileSizeStatus();
         }
 
-        void openToolStripItem_Click(object sender, EventArgs e)
+        void open_Click(object sender, EventArgs e)
         {
             OpenFile();
         }
 
-        void saveToolStripItem_Click(object sender, EventArgs e)
+        void save_Click(object sender, EventArgs e)
         {
             SaveFile();
         }
 
-        void saveAsToolStripItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        void cutToolStripItem_Click(object sender, EventArgs e)
+        void cut_Click(object sender, EventArgs e)
         {
             this.hexBox.Cut();
         }
 
-        void copyToolStripItem_Click(object sender, EventArgs e)
+        private void copy_Click(object sender, EventArgs e)
         {
             this.hexBox.Copy();
         }
 
-        void pasteToolStripItem_Click(object sender, EventArgs e)
+        void paste_Click(object sender, EventArgs e)
         {
             this.hexBox.Paste();
         }
 
-        void findToolStripItem_Click(object sender, EventArgs e)
+        private void copyHex_Click(object sender, EventArgs e)
+        {
+            this.hexBox.CopyHex();
+        }
+
+        private void pasteHex_Click(object sender, EventArgs e)
+        {
+            this.hexBox.PasteHex();
+        }
+
+        void find_Click(object sender, EventArgs e)
         {
             this.Find();
         }
 
-        void findNextToolStripItem_Click(object sender, EventArgs e)
-        {
-            this.FindNext();
-        }
-
-        void goToToolStripItem_Click(object sender, EventArgs e)
+        void goTo_Click(object sender, EventArgs e)
         {
             this.Goto();
         }
 
-        void exitToolStripItem_Click(object sender, EventArgs e)
+        void exit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        void about_Click(object sender, EventArgs e)
         {
             new FormAbout().ShowDialog();
         }
 
-        void recentFilesToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        void recentFiles_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             RecentFileHandler.FileMenuItem fmi = (RecentFileHandler.FileMenuItem)e.ClickedItem;
             this.OpenFile(fmi.Filename);
         }
 
-        void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        void options_Click(object sender, EventArgs e)
         {
             new FormOptions().ShowDialog();
         }
+
     }
 }

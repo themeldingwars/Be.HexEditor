@@ -100,7 +100,7 @@ namespace Be.Windows.Forms
 		/// <summary>
 		/// Returns true, if the byte exists in the collection.
 		/// </summary>
-		public bool Contains(bool b)
+		public bool Contains(byte b)
 		{
 			return InnerList.Contains(b);
 		}

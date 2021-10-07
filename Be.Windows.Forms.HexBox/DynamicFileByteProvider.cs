@@ -16,7 +16,7 @@ namespace Be.Windows.Forms
         const int COPY_BLOCK_SIZE = 4096;
 
         string _fileName;
-        FileStream _fileStream;
+        Stream _stream;
         DataMap _dataMap;
         long _totalLength;
         bool _readOnly;
@@ -32,21 +32,41 @@ namespace Be.Windows.Forms
         /// Constructs a new <see cref="DynamicFileByteProvider" /> instance.
         /// </summary>
         /// <param name="fileName">The name of the file from which bytes should be provided.</param>
+        /// <param name="readOnly">True, opens the file in read-only mode.</param>
         public DynamicFileByteProvider(string fileName, bool readOnly)
         {
             _fileName = fileName;
 
             if (!readOnly)
             {
-                _fileStream = File.Open(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+                _stream = File.Open(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
             }
             else
             {
-                _fileStream = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                _stream = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             }
 
             _readOnly = readOnly;
 
+            ReInitialize();
+        }
+
+        /// <summary>
+        /// Constructs a new <see cref="DynamicFileByteProvider" /> instance.
+        /// </summary>
+        /// <param name="stream">the stream containing the data.</param>
+        /// <remarks>
+        /// The stream must supported seek operations.
+        /// </remarks>
+        public DynamicFileByteProvider(Stream stream)
+        {
+            if (stream == null)
+                throw new ArgumentNullException("stream");
+            if (!stream.CanSeek)
+                throw new ArgumentException("stream must supported seek operations(CanSeek)");
+
+            _stream = stream;
+            _readOnly = !stream.CanWrite;
             ReInitialize();
         }
 
@@ -247,7 +267,7 @@ namespace Be.Windows.Forms
                 DataBlock block = GetDataBlock(index, out blockOffset);
 
                 // Truncate or remove each block as necessary.
-                while (bytesToDelete > 0)
+                while ((bytesToDelete > 0) && (block != null))
                 {
                     long blockLength = block.Length;
                     DataBlock nextBlock = block.NextBlock;
@@ -297,7 +317,7 @@ namespace Be.Windows.Forms
             if (_readOnly)
                 return false;
 
-            if (_totalLength != _fileStream.Length)
+            if (_totalLength != _stream.Length)
             {
                 return true;
             }
@@ -318,7 +338,7 @@ namespace Be.Windows.Forms
 
                 offset += fileBlock.Length;
             }
-            return (offset != _fileStream.Length);
+            return (offset != _stream.Length);
         }
 
         /// <summary>
@@ -333,9 +353,9 @@ namespace Be.Windows.Forms
             // Saving to a separate file would be a much simpler implementation.
 
             // Firstly, extend the file length (if necessary) to ensure that there is enough disk space.
-            if (_totalLength > _fileStream.Length)
+            if (_totalLength > _stream.Length)
             {
-                _fileStream.SetLength(_totalLength);
+                _stream.SetLength(_totalLength);
             }
 
             // Secondly, shift around any file sections that have moved.
@@ -357,17 +377,17 @@ namespace Be.Windows.Forms
                 MemoryDataBlock memoryBlock = block as MemoryDataBlock;
                 if (memoryBlock != null)
                 {
-                    _fileStream.Position = dataOffset;
+                    _stream.Position = dataOffset;
                     for (int memoryOffset = 0; memoryOffset < memoryBlock.Length; memoryOffset += COPY_BLOCK_SIZE)
                     {
-                        _fileStream.Write(memoryBlock.Data, memoryOffset, (int)Math.Min(COPY_BLOCK_SIZE, memoryBlock.Length - memoryOffset));
+                        _stream.Write(memoryBlock.Data, memoryOffset, (int)Math.Min(COPY_BLOCK_SIZE, memoryBlock.Length - memoryOffset));
                     }
                 }
                 dataOffset += block.Length;
             }
 
             // Finally, if the file has shortened, truncate the stream.
-            _fileStream.SetLength(_totalLength);
+            _stream.SetLength(_totalLength);
             ReInitialize();
         }
 
@@ -410,10 +430,10 @@ namespace Be.Windows.Forms
         /// </summary>
         public void Dispose()
         {
-            if (_fileStream != null)
+            if (_stream != null)
             {
-                _fileStream.Close();
-                _fileStream = null;
+                _stream.Close();
+                _stream = null;
             }
             _fileName = null;
             _dataMap = null;
@@ -421,10 +441,12 @@ namespace Be.Windows.Forms
         }
         #endregion
 
+        /// <summary>
+        /// Gets a value, if the file is opened in read-only mode.
+        /// </summary>
         public bool ReadOnly
         {
             get { return _readOnly; }
-            set { _readOnly = value; }
         }
 
         void OnLengthChanged(EventArgs e)
@@ -482,11 +504,11 @@ namespace Be.Windows.Forms
         byte ReadByteFromFile(long fileOffset)
         {
             // Move to the correct position and read the byte.
-            if (_fileStream.Position != fileOffset)
+            if (_stream.Position != fileOffset)
             {
-                _fileStream.Position = fileOffset;
+                _stream.Position = fileOffset;
             }
-            return (byte)_fileStream.ReadByte();
+            return (byte)_stream.ReadByte();
         }
 
         void MoveFileBlock(FileDataBlock fileBlock, long dataOffset)
@@ -509,12 +531,12 @@ namespace Be.Windows.Forms
                 {
                     long readOffset = fileBlock.FileOffset + relativeOffset;
                     int bytesToRead = (int)Math.Min(buffer.Length, fileBlock.Length - relativeOffset);
-                    _fileStream.Position = readOffset;
-                    _fileStream.Read(buffer, 0, bytesToRead);
+                    _stream.Position = readOffset;
+                    _stream.Read(buffer, 0, bytesToRead);
 
                     long writeOffset = dataOffset + relativeOffset;
-                    _fileStream.Position = writeOffset;
-                    _fileStream.Write(buffer, 0, bytesToRead);
+                    _stream.Position = writeOffset;
+                    _stream.Write(buffer, 0, bytesToRead);
                 }
             }
             else
@@ -525,12 +547,12 @@ namespace Be.Windows.Forms
                 {
                     int bytesToRead = (int)Math.Min(buffer.Length, fileBlock.Length - relativeOffset);
                     long readOffset = fileBlock.FileOffset + fileBlock.Length - relativeOffset - bytesToRead;
-                    _fileStream.Position = readOffset;
-                    _fileStream.Read(buffer, 0, bytesToRead);
+                    _stream.Position = readOffset;
+                    _stream.Read(buffer, 0, bytesToRead);
 
                     long writeOffset = dataOffset + fileBlock.Length - relativeOffset - bytesToRead;
-                    _fileStream.Position = writeOffset;
-                    _fileStream.Write(buffer, 0, bytesToRead);
+                    _stream.Position = writeOffset;
+                    _stream.Write(buffer, 0, bytesToRead);
                 }
             }
 
@@ -541,8 +563,8 @@ namespace Be.Windows.Forms
         void ReInitialize()
         {
             _dataMap = new DataMap();
-            _dataMap.AddFirst(new FileDataBlock(0, _fileStream.Length));
-            _totalLength = _fileStream.Length;
+            _dataMap.AddFirst(new FileDataBlock(0, _stream.Length));
+            _totalLength = _stream.Length;
         }
     }
 }

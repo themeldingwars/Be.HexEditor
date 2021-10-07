@@ -1,5 +1,18 @@
 Version history
 
+1.4.0
+- New feature: Copy Hex and Paste Hex added
+- New feature: Scroll with mouse selection
+- Bug fix: Unhandled exception in DynamicFileByteProvider.DeleteBytes
+- Buf fix: ByteCollection.Contains method signature fixed
+- Bug fix: End key does not always scroll byte into view
+- Bug fix: Selection Shift-Down after Shift-Up does not work correctly
+- Improvement: App.ico as main form icon 
+- Improvement: InsertActive-mode changes caret width
+- Improvement: MaximumSize of main form changed
+- Improvement: DynamicFileByteProvider constructor with stream parameter added
+
+
 1.3.0
 - New feature: Multilanguage support (English, German)
 - New feature: Recent files added
