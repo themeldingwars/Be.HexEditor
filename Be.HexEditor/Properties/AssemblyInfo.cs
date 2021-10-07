@@ -15,4 +15,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
 
-[assembly: AssemblyVersion("1.4.0.*")]
+[assembly: AssemblyVersion("1.4.1.*")]

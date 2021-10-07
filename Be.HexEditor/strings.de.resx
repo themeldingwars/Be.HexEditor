@@ -144,4 +144,7 @@
   <data name="OpenReadonly" xml:space="preserve">
     <value>Die Datei wird blockiert. Möchten Sie sie im "Schreibgeschützen"-Modus öffnen?</value>
   </data>
+  <data name="Japanese" xml:space="preserve">
+    <value>Japanisch</value>
+  </data>
 </root>
