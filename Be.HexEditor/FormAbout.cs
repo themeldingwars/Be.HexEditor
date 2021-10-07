@@ -52,35 +52,35 @@ namespace Be.HexEditor
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAbout));
-            this.ucAbout1 = new Be.HexEditor.UCAbout();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.SuspendLayout();
-            // 
-            // ucAbout1
-            // 
-            resources.ApplyResources(this.ucAbout1, "ucAbout1");
-            this.ucAbout1.Name = "ucAbout1";
-            // 
-            // btnOK
-            // 
-            resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            // 
-            // FormAbout
-            // 
-            this.AcceptButton = this.btnOK;
-            resources.ApplyResources(this, "$this");
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.ucAbout1);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "FormAbout";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-            this.ResumeLayout(false);
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAbout));
+			this.ucAbout1 = new Be.HexEditor.UCAbout();
+			this.btnOK = new System.Windows.Forms.Button();
+			this.SuspendLayout();
+			// 
+			// ucAbout1
+			// 
+			resources.ApplyResources(this.ucAbout1, "ucAbout1");
+			this.ucAbout1.Name = "ucAbout1";
+			// 
+			// btnOK
+			// 
+			resources.ApplyResources(this.btnOK, "btnOK");
+			this.btnOK.Name = "btnOK";
+			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+			// 
+			// FormAbout
+			// 
+			this.AcceptButton = this.btnOK;
+			resources.ApplyResources(this, "$this");
+			this.BackColor = System.Drawing.SystemColors.Control;
+			this.Controls.Add(this.btnOK);
+			this.Controls.Add(this.ucAbout1);
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
+			this.Name = "FormAbout";
+			this.ShowIcon = false;
+			this.ShowInTaskbar = false;
+			this.ResumeLayout(false);
 
 		}
 		#endregion

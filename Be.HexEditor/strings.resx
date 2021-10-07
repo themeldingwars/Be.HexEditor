@@ -156,4 +156,10 @@
   <data name="Italian" xml:space="preserve">
     <value>Italian</value>
   </data>
+  <data name="Byte" xml:space="preserve">
+    <value>Byte {0}</value>
+  </data>
+  <data name="NoByteSelected" xml:space="preserve">
+    <value>No byte is selected</value>
+  </data>
 </root>

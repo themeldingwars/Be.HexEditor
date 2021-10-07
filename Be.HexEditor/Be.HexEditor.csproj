@@ -29,6 +29,7 @@
     <SignAssembly>true</SignAssembly>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -39,9 +40,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <SupportUrl>http://sourceforge.net/projects/hexbox/</SupportUrl>
+    <ProductName>Be.HexEditor</ProductName>
+    <PublisherName>Bernhard Elbl</PublisherName>
+    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationVersion>1.5.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -67,6 +72,7 @@
     <DebugType>full</DebugType>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -92,6 +98,18 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>BasicCorrectnessRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>5282C77035188F0544204E779C3587A1D0FE131C</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Be.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
       <Name>System</Name>
@@ -104,14 +122,15 @@
       <Name>System.Windows.Forms</Name>
     </Reference>
     <Reference Include="System.Xml" />
-    <ProjectReference Include="..\Be.Windows.Forms.HexBox\Be.Windows.Forms.HexBox.csproj">
-      <Name>Be.Windows.Forms.HexBox</Name>
-      <Project>{26C5F25F-B450-4CAF-AD8B-B8D11AE73457}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.ico" />
+    <EmbeddedResource Include="BitControl.de.resx">
+      <DependentUpon>BitControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BitControl.resx">
+      <DependentUpon>BitControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="strings.it.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -121,6 +140,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormAbout.it.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
@@ -138,6 +158,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormFind.it.resx">
       <DependentUpon>FormFind.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFind.resx">
       <DependentUpon>FormFind.cs</DependentUpon>
@@ -155,6 +176,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormGoTo.it.resx">
       <DependentUpon>FormGoTo.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGoTo.resx">
       <DependentUpon>FormGoTo.cs</DependentUpon>
@@ -172,6 +194,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormHexEditor.it.resx">
       <DependentUpon>FormHexEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormHexEditor.resx">
       <SubType>Designer</SubType>
@@ -217,6 +240,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCAbout.it.resx">
       <DependentUpon>UCAbout.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UCAbout.ja.resx">
       <DependentUpon>UCAbout.cs</DependentUpon>
@@ -225,6 +249,13 @@
       <DependentUpon>UCAbout.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="BitControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BitControl.designer.cs">
+      <DependentUpon>BitControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BitInfo.cs" />
     <Compile Include="FormOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -301,10 +332,14 @@
     <EmbeddedResource Include="images.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>images.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="strings.ja.resx" />
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Be.HexEditor.snk" />
+    <None Include="Be.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -319,7 +354,7 @@
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
       <Visible>False</Visible>
       <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
-      <Install>true</Install>
+      <Install>false</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
       <Visible>False</Visible>
@@ -350,6 +385,15 @@
     <EmbeddedResource Include="..\..\license.txt">
       <Link>Resources\license.txt</Link>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Be.Windows.Forms.HexBox\Be.Windows.Forms.HexBox.csproj">
+      <Project>{26c5f25f-b450-4caf-ad8b-b8d11ae73457}</Project>
+      <Name>Be.Windows.Forms.HexBox</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

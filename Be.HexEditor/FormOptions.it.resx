@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -112,64 +112,67 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tabControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="selectLanguageLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="selectLanguageLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="selectLanguageLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 42</value>
-  </data>
-  <data name="selectLanguageLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 13</value>
-  </data>
-  <data name="selectLanguageLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
   <data name="selectLanguageLabel.Text" xml:space="preserve">
     <value>Seleziona una lingua</value>
   </data>
-  <data name="languageComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 39</value>
+  <data name="clearRecentFilesButton.Text" xml:space="preserve">
+    <value>Cancella file recenti</value>
   </data>
-  <data name="languageComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>Annulla</value>
   </data>
-  <data name="languageComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="recentFilesMaxlabel.Text" xml:space="preserve">
+    <value>elementi mostrati nel menu dei file recenti</value>
   </data>
-  <data name="useSystemLanguageCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="generalTabPage.Text" xml:space="preserve">
+    <value>Generali</value>
   </data>
-  <data name="useSystemLanguageCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 19</value>
+  <data name="recentFilesGroupBox.Text" xml:space="preserve">
+    <value>File recenti</value>
   </data>
-  <data name="useSystemLanguageCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 17</value>
+  <data name="okButton.Text" xml:space="preserve">
+    <value>OK</value>
   </data>
-  <data name="useSystemLanguageCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="recentFilesMaxTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 20</value>
+  </data>
+  <data name="tabControl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Opzioni</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="tabControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="useSystemLanguageCheckBox.Text" xml:space="preserve">
     <value>Usa lingua di sistema</value>
   </data>
-  <data name="languageSettingsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
-  <data name="languageSettingsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>553, 75</value>
+  <data name="generalTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="selectLanguageLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 13</value>
+  </data>
+  <data name="languageComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>135, 39</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="languageSettingsGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -177,124 +180,25 @@
   <data name="languageSettingsGroupBox.Text" xml:space="preserve">
     <value>Imposta lingua</value>
   </data>
-  <data name="clearRecentFilesButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 45</value>
-  </data>
-  <data name="clearRecentFilesButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 23</value>
-  </data>
-  <data name="clearRecentFilesButton.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="clearRecentFilesButton.Text" xml:space="preserve">
-    <value>Cancella file recenti</value>
-  </data>
-  <data name="recentFilesMaxlabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="recentFilesMaxlabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 22</value>
-  </data>
-  <data name="recentFilesMaxlabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 13</value>
+  <data name="okButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 24</value>
   </data>
   <data name="recentFilesMaxlabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="recentFilesMaxlabel.Text" xml:space="preserve">
-    <value>elementi mostrati nel menu dei file recenti</value>
-  </data>
   <data name="recentFilesMaxTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 19</value>
   </data>
-  <data name="recentFilesMaxTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 20</value>
-  </data>
-  <data name="recentFilesMaxTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="recentFilesGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 87</value>
-  </data>
-  <data name="recentFilesGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>553, 77</value>
-  </data>
-  <data name="recentFilesGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="recentFilesGroupBox.Text" xml:space="preserve">
-    <value>File recenti</value>
-  </data>
-  <data name="generalTabPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="generalTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="generalTabPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>556, 208</value>
-  </data>
-  <data name="generalTabPage.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="generalTabPage.Text" xml:space="preserve">
-    <value>Generali</value>
-  </data>
-  <data name="tabControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
-  </data>
-  <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>564, 234</value>
-  </data>
-  <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="okButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>380, 252</value>
-  </data>
-  <data name="okButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 24</value>
+  <data name="clearRecentFilesButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 45</value>
   </data>
   <data name="okButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="okButton.Text" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="cancelButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>476, 252</value>
-  </data>
-  <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 24</value>
-  </data>
-  <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="cancelButton.Text" xml:space="preserve">
-    <value>Annulla</value>
   </data>
   <data name="$this.Language" type="System.Globalization.CultureInfo, mscorlib">
     <value>ca</value>
   </data>
   <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>588, 285</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Opzioni</value>
   </data>
 </root>

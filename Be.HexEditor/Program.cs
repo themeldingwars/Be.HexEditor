@@ -11,19 +11,11 @@ namespace Be.HexEditor
     {
         public const string SoftwareName = "Be.HexEditor";
 
-        public static FormHexEditor FormHexEditor;
+        public static FormHexEditor ApplictionForm;
 
         [STAThread()]
         static void Main(string[] args)
         {
-			long length = 10;
-			for (long pos = 1; pos < length; pos++)
-			{
-				length = 4;
-			}
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
             if (!Settings.Default.UseSystemLanguage)
             {
                 string l = Settings.Default.SelectedLanguage;
@@ -31,10 +23,13 @@ namespace Be.HexEditor
                 Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(l);
             }
 
-            FormHexEditor = new FormHexEditor();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            ApplictionForm = new FormHexEditor();
             if (args.Length > 0 && System.IO.File.Exists(args[0]))
-                FormHexEditor.OpenFile(args[0]);
-            Application.Run(FormHexEditor);
+                ApplictionForm.OpenFile(args[0]);
+            Application.Run(ApplictionForm);
         }
 
         public static DialogResult ShowError(Exception ex)

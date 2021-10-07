@@ -1378,7 +1378,6 @@ namespace Be.Windows.Forms
 
 			BackColor = Color.White;
 			Font = new Font("Courier New", 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-			BoldFont = new Font("Courier New", 9F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
 			_stringFormat = new StringFormat(StringFormat.GenericTypographic);
 			_stringFormat.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
 
@@ -1506,11 +1505,11 @@ namespace Be.Windows.Forms
 				_vScrollBar.Minimum = 0;
 				_vScrollBar.Maximum = max;
 				_vScrollBar.Value = ToScrollPos(_scrollVpos);
-				_vScrollBar.Enabled = true;
+				_vScrollBar.Visible = true;
 			}
 			else
 			{
-				_vScrollBar.Enabled = false;
+				_vScrollBar.Visible = false;
 			}
 		}
 
@@ -1941,8 +1940,7 @@ namespace Be.Windows.Forms
 		/// <summary>
 		/// Searches the current ByteProvider
 		/// </summary>
-		/// <param name="bytes">the array of bytes to find</param>
-		/// <param name="startIndex">the start index</param>
+		/// <param name="options">contains all find options</param>
 		/// <returns>the SelectionStart property value if find was successfull or
 		/// -1 if there is no match
 		/// -2 if Find was aborted.</returns>
@@ -2381,7 +2379,7 @@ namespace Be.Windows.Forms
 			// Ensure endByte isn't > length of array.
 			endByte = Math.Min(_byteProvider.Length - 1, endByte);
 
-			Color lineInfoColor = (this.LineInfoForeColor != Color.Empty) ? this.LineInfoForeColor : this.ForeColor;
+			Color lineInfoColor = (this.InfoForeColor != Color.Empty) ? this.InfoForeColor : this.ForeColor;
 			Brush brush = new SolidBrush(lineInfoColor);
 
 			int maxLine = GetGridBytePoint(endByte - startByte).Y + 1;
@@ -2409,7 +2407,7 @@ namespace Be.Windows.Forms
 
 		void PaintHeaderRow(Graphics g)
 		{
-			Brush brush = new SolidBrush(this.LineInfoForeColor);
+			Brush brush = new SolidBrush(this.InfoForeColor);
 			for (int col = 0; col < _iHexMaxHBytes; col++)
 			{
 				PaintColumnInfo(g, (byte)col, brush, col);
@@ -2420,7 +2418,7 @@ namespace Be.Windows.Forms
 		{
 			for (int col = GroupSize; col < _iHexMaxHBytes; col += GroupSize)
 			{
-				var pen = new Pen(new SolidBrush(this.LineInfoForeColor), 1);
+				var pen = new Pen(new SolidBrush(this.InfoForeColor), 1);
 				PointF headerPointF = GetColumnInfoPointF(col);
 				headerPointF.X -= _charSize.Width / 2;
 				g.DrawLine(pen, headerPointF, new PointF(headerPointF.X, headerPointF.Y + _recColumnInfo.Height + _recHex.Height));
@@ -2473,15 +2471,16 @@ namespace Be.Windows.Forms
 			bytePointF.X += _charSize.Width;
 			g.DrawString(sB.Substring(1, 1), Font, brush, bytePointF, _stringFormat);
 		}
+
 		void PaintColumnInfo(Graphics g, byte b, Brush brush, int col)
 		{
 			PointF headerPointF = GetColumnInfoPointF(col);
 
 			string sB = ConvertByteToHex(b);
 
-			g.DrawString(sB.Substring(0, 1), BoldFont, brush, headerPointF, _stringFormat);
+			g.DrawString(sB.Substring(0, 1), Font, brush, headerPointF, _stringFormat);
 			headerPointF.X += _charSize.Width;
-			g.DrawString(sB.Substring(1, 1), BoldFont, brush, headerPointF, _stringFormat);
+			g.DrawString(sB.Substring(1, 1), Font, brush, headerPointF, _stringFormat);
 		}
 
 		void PaintHexStringSelected(Graphics g, byte b, Brush brush, Brush brushBack, Point gridPoint)
@@ -2904,11 +2903,6 @@ namespace Be.Windows.Forms
 		}
 
 		/// <summary>
-		/// The bold font used to display titles in the hexbox.
-		/// </summary>
-		public Font BoldFont { get; set; }
-
-		/// <summary>
 		/// The font used to display text in the hexbox.
 		/// </summary>
 		public override Font Font
@@ -2919,6 +2913,9 @@ namespace Be.Windows.Forms
 			}
 			set
 			{
+                if (value == null)
+                    return;
+                
 				base.Font = value;
 			}
 		}
@@ -3341,14 +3338,14 @@ namespace Be.Windows.Forms
 
 
 		/// <summary>
-		/// Gets or sets the line info color. When this property is null, then ForeColor property is used.
+		/// Gets or sets the info color used for column info and line info. When this property is null, then ForeColor property is used.
 		/// </summary>
 		[DefaultValue(typeof(Color), "Empty"), Category("Hex"), Description("Gets or sets the line info color. When this property is null, then ForeColor property is used.")]
-		public Color LineInfoForeColor
+		public Color InfoForeColor
 		{
-			get { return _lineInfoForeColor; }
-			set { _lineInfoForeColor = value; Invalidate(); }
-		} Color _lineInfoForeColor = Color.Empty;
+			get { return _infoForeColor; }
+			set { _infoForeColor = value; Invalidate(); }
+		} Color _infoForeColor = Color.Empty;
 
 		/// <summary>
 		/// Gets or sets the background color for the selected bytes.
