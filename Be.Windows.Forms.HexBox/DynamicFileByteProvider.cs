@@ -19,15 +19,34 @@ namespace Be.Windows.Forms
         FileStream _fileStream;
         DataMap _dataMap;
         long _totalLength;
+        bool _readOnly;
 
         /// <summary>
         /// Constructs a new <see cref="DynamicFileByteProvider" /> instance.
         /// </summary>
         /// <param name="fileName">The name of the file from which bytes should be provided.</param>
-        public DynamicFileByteProvider(string fileName)
+        public DynamicFileByteProvider(string fileName) : this(fileName, false)
+        {}
+
+        /// <summary>
+        /// Constructs a new <see cref="DynamicFileByteProvider" /> instance.
+        /// </summary>
+        /// <param name="fileName">The name of the file from which bytes should be provided.</param>
+        public DynamicFileByteProvider(string fileName, bool readOnly)
         {
             _fileName = fileName;
-            _fileStream = File.Open(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+
+            if (!readOnly)
+            {
+                _fileStream = File.Open(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+            }
+            else
+            {
+                _fileStream = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            }
+
+            _readOnly = readOnly;
+
             ReInitialize();
         }
 
@@ -275,6 +294,9 @@ namespace Be.Windows.Forms
         /// </summary>
         public bool HasChanges()
         {
+            if (_readOnly)
+                return false;
+
             if (_totalLength != _fileStream.Length)
             {
                 return true;
@@ -304,6 +326,9 @@ namespace Be.Windows.Forms
         /// </summary>
         public void ApplyChanges()
         {
+            if (_readOnly)
+                throw new OperationCanceledException("File is in read-only mode");
+
             // This method is implemented to efficiently save the changes to the same file stream opened for reading.
             // Saving to a separate file would be a much simpler implementation.
 
@@ -351,7 +376,7 @@ namespace Be.Windows.Forms
         /// </summary>
         public bool SupportsWriteByte()
         {
-            return true;
+            return !_readOnly;
         }
 
         /// <summary>
@@ -359,7 +384,7 @@ namespace Be.Windows.Forms
         /// </summary>
         public bool SupportsInsertBytes()
         {
-            return true;
+            return !_readOnly;
         }
 
         /// <summary>
@@ -367,7 +392,7 @@ namespace Be.Windows.Forms
         /// </summary>
         public bool SupportsDeleteBytes()
         {
-            return true;
+            return !_readOnly;
         }
         #endregion
 
@@ -395,6 +420,12 @@ namespace Be.Windows.Forms
             GC.SuppressFinalize(this);
         }
         #endregion
+
+        public bool ReadOnly
+        {
+            get { return _readOnly; }
+            set { _readOnly = value; }
+        }
 
         void OnLengthChanged(EventArgs e)
         {

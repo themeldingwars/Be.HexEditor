@@ -52,44 +52,42 @@ namespace Be.HexEditor
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.ucAbout1 = new Be.HexEditor.UCAbout();
-			this.btnOK = new System.Windows.Forms.Button();
-			this.SuspendLayout();
-			// 
-			// ucAbout1
-			// 
-			this.ucAbout1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right)));
-			this.ucAbout1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
-			this.ucAbout1.Location = new System.Drawing.Point(0, 0);
-			this.ucAbout1.Name = "ucAbout1";
-			this.ucAbout1.Size = new System.Drawing.Size(456, 312);
-			this.ucAbout1.TabIndex = 0;
-			// 
-			// btnOK
-			// 
-			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnOK.Location = new System.Drawing.Point(368, 320);
-			this.btnOK.Name = "btnOK";
-			this.btnOK.TabIndex = 1;
-			this.btnOK.Text = "OK";
-			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-			// 
-			// FormAbout
-			// 
-			this.AcceptButton = this.btnOK;
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 14);
-			this.BackColor = System.Drawing.SystemColors.Control;
-			this.ClientSize = new System.Drawing.Size(456, 350);
-			this.Controls.Add(this.btnOK);
-			this.Controls.Add(this.ucAbout1);
-			this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
-			this.Name = "FormAbout";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "About";
-			this.ResumeLayout(false);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAbout));
+            this.ucAbout1 = new Be.HexEditor.UCAbout();
+            this.btnOK = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // ucAbout1
+            // 
+            this.ucAbout1.AccessibleDescription = null;
+            this.ucAbout1.AccessibleName = null;
+            resources.ApplyResources(this.ucAbout1, "ucAbout1");
+            this.ucAbout1.BackgroundImage = null;
+            this.ucAbout1.Name = "ucAbout1";
+            // 
+            // btnOK
+            // 
+            this.btnOK.AccessibleDescription = null;
+            this.btnOK.AccessibleName = null;
+            resources.ApplyResources(this.btnOK, "btnOK");
+            this.btnOK.BackgroundImage = null;
+            this.btnOK.Font = null;
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
+            // FormAbout
+            // 
+            this.AcceptButton = this.btnOK;
+            this.AccessibleDescription = null;
+            this.AccessibleName = null;
+            resources.ApplyResources(this, "$this");
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackgroundImage = null;
+            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.ucAbout1);
+            this.Icon = null;
+            this.Name = "FormAbout";
+            this.ResumeLayout(false);
 
 		}
 		#endregion

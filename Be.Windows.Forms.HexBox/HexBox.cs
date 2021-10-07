@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Security.Permissions;
+using System.Windows.Forms.VisualStyles;
 using Be.Windows.Forms.Design;
 
 namespace Be.Windows.Forms
@@ -1192,6 +1193,22 @@ namespace Be.Windows.Forms
 		/// Contains a vertical scroll
 		/// </summary>
 		VScrollBar _vScrollBar;
+        /// <summary>
+        /// Contains a timer for thumbtrack scrolling
+        /// </summary>
+        Timer _thumbTrackTimer = new Timer();
+        /// <summary>
+        /// Contains the thumbtrack scrolling position
+        /// </summary>
+        long _thumbTrackPosition;
+        /// <summary>
+        /// Contains the thumptrack delay for scrolling in milliseconds.
+        /// </summary>
+        const int THUMPTRACKDELAY = 50;
+        /// <summary>
+        /// Contains the Enviroment.TickCount of the last refresh
+        /// </summary>
+        int _lastThumbtrack; 
 		/// <summary>
 		/// Contains the border´s left shift
 		/// </summary>
@@ -1378,7 +1395,11 @@ namespace Be.Windows.Forms
 			SetStyle(ControlStyles.DoubleBuffer, true);
 			SetStyle(ControlStyles.AllPaintingInWmPaint, true);
 			SetStyle(ControlStyles.ResizeRedraw, true);
+
+            _thumbTrackTimer.Interval = 50;
+            _thumbTrackTimer.Tick += new EventHandler(PerformScrollThumbTrack);
 		}
+
 		#endregion
 
 		#region Scroll methods
@@ -1407,15 +1428,41 @@ namespace Be.Windows.Forms
 					PerformScrollThumpPosition(lPos);
 					break;
 				case ScrollEventType.ThumbTrack:
+                    // to avoid performance problems use a refresh delay implemented with a timer
+                    if (_thumbTrackTimer.Enabled) // stop old timer
+                        _thumbTrackTimer.Enabled = false;
+
+                    // perform scroll immediately only if last refresh is very old
+                    int currentThumbTrack = System.Environment.TickCount;
+                    if (currentThumbTrack - _lastThumbtrack > THUMPTRACKDELAY)
+                    {
+                        PerformScrollThumbTrack(null, null);
+                        _lastThumbtrack = currentThumbTrack;
+                        break;
+                    }
+
+                    // start thumbtrack timer 
+                    _thumbTrackPosition = FromScrollPos(e.NewValue);
+                    _thumbTrackTimer.Enabled = true;
 					break;
 				case ScrollEventType.First:
 					break;
 				default:
 					break;
 			}
-
+            
 			e.NewValue = ToScrollPos(_scrollVpos);
 		}
+
+        /// <summary>
+        /// Performs the thumbtrack scrolling after an delay.
+        /// </summary>
+        void PerformScrollThumbTrack(object sender, EventArgs e)
+        {
+            _thumbTrackTimer.Enabled = false;
+            PerformScrollThumpPosition(_thumbTrackPosition);
+            _lastThumbtrack = Environment.TickCount;
+        }
 
 		void UpdateScrollSize()
 		{
@@ -1995,7 +2042,7 @@ namespace Be.Windows.Forms
 		/// </summary>
 		public bool CanCut()
 		{
-			if (ReadOnly) 
+			if (ReadOnly || !this.Enabled) 
 				return false;
 			if(_byteProvider == null)
 				return false;
@@ -2049,7 +2096,7 @@ namespace Be.Windows.Forms
 		/// </summary>
 		public bool CanPaste()
 		{
-			if (ReadOnly) return false;
+			if (ReadOnly || !this.Enabled) return false;
 
 			if(_byteProvider == null || !_byteProvider.SupportsInsertBytes())
 				return false;
@@ -2075,37 +2122,39 @@ namespace Be.Windows.Forms
 		/// <param name="e">A PaintEventArgs that contains the event data.</param>
 		protected override void OnPaintBackground(PaintEventArgs e)
 		{
-			e.Graphics.FillRectangle(new SolidBrush(BackColor), ClientRectangle);
-
 			switch(_borderStyle)
 			{
 				case BorderStyle.Fixed3D:
 				{
-					if(VisualStylesEnabled())
+					if(TextBoxRenderer.IsSupported)
 					{
-						// draw xp themed border
-						int partId = NativeMethods.EP_EDITTEXT;
-				
-						int stateId;
-						if(this.Enabled)
-							stateId = NativeMethods.ETS_NORMAL;
-						else
-							stateId = NativeMethods.ETS_DISABLED;
+                        VisualStyleElement state = VisualStyleElement.TextBox.TextEdit.Normal;
+                        Color backColor = this.BackColor;
 
-						NativeMethods.RECT rect = NativeMethods.RECT.FromRectangle(this.ClientRectangle);
+                        if (this.Enabled)
+                        {
+                            if (this.ReadOnly)
+                                state = VisualStyleElement.TextBox.TextEdit.ReadOnly;
+                            else if (this.Focused)
+                                state = VisualStyleElement.TextBox.TextEdit.Focused;
+                        }
+                        else
+                        {
+                            state = VisualStyleElement.TextBox.TextEdit.Disabled;
+                            backColor = this.BackColorDisabled;
+                        }
 
-						IntPtr hTheme = NativeMethods.OpenThemeData(this.Handle, "EDIT");
+                        VisualStyleRenderer vsr = new VisualStyleRenderer(state);
+                        vsr.DrawBackground(e.Graphics, this.ClientRectangle);
 
-						IntPtr hDC = e.Graphics.GetHdc();
-	
-						NativeMethods.DrawThemeBackground(hTheme, hDC, partId, stateId, ref rect, IntPtr.Zero);
-
-						e.Graphics.ReleaseHdc(hDC);
-
-						NativeMethods.CloseThemeData(hTheme);
+                        Rectangle rectContent = vsr.GetBackgroundContentRectangle(e.Graphics, this.ClientRectangle);
+                        e.Graphics.FillRectangle(new SolidBrush(backColor), rectContent);
 					}
 					else
 					{
+                        // draw background
+                        e.Graphics.FillRectangle(new SolidBrush(BackColor), ClientRectangle);
+
 						// draw default border
 						ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, Border3DStyle.Sunken);
 					}
@@ -2114,12 +2163,16 @@ namespace Be.Windows.Forms
 				}
 				case BorderStyle.FixedSingle:
 				{
-					// draw fixed single border
+                    // draw background
+                    e.Graphics.FillRectangle(new SolidBrush(BackColor), ClientRectangle);
+
+                    // draw fixed single border
 					ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.Black, ButtonBorderStyle.Solid);
 					break;
 				}
 			}
 		}
+
 
 		/// <summary>
 		/// Paints the hex box.
@@ -2127,7 +2180,7 @@ namespace Be.Windows.Forms
 		/// <param name="e">A PaintEventArgs that contains the event data.</param>
 		protected override void OnPaint(PaintEventArgs e)
 		{
-			base.OnPaint (e);
+            base.OnPaint(e);
 
 			if(_byteProvider == null)
 				return;
@@ -2461,6 +2514,10 @@ namespace Be.Windows.Forms
 
 		void PaintCurrentByteSign(Graphics g, Rectangle rec)
 		{
+			// stack overflowexception on big files - workaround
+			if(rec.Top < 0 || rec.Left < 0 || rec.Width <= 0 || rec.Height <= 0)
+				return;
+			
 			Bitmap myBitmap = new Bitmap(rec.Width, rec.Height);
 			Graphics bitmapGraphics = Graphics.FromImage(myBitmap);
 
@@ -2635,39 +2692,6 @@ namespace Be.Windows.Forms
 			}
 		}
 
-
-		/// <summary>
-		/// Gets the required creation parameters when the control handle is created.
-		/// </summary>
-		protected override CreateParams CreateParams
-		{
-			[SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode=true), SecurityPermission(SecurityAction.InheritanceDemand, UnmanagedCode=true)]
-			get
-			{
-				CreateParams p = base.CreateParams;
-
-//				if(VScrollBarVisible)
-//				{
-//					p.Style |= NativeMethods.WS_VSCROLL;
-//				}
-
-//				switch (_borderStyle)
-//				{
-//					case BorderStyle.FixedSingle:
-//					{
-//						p.Style = (p.Style | NativeMethods.WS_BORDER); //0x800000
-//						return p;
-//					}
-//					case BorderStyle.Fixed3D:
-//					{
-//						p.ExStyle = (p.ExStyle | NativeMethods.WS_EX_CLIENTEDGE);
-//						return p;
-//					}
-//				}
-				return p;
-			}
-		}
-
 		/// <summary>
 		/// Not used.
 		/// </summary>
@@ -2702,6 +2726,22 @@ namespace Be.Windows.Forms
 		#endregion
 
 		#region Properties
+        /// <summary>
+        /// Gets or sets the background color for the disabled control.
+        /// </summary>
+        [Category("Appearance"), DefaultValue(typeof(Color), "WhiteSmoke")]
+        public Color BackColorDisabled
+        {
+            get
+            {
+                return _backColorDisabled;
+            }
+            set
+            {
+                _backColorDisabled = value;
+            }
+        } Color _backColorDisabled = Color.FromName("WhiteSmoke");
+
 		/// <summary>
 		/// Gets or sets if the count of bytes in one line is fix.
 		/// </summary>
@@ -3177,27 +3217,6 @@ namespace Be.Windows.Forms
 				_currentPositionInLine = currentPositionInLine;
 				OnCurrentPositionInLineChanged(EventArgs.Empty);
 			}
-		}
-
-		bool VisualStylesEnabled()
-		{
-			OperatingSystem os = Environment.OSVersion;
-			bool isAppropriateOS = os.Platform == PlatformID.Win32NT && ((os.Version.Major == 5 && os.Version.Minor >= 1) || os.Version.Major > 5);
-			bool osFeatureThemesPresent = false;
-			bool osThemeDLLAvailable = false;
-
-			if (isAppropriateOS)
-			{
-				Version osThemeVersion = OSFeature.Feature.GetVersionPresent(OSFeature.Themes);
-				osFeatureThemesPresent = osThemeVersion != null;
-
-				NativeMethods.DLLVersionInfo dllVersion = new NativeMethods.DLLVersionInfo();
-				dllVersion.cbSize = Marshal.SizeOf(typeof(NativeMethods.DLLVersionInfo));
-				int temp = NativeMethods.DllGetVersion(ref dllVersion);
-				osThemeDLLAvailable = dllVersion.dwMajorVersion >= 6;
-			}
-
-			return isAppropriateOS && osFeatureThemesPresent && osThemeDLLAvailable && NativeMethods.IsAppThemed() && NativeMethods.IsThemeActive();
 		}
 		
 		/// <summary>

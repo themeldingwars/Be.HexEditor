@@ -56,105 +56,105 @@ namespace Be.HexEditor
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.label1 = new System.Windows.Forms.Label();
-			this.btnCancel = new System.Windows.Forms.Button();
-			this.btnOK = new System.Windows.Forms.Button();
-			this.nup = new System.Windows.Forms.NumericUpDown();
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.label2 = new System.Windows.Forms.Label();
-			((System.ComponentModel.ISupportInitialize)(this.nup)).BeginInit();
-			this.SuspendLayout();
-			// 
-			// label1
-			// 
-			this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.label1.Location = new System.Drawing.Point(8, 32);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(72, 16);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Byte number:";
-			// 
-			// btnCancel
-			// 
-			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnCancel.Location = new System.Drawing.Point(164, 64);
-			this.btnCancel.Name = "btnCancel";
-			this.btnCancel.TabIndex = 1;
-			this.btnCancel.Text = "Cancel";
-			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-			// 
-			// btnOK
-			// 
-			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnOK.Location = new System.Drawing.Point(84, 64);
-			this.btnOK.Name = "btnOK";
-			this.btnOK.TabIndex = 2;
-			this.btnOK.Text = "OK";
-			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-			// 
-			// nup
-			// 
-			this.nup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right)));
-			this.nup.Location = new System.Drawing.Point(80, 32);
-			this.nup.Minimum = new System.Decimal(new int[] {
-																1,
-																0,
-																0,
-																0});
-			this.nup.Name = "nup";
-			this.nup.Size = new System.Drawing.Size(160, 21);
-			this.nup.TabIndex = 3;
-			this.nup.Value = new System.Decimal(new int[] {
-															  1,
-															  0,
-															  0,
-															  0});
-			// 
-			// groupBox1
-			// 
-			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right)));
-			this.groupBox1.Location = new System.Drawing.Point(40, 8);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(200, 8);
-			this.groupBox1.TabIndex = 11;
-			this.groupBox1.TabStop = false;
-			// 
-			// label2
-			// 
-			this.label2.ForeColor = System.Drawing.Color.Blue;
-			this.label2.Location = new System.Drawing.Point(8, 8);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(40, 16);
-			this.label2.TabIndex = 10;
-			this.label2.Text = "Goto";
-			// 
-			// FormGoTo
-			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 14);
-			this.BackColor = System.Drawing.SystemColors.Control;
-			this.ClientSize = new System.Drawing.Size(248, 94);
-			this.Controls.Add(this.groupBox1);
-			this.Controls.Add(this.label2);
-			this.Controls.Add(this.nup);
-			this.Controls.Add(this.btnOK);
-			this.Controls.Add(this.btnCancel);
-			this.Controls.Add(this.label1);
-			this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.MaximizeBox = false;
-			this.MinimizeBox = false;
-			this.Name = "FormGoTo";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Goto byte";
-			this.Activated += new System.EventHandler(this.FormGoTo_Activated);
-			((System.ComponentModel.ISupportInitialize)(this.nup)).EndInit();
-			this.ResumeLayout(false);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGoTo));
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnOK = new System.Windows.Forms.Button();
+            this.nup = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.nup)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AccessibleDescription = null;
+            this.label1.AccessibleName = null;
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Font = null;
+            this.label1.Name = "label1";
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.AccessibleDescription = null;
+            this.btnCancel.AccessibleName = null;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.BackgroundImage = null;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Font = null;
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnOK
+            // 
+            this.btnOK.AccessibleDescription = null;
+            this.btnOK.AccessibleName = null;
+            resources.ApplyResources(this.btnOK, "btnOK");
+            this.btnOK.BackgroundImage = null;
+            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOK.Font = null;
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
+            // nup
+            // 
+            this.nup.AccessibleDescription = null;
+            this.nup.AccessibleName = null;
+            resources.ApplyResources(this.nup, "nup");
+            this.nup.Font = null;
+            this.nup.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nup.Name = "nup";
+            this.nup.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.AccessibleDescription = null;
+            this.groupBox1.AccessibleName = null;
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.BackgroundImage = null;
+            this.groupBox1.Font = null;
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AccessibleDescription = null;
+            this.label2.AccessibleName = null;
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Font = null;
+            this.label2.ForeColor = System.Drawing.Color.Blue;
+            this.label2.Name = "label2";
+            // 
+            // FormGoTo
+            // 
+            this.AccessibleDescription = null;
+            this.AccessibleName = null;
+            resources.ApplyResources(this, "$this");
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackgroundImage = null;
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.nup);
+            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = null;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "FormGoTo";
+            this.Activated += new System.EventHandler(this.FormGoTo_Activated);
+            ((System.ComponentModel.ISupportInitialize)(this.nup)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 		#endregion

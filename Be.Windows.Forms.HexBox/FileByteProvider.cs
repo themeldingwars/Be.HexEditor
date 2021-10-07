@@ -61,6 +61,10 @@ namespace Be.Windows.Forms
 		/// Contains the file stream.
 		/// </summary>
 		FileStream _fileStream;
+        /// <summary>
+        /// Read-only access.
+        /// </summary>
+        bool _readOnly;
 
 		/// <summary>
 		/// Initializes a new instance of the FileByteProvider class.
@@ -69,7 +73,25 @@ namespace Be.Windows.Forms
 		public FileByteProvider(string fileName)
 		{
 			_fileName = fileName;
-			_fileStream = File.Open(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+
+            try
+            {
+                // try to open in write mode
+                _fileStream = File.Open(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+            }
+            catch
+            {
+                // write mode failed, try to open in read-only and fileshare friendly mode.
+                try
+                {
+                    _fileStream = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                    _readOnly = true;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
 		}
 
 		/// <summary>
@@ -112,6 +134,11 @@ namespace Be.Windows.Forms
 		/// </summary>
 		public void ApplyChanges()
 		{
+            if (this._readOnly)
+            {
+                throw new Exception("File is in read-only mode.");
+            }
+
 			if(!HasChanges())
 				return;
 
@@ -203,7 +230,7 @@ namespace Be.Windows.Forms
 		/// </summary>
 		public bool SupportsWriteByte()
 		{
-			return true;
+			return !_readOnly;
 		}
 
 		/// <summary>

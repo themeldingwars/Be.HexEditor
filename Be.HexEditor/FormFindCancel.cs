@@ -58,95 +58,94 @@ namespace Be.HexEditor
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.btnCancel = new System.Windows.Forms.Button();
-			this.lblFinding = new System.Windows.Forms.Label();
-			this.timer = new System.Windows.Forms.Timer(this.components);
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.lblPercent = new System.Windows.Forms.Label();
-			this.timerPercent = new System.Windows.Forms.Timer(this.components);
-			this.SuspendLayout();
-			// 
-			// btnCancel
-			// 
-			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnCancel.Location = new System.Drawing.Point(208, 40);
-			this.btnCancel.Name = "btnCancel";
-			this.btnCancel.Size = new System.Drawing.Size(72, 23);
-			this.btnCancel.TabIndex = 0;
-			this.btnCancel.Text = "Cancel";
-			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-			// 
-			// lblFinding
-			// 
-			this.lblFinding.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblFinding.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
-			this.lblFinding.ForeColor = System.Drawing.Color.Blue;
-			this.lblFinding.Location = new System.Drawing.Point(128, 40);
-			this.lblFinding.Name = "lblFinding";
-			this.lblFinding.Size = new System.Drawing.Size(80, 23);
-			this.lblFinding.TabIndex = 1;
-			// 
-			// timer
-			// 
-			this.timer.Interval = 50;
-			this.timer.Tick += new System.EventHandler(this.timer_Tick);
-			// 
-			// groupBox1
-			// 
-			this.groupBox1.Location = new System.Drawing.Point(80, 16);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(200, 8);
-			this.groupBox1.TabIndex = 11;
-			this.groupBox1.TabStop = false;
-			// 
-			// label1
-			// 
-			this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.label1.ForeColor = System.Drawing.Color.Blue;
-			this.label1.Location = new System.Drawing.Point(16, 16);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(56, 16);
-			this.label1.TabIndex = 10;
-			this.label1.Text = "Finding...";
-			// 
-			// lblPercent
-			// 
-			this.lblPercent.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblPercent.Location = new System.Drawing.Point(80, 40);
-			this.lblPercent.Name = "lblPercent";
-			this.lblPercent.Size = new System.Drawing.Size(48, 23);
-			this.lblPercent.TabIndex = 12;
-			this.lblPercent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// timerPercent
-			// 
-			this.timerPercent.Tick += new System.EventHandler(this.timerPercent_Tick);
-			// 
-			// FormFindCancel
-			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 14);
-			this.BackColor = System.Drawing.SystemColors.Control;
-			this.CancelButton = this.btnCancel;
-			this.ClientSize = new System.Drawing.Size(292, 68);
-			this.ControlBox = false;
-			this.Controls.Add(this.lblPercent);
-			this.Controls.Add(this.groupBox1);
-			this.Controls.Add(this.label1);
-			this.Controls.Add(this.lblFinding);
-			this.Controls.Add(this.btnCancel);
-			this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-			this.MaximizeBox = false;
-			this.MinimizeBox = false;
-			this.Name = "FormFindCancel";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Finding...";
-			this.Activated += new System.EventHandler(this.FormFindCancel_Activated);
-			this.Deactivate += new System.EventHandler(this.FormFindCancel_Deactivate);
-			this.ResumeLayout(false);
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFindCancel));
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.lblFinding = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblPercent = new System.Windows.Forms.Label();
+            this.timerPercent = new System.Windows.Forms.Timer(this.components);
+            this.SuspendLayout();
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.AccessibleDescription = null;
+            this.btnCancel.AccessibleName = null;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.BackgroundImage = null;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Font = null;
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // lblFinding
+            // 
+            this.lblFinding.AccessibleDescription = null;
+            this.lblFinding.AccessibleName = null;
+            resources.ApplyResources(this.lblFinding, "lblFinding");
+            this.lblFinding.ForeColor = System.Drawing.Color.Blue;
+            this.lblFinding.Name = "lblFinding";
+            // 
+            // timer
+            // 
+            this.timer.Interval = 50;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.AccessibleDescription = null;
+            this.groupBox1.AccessibleName = null;
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.BackgroundImage = null;
+            this.groupBox1.Font = null;
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AccessibleDescription = null;
+            this.label1.AccessibleName = null;
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Font = null;
+            this.label1.ForeColor = System.Drawing.Color.Blue;
+            this.label1.Name = "label1";
+            // 
+            // lblPercent
+            // 
+            this.lblPercent.AccessibleDescription = null;
+            this.lblPercent.AccessibleName = null;
+            resources.ApplyResources(this.lblPercent, "lblPercent");
+            this.lblPercent.Font = null;
+            this.lblPercent.Name = "lblPercent";
+            // 
+            // timerPercent
+            // 
+            this.timerPercent.Tick += new System.EventHandler(this.timerPercent_Tick);
+            // 
+            // FormFindCancel
+            // 
+            this.AccessibleDescription = null;
+            this.AccessibleName = null;
+            resources.ApplyResources(this, "$this");
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackgroundImage = null;
+            this.CancelButton = this.btnCancel;
+            this.ControlBox = false;
+            this.Controls.Add(this.lblPercent);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblFinding);
+            this.Controls.Add(this.btnCancel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = null;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "FormFindCancel";
+            this.Deactivate += new System.EventHandler(this.FormFindCancel_Deactivate);
+            this.Activated += new System.EventHandler(this.FormFindCancel_Activated);
+            this.ResumeLayout(false);
 
 		}
 		#endregion

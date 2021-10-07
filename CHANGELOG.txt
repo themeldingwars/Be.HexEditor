@@ -1,5 +1,21 @@
 Version history
 
+1.3.0
+- New feature: Multilanguage support (English, German)
+- New feature: Recent files added
+- New feature: Options dialog added
+- New feature: Refresh during thumbtrack scrolling
+- New feature: File size shown in status bar
+- Bug fix: BackColor is not recognized
+- Bug fix: Sometimes crashes on files > 8 GB
+- Improvement: Can open file in read-only mode
+- Improvement: Ported to .NET 2.0
+- Improvement: Solution converted to Visual Studio 2008
+- Improvement: TextBox border rendering changed (without pinvoke)
+- Improvement: New ToolStrip controls and icons
+- Improvement: pinvoke signatures dropped
+
+
 1.2.0
 - Note: Thanks to Dave Cluderay
 - New feature: DynamicFileByteProvider with Insert/Delete support
