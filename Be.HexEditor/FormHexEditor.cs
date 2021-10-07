@@ -7,10 +7,11 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using Be.Windows.Forms;
+using System.Diagnostics;
 
 namespace Be.HexEditor
 {
-    public partial class FormHexEditor : Form
+    public partial class FormHexEditor : Core.FormEx
     {
 		FormFind _formFind;
 		FindOptions _findOptions = new FindOptions();
@@ -22,6 +23,8 @@ namespace Be.HexEditor
             InitializeComponent();
 
 			Init();
+
+            hexBox.Font = new Font(SystemFonts.MessageBoxFont.FontFamily, SystemFonts.MessageBoxFont.Size, SystemFonts.MessageBoxFont.Style);
 
 			this.toolStrip.Renderer.RenderToolStripBorder += new ToolStripRenderEventHandler(Renderer_RenderToolStripBorder);
         }
@@ -70,6 +73,8 @@ namespace Be.HexEditor
 			encodingToolStripMenuItem.DropDownItems.Add(miDefault);
 			encodingToolStripMenuItem.DropDownItems.Add(miEbcdic);
 			encodingToolStripComboBox.SelectedIndex = 0;
+
+            UpdateFormWidth();
         }
 
 		void encodingMenuItem_Clicked(object sender, EventArgs e)
@@ -546,18 +551,20 @@ namespace Be.HexEditor
 
 		void UpdateBitControlVisibility()
 		{
+            if (Util.DesignMode)
+                return;
 			//if (this.bitControl1.Visible == bitsToolStripMenuItem.Checked)
 			//{
 			//    return;
 			//}
 			if (bitsToolStripMenuItem.Checked)
 			{
-				//hexBox.Height -= bitControl1.Height;
+                hexBox.Height -= bitControl1.Height;
 				bitControl1.Visible = true;
 			}
 			else
 			{
-				//hexBox.Height += bitControl1.Height;
+                hexBox.Height += bitControl1.Height;
 				bitControl1.Visible = false;
 			}
 		}
@@ -567,5 +574,20 @@ namespace Be.HexEditor
 			hexBox.ByteProvider.WriteByte(bitControl1.BitInfo.Position, bitControl1.BitInfo.Value);
 			hexBox.Invalidate();
 		}
+
+        void menuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        void hexBox_RequiredWidthChanged(object sender, EventArgs e)
+        {
+            UpdateFormWidth();
+        }
+
+        void UpdateFormWidth()
+        {
+            this.Width = this.hexBox.RequiredWidth + 70;
+        }
 	}
 }

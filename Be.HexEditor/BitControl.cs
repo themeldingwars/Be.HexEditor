@@ -20,57 +20,80 @@ namespace Be.HexEditor
 				BitChanged(this, e);
 		}
 
-        FlowLayoutPanel _innerBorderHeaderPanel;
+        Panel _innerBorderHeaderPanel;
 
-		FlowLayoutPanel _innerBorderPanel;
+		Panel _innerBorderPanel;
 
 		public BitControl()
 		{
+            _innerBorderHeaderPanel = new Panel();
+            _innerBorderHeaderPanel.Dock = DockStyle.Fill;
+            _innerBorderHeaderPanel.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+
+            _innerBorderPanel = new Panel();
+            _innerBorderPanel.BackColor = Color.White;
+            _innerBorderPanel.Dock = DockStyle.Fill;
+            _innerBorderPanel.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+
 			InitializeComponent();
 
 			pnBitsEditor.BackColor = System.Windows.Forms.VisualStyles.VisualStyleInformation.TextControlBorder;
 
-            _innerBorderHeaderPanel = new FlowLayoutPanel();
-            _innerBorderHeaderPanel.Dock = DockStyle.Fill;
-            _innerBorderHeaderPanel.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            _innerBorderHeaderPanel.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            
             pnBitsHeader.Controls.Add(_innerBorderHeaderPanel);
 
+            bool first = true;
+            Size size = new Size();
+            int pos = 5;
             for (int i = 7; i > -1; i--)
             {
                 Label lbl = new Label();
                 lbl.Tag = i;
                 lbl.BorderStyle = System.Windows.Forms.BorderStyle.None;
-                lbl.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                lbl.Font = new System.Drawing.Font("Consolas", SystemFonts.MessageBoxFont.Size, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 lbl.Margin = new System.Windows.Forms.Padding(0);
 
                 lbl.Name = "lbl" + i.ToString();
-                lbl.Size = new System.Drawing.Size(14, 14);
+
+                //lbl.Size = new System.Drawing.Size(14, 14);
+                
+                lbl.AutoSize = true;
                 lbl.Text = i.ToString();
                 lbl.Enter += new System.EventHandler(this.txt_Enter);
                 lbl.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
                 _innerBorderHeaderPanel.Controls.Add(lbl);
+
+                if (first)
+                {
+                    size = lbl.Size;
+                    lbl.AutoSize = false;
+                    first = false;
+                }
+                
+                lbl.Size = size;
+                lbl.Left = pos;
+                lbl.Top = 3;
+                pos += size.Width;
             }
-
-			_innerBorderPanel = new FlowLayoutPanel();
-			_innerBorderPanel.BackColor = Color.White;
-			_innerBorderPanel.Dock = DockStyle.Fill;
-			_innerBorderPanel.Padding = new System.Windows.Forms.Padding(3, 2, 0, 0);
-            _innerBorderPanel.Margin = new System.Windows.Forms.Padding(3,1,3,1);
+			
 			pnBitsEditor.Controls.Add(_innerBorderPanel);
-
+            pos = 8;
 			for(int i = 7; i > -1; i--)
 			{
 				RichTextBox txt = new RichTextBox();
 				txt.Tag = i;
 				txt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-				txt.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                txt.Font = new System.Drawing.Font("Consolas", SystemFonts.MessageBoxFont.Size, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 				txt.Margin = new System.Windows.Forms.Padding(0);
                 
 				txt.MaxLength = 1;
 				txt.Multiline = false;
 				txt.Name = "txt" + i.ToString();
-				txt.Size = new System.Drawing.Size(14, 14);
+                //txt.Size = new System.Drawing.Size(14, 14);
+                txt.Size = size;
+                txt.Left = pos;
+                txt.Top = 6;
+                pos += size.Width;
 				txt.TabIndex = 10 -i + 7;
 				txt.Text = "0";
 				txt.Visible = false;
@@ -254,5 +277,5 @@ namespace Be.HexEditor
 			var txt = (RichTextBox)sender;
 			UpdateSelection(txt);
 		}
-	}
+   }
 }

@@ -70,7 +70,7 @@ namespace Be.HexEditor
 
             // check if the file is already in the collection
             int alreadyIn = GetIndexOfRecentFile(fileName);
-            if (alreadyIn != -1) // remove it
+            if (alreadyIn > 0) // remove it
             {
                 Settings.Default.RecentFiles.RemoveAt(alreadyIn);
                 if(recentFileToolStripItem.DropDownItems.Count > alreadyIn)

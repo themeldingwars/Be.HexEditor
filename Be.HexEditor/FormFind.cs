@@ -13,7 +13,7 @@ namespace Be.HexEditor
 	/// <summary>
 	/// Summary description for FormFind.
 	/// </summary>
-	public class FormFind : System.Windows.Forms.Form
+    public class FormFind : Core.FormEx
 	{
 		private Be.Windows.Forms.HexBox hexFind;
 		private System.Windows.Forms.TextBox txtFind;
@@ -21,14 +21,15 @@ namespace Be.HexEditor
 		private System.Windows.Forms.RadioButton rbHex;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button btnOK;
-		private System.Windows.Forms.Button btnCancel;
-		private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnCancel;
 		private Label lblPercent;
 		private Label lblFinding;
 		private CheckBox chkMatchCase;
 		private Timer timerPercent;
 		private Timer timer;
 		private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel flowLayoutPanel2;
+        private Panel line;
 		private IContainer components;
 
 		public FormFind()
@@ -81,7 +82,6 @@ namespace Be.HexEditor
             this.label1 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblPercent = new System.Windows.Forms.Label();
             this.lblFinding = new System.Windows.Forms.Label();
             this.chkMatchCase = new System.Windows.Forms.CheckBox();
@@ -89,7 +89,10 @@ namespace Be.HexEditor
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.hexFind = new Be.Windows.Forms.HexBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.line = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtFind
@@ -129,12 +132,6 @@ namespace Be.HexEditor
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // groupBox1
-            // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
-            // 
             // lblPercent
             // 
             resources.ApplyResources(this.lblPercent, "lblPercent");
@@ -142,8 +139,8 @@ namespace Be.HexEditor
             // 
             // lblFinding
             // 
-            resources.ApplyResources(this.lblFinding, "lblFinding");
             this.lblFinding.ForeColor = System.Drawing.Color.Blue;
+            resources.ApplyResources(this.lblFinding, "lblFinding");
             this.lblFinding.Name = "lblFinding";
             // 
             // chkMatchCase
@@ -180,23 +177,37 @@ namespace Be.HexEditor
             // 
             // flowLayoutPanel1
             // 
-            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Controls.Add(this.label1);
-            this.flowLayoutPanel1.Controls.Add(this.groupBox1);
+            this.flowLayoutPanel1.Controls.Add(this.line);
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
+            // 
+            // line
+            // 
+            resources.ApplyResources(this.line, "line");
+            this.line.BackColor = System.Drawing.Color.LightGray;
+            this.line.Name = "line";
+            // 
+            // flowLayoutPanel2
+            // 
+            resources.ApplyResources(this.flowLayoutPanel2, "flowLayoutPanel2");
+            this.flowLayoutPanel2.Controls.Add(this.btnCancel);
+            this.flowLayoutPanel2.Controls.Add(this.btnOK);
+            this.flowLayoutPanel2.Controls.Add(this.lblFinding);
+            this.flowLayoutPanel2.Controls.Add(this.lblPercent);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             // 
             // FormFind
             // 
             this.AcceptButton = this.btnOK;
             resources.ApplyResources(this, "$this");
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.btnCancel;
+            this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.chkMatchCase);
-            this.Controls.Add(this.lblPercent);
-            this.Controls.Add(this.lblFinding);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
             this.Controls.Add(this.rbHex);
             this.Controls.Add(this.rbString);
             this.Controls.Add(this.txtFind);
@@ -210,6 +221,8 @@ namespace Be.HexEditor
             this.Activated += new System.EventHandler(this.FormFind_Activated);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -389,6 +402,11 @@ namespace Be.HexEditor
 			string text = percent.ToString("0.00", nfi) + " %";
 			lblPercent.Text = text;
 		}
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
 
 	}
 }

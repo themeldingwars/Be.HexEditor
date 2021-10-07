@@ -28,7 +28,7 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <SignAssembly>true</SignAssembly>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -73,6 +73,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -97,6 +98,7 @@
     <DebugType>none</DebugType>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>BasicCorrectnessRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>5282C77035188F0544204E779C3587A1D0FE131C</ManifestCertificateThumbprint>
@@ -105,10 +107,21 @@
     <ManifestKeyFile>Be.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
@@ -124,6 +137,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\CoreUtil.cs" />
+    <Compile Include="Core\FormEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\IScalingItem.cs" />
+    <Compile Include="Core\MenuStripEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\ToolStripButtonEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\ToolStripEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\ToolStripMenuItemEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\ToolStripSplitButtonEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ScalingImages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScalingImages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="W32.cs" />
     <EmbeddedResource Include="App.ico" />
     <EmbeddedResource Include="BitControl.de.resx">
       <DependentUpon>BitControl.cs</DependentUpon>
@@ -131,8 +170,13 @@
     <EmbeddedResource Include="BitControl.resx">
       <DependentUpon>BitControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ScalingImages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ScalingImages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="strings.it.resx">
       <SubType>Designer</SubType>
+      <LastGenOutput>strings.it.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAbout.de.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
@@ -226,14 +270,19 @@
     <EmbeddedResource Include="Resources\ThanksTo.rtf" />
     <EmbeddedResource Include="strings.de.resx">
       <SubType>Designer</SubType>
+      <LastGenOutput>strings.de.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="strings.ru.resx" />
-    <EmbeddedResource Include="strings.zh-Hans.resx" />
+    <EmbeddedResource Include="strings.ru.resx">
+      <LastGenOutput>strings.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="strings.zh-Hans.resx">
+      <LastGenOutput>strings.zh-Hans.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="UCAbout.de.resx">
       <DependentUpon>UCAbout.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -334,8 +383,13 @@
       <LastGenOutput>images.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="strings.ja.resx" />
+    <EmbeddedResource Include="strings.ja.resx">
+      <LastGenOutput>strings.ja.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>
     <None Include="Be.HexEditor.snk" />
@@ -394,6 +448,29 @@
       <Project>{26c5f25f-b450-4caf-ad8b-b8d11ae73457}</Project>
       <Name>Be.Windows.Forms.HexBox</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copy16.png" />
+    <None Include="Resources\Copy24.png" />
+    <None Include="Resources\Copy32.png" />
+    <None Include="Resources\Cut16.png" />
+    <None Include="Resources\Cut24.png" />
+    <None Include="Resources\Cut32.png" />
+    <None Include="Resources\Find16.png" />
+    <None Include="Resources\Find24.png" />
+    <None Include="Resources\Find32.png" />
+    <None Include="Resources\FindNext16.png" />
+    <None Include="Resources\FindNext32.png" />
+    <None Include="Resources\FolderOpen_16.png" />
+    <None Include="Resources\FolderOpen_24.png" />
+    <None Include="Resources\FolderOpen_32.png" />
+    <None Include="Resources\Paste16.png" />
+    <None Include="Resources\Paste24.png" />
+    <None Include="Resources\Paste32.png" />
+    <None Include="Resources\save16.png" />
+    <None Include="Resources\Save24.png" />
+    <None Include="Resources\Save32.png" />
+    <None Include="Resources\FindNext24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -9,7 +9,7 @@ namespace Be.HexEditor
 	/// <summary>
 	/// Summary description for FormAbout.
 	/// </summary>
-	public class FormAbout : System.Windows.Forms.Form
+	public class FormAbout : Core.FormEx
 	{
 		private Be.HexEditor.UCAbout ucAbout1;
 		private System.Windows.Forms.Button btnOK;
@@ -28,6 +28,7 @@ namespace Be.HexEditor
 			//
 			// TODO: Add any constructor code after InitializeComponent call
 			//
+            
 		}
 
 		/// <summary>
@@ -52,35 +53,38 @@ namespace Be.HexEditor
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAbout));
-			this.ucAbout1 = new Be.HexEditor.UCAbout();
-			this.btnOK = new System.Windows.Forms.Button();
-			this.SuspendLayout();
-			// 
-			// ucAbout1
-			// 
-			resources.ApplyResources(this.ucAbout1, "ucAbout1");
-			this.ucAbout1.Name = "ucAbout1";
-			// 
-			// btnOK
-			// 
-			resources.ApplyResources(this.btnOK, "btnOK");
-			this.btnOK.Name = "btnOK";
-			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-			// 
-			// FormAbout
-			// 
-			this.AcceptButton = this.btnOK;
-			resources.ApplyResources(this, "$this");
-			this.BackColor = System.Drawing.SystemColors.Control;
-			this.Controls.Add(this.btnOK);
-			this.Controls.Add(this.ucAbout1);
-			this.MaximizeBox = false;
-			this.MinimizeBox = false;
-			this.Name = "FormAbout";
-			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
-			this.ResumeLayout(false);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAbout));
+            this.btnOK = new System.Windows.Forms.Button();
+            this.ucAbout1 = new Be.HexEditor.UCAbout();
+            this.SuspendLayout();
+            // 
+            // btnOK
+            // 
+            resources.ApplyResources(this.btnOK, "btnOK");
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
+            // ucAbout1
+            // 
+            resources.ApplyResources(this.ucAbout1, "ucAbout1");
+            this.ucAbout1.Name = "ucAbout1";
+            // 
+            // FormAbout
+            // 
+            this.AcceptButton = this.btnOK;
+            resources.ApplyResources(this, "$this");
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.ucAbout1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "FormAbout";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Load += new System.EventHandler(this.FormAbout_CorrectWidth);
+            this.Resize += new System.EventHandler(this.FormAbout_CorrectWidth);
+            this.ResumeLayout(false);
 
 		}
 		#endregion
@@ -89,5 +93,11 @@ namespace Be.HexEditor
 		{
 			Close();
 		}
+
+        private void FormAbout_CorrectWidth(object sender, EventArgs e)
+        {
+            //var factor = this.DpiNew / Core.FormEx.DpiAtDesign;
+            //this.ucAbout1.Width = (int)((this.Width - 40) * factor);
+        }
 	}
 }

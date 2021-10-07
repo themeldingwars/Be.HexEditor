@@ -1,5 +1,11 @@
 Version history
 
+1.6.0
+- New feature: High DPI (DPI Aware) As-Per-Monitor Windows 8.1 support
+- Improvement: InfoForeColor default value changed to Gray
+- Bug fix: RecentFileHandler fix
+
+
 1.5.0
 - Improvement: Moved to .NET Framework 4.0 for a better Win 8 support
 - Improvement: Moved to Visual Studio 2012

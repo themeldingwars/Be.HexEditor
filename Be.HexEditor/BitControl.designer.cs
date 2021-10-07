@@ -33,6 +33,8 @@
             this.lblBit = new System.Windows.Forms.Label();
             this.pnBitsEditor = new System.Windows.Forms.Panel();
             this.pnBitsHeader = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblValue
@@ -53,17 +55,26 @@
             // pnBitsHeader
             // 
             resources.ApplyResources(this.pnBitsHeader, "pnBitsHeader");
+            this.flowLayoutPanel.SetFlowBreak(this.pnBitsHeader, true);
             this.pnBitsHeader.Name = "pnBitsHeader";
+            // 
+            // flowLayoutPanel
+            // 
+            this.flowLayoutPanel.Controls.Add(this.lblBit);
+            this.flowLayoutPanel.Controls.Add(this.pnBitsHeader);
+            this.flowLayoutPanel.Controls.Add(this.lblValue);
+            this.flowLayoutPanel.Controls.Add(this.pnBitsEditor);
+            resources.ApplyResources(this.flowLayoutPanel, "flowLayoutPanel");
+            this.flowLayoutPanel.Name = "flowLayoutPanel";
             // 
             // BitControl
             // 
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pnBitsHeader);
-            this.Controls.Add(this.pnBitsEditor);
-            this.Controls.Add(this.lblValue);
-            this.Controls.Add(this.lblBit);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.flowLayoutPanel);
             this.Name = "BitControl";
+            this.flowLayoutPanel.ResumeLayout(false);
+            this.flowLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -74,5 +85,6 @@
         private System.Windows.Forms.Label lblBit;
         private System.Windows.Forms.Panel pnBitsEditor;
         private System.Windows.Forms.Panel pnBitsHeader;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
 	}
 }
