@@ -1,6 +1,4 @@
 using System;
-using System.Drawing;
-using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -11,12 +9,12 @@ namespace Be.HexEditor
 	/// </summary>
 	public class FormAbout : Core.FormEx
 	{
-		private Be.HexEditor.UCAbout ucAbout1;
-		private System.Windows.Forms.Button btnOK;
+		private UCAbout ucAbout1;
+		private Button btnOK;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		private System.ComponentModel.Container components = null;
+		private Container components = null;
 
 		public FormAbout()
 		{
@@ -89,7 +87,7 @@ namespace Be.HexEditor
 		}
 		#endregion
 
-		private void btnOK_Click(object sender, System.EventArgs e)
+		private void btnOK_Click(object sender, EventArgs e)
 		{
 			Close();
 		}

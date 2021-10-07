@@ -1,7 +1,4 @@
 using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Be.HexEditor
@@ -11,11 +8,11 @@ namespace Be.HexEditor
 	/// </summary>
     public class FormGoTo : Core.FormEx
 	{
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Button btnCancel;
-		private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.NumericUpDown nup;
-		private System.Windows.Forms.Label label2;
+		private Label label1;
+		private Button btnCancel;
+		private Button btnOK;
+        private NumericUpDown nup;
+		private Label label2;
         private Panel line;
         private FlowLayoutPanel flowLayoutPanel1;
 		/// <summary>
@@ -161,18 +158,18 @@ namespace Be.HexEditor
 			return Convert.ToInt64(nup.Value) - 1;
 		}
 
-		private void FormGoTo_Activated(object sender, System.EventArgs e)
+		private void FormGoTo_Activated(object sender, EventArgs e)
 		{
 			nup.Focus();
 			nup.Select(0, nup.Value.ToString().Length);
 		}
 
-		private void btnOK_Click(object sender, System.EventArgs e)
+		private void btnOK_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.OK;
 		}
 
-		private void btnCancel_Click(object sender, System.EventArgs e)
+		private void btnCancel_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.OK;
 		}

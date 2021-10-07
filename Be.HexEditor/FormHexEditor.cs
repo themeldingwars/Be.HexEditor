@@ -1,13 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using Be.Windows.Forms;
-using System.Diagnostics;
 
 namespace Be.HexEditor
 {
@@ -61,7 +57,8 @@ namespace Be.HexEditor
 			miDefault.Tag = defConverter;
 			miDefault.Click += new EventHandler(encodingMenuItem_Clicked);
 
-			var ebcdicConverter = new EbcdicByteCharProvider();
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            var ebcdicConverter = new EbcdicByteCharProvider();
 			ToolStripMenuItem miEbcdic = new ToolStripMenuItem();
 			miEbcdic.Text = ebcdicConverter.ToString();
 			miEbcdic.Tag = ebcdicConverter;

@@ -1,33 +1,29 @@
 using System;
-using System.Collections;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Diagnostics;
 using System.Reflection;
-using System.IO;
 
 namespace Be.HexEditor
 {
 	/// <summary>
 	/// Summary description for UCAbout.
 	/// </summary>
-	public class UCAbout : System.Windows.Forms.UserControl
+	public class UCAbout : UserControl
 	{
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.Label lblAuthor;
-		private System.Windows.Forms.Label lblVersion;
-		private System.Windows.Forms.TabPage tabLicense;
-		private System.Windows.Forms.RichTextBox txtLicense;
-		private System.Windows.Forms.TabPage tabChanges;
-		private System.Windows.Forms.RichTextBox txtChanges;
-		private System.Windows.Forms.PictureBox pictureBox1;
-		private System.Windows.Forms.LinkLabel lnkWorkspace;
-		private System.Windows.Forms.TabControl tabControl;
-		private System.Windows.Forms.TabPage tabThanksTo;
-		private System.Windows.Forms.RichTextBox txtThanksTo;
+		private Label label1;
+		private Label label5;
+		private Label label7;
+		private Label lblAuthor;
+		private Label lblVersion;
+		private TabPage tabLicense;
+		private RichTextBox txtLicense;
+		private TabPage tabChanges;
+		private RichTextBox txtChanges;
+		private PictureBox pictureBox1;
+		private LinkLabel lnkWorkspace;
+		private TabControl tabControl;
+		private TabPage tabThanksTo;
+		private RichTextBox txtThanksTo;
 		/// <summary> 
 		/// Required designer variable.
 		/// </summary>
@@ -230,11 +226,11 @@ namespace Be.HexEditor
 		}
 		#endregion
 
-		private void lnkCompany_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+		private void lnkCompany_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			try
 			{
-				System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(this.lnkWorkspace.Text));
+				System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(lnkWorkspace.Text));
 			}
 			catch (Exception ex1)
 			{
@@ -244,11 +240,11 @@ namespace Be.HexEditor
 
         private void UCAbout_Load(object sender, EventArgs e)
         {
-            this.tabControl.Width = this.Width - 10;
-            this.tabControl.Height = this.Height - this.tabControl.Top - 10;
-            this.lblAuthor.Width = this.Width - this.lblAuthor.Left - 10;
-            this.lnkWorkspace.Width = this.Width - this.lnkWorkspace.Left - 10;
-            this.lblVersion.Width = this.Width - this.lblVersion.Left - 10;
+            tabControl.Width = Width - 10;
+            tabControl.Height = Height - tabControl.Top - 10;
+            lblAuthor.Width = Width - lblAuthor.Left - 10;
+            lnkWorkspace.Width = Width - lnkWorkspace.Left - 10;
+            lblVersion.Width = Width - lblVersion.Left - 10;
         }
 	}
 }

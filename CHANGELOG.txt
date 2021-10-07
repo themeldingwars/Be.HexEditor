@@ -1,5 +1,10 @@
 Version history
 
+1.8.0
+- New feature: Update project and dependencies to .NET 5
+- Improvement: Remove unnecessary usings
+
+
 1.7.0
 - New feature: Ability to color regions in the hex view with a different background color
 

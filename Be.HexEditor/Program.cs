@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Globalization;
 using Be.HexEditor.Properties;
-using Be.Windows.Forms;
 
 namespace Be.HexEditor
 {
