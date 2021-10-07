@@ -1,5 +1,8 @@
 Version history
 
+1.4.6
+- New feature: Italian language added
+
 1.4.5
 - New feature: Simplified Chinese language added
 

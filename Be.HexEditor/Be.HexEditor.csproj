@@ -112,9 +112,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.ico" />
+    <EmbeddedResource Include="strings.it.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAbout.de.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAbout.it.resx">
+      <DependentUpon>FormAbout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
@@ -130,6 +136,9 @@
       <DependentUpon>FormFind.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormFind.it.resx">
+      <DependentUpon>FormFind.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormFind.resx">
       <DependentUpon>FormFind.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -143,6 +152,9 @@
     <EmbeddedResource Include="FormFindCancel.de.resx">
       <DependentUpon>FormFindCancel.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFindCancel.it.resx">
+      <DependentUpon>FormFindCancel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFindCancel.resx">
       <DependentUpon>FormFindCancel.cs</DependentUpon>
@@ -158,6 +170,9 @@
       <DependentUpon>FormGoTo.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormGoTo.it.resx">
+      <DependentUpon>FormGoTo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormGoTo.resx">
       <DependentUpon>FormGoTo.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -172,6 +187,9 @@
       <DependentUpon>FormHexEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormHexEditor.it.resx">
+      <DependentUpon>FormHexEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormHexEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormHexEditor.cs</DependentUpon>
@@ -185,6 +203,9 @@
     <EmbeddedResource Include="FormOptions.de.resx">
       <DependentUpon>FormOptions.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOptions.it.resx">
+      <DependentUpon>FormOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormOptions.resx">
       <DependentUpon>FormOptions.cs</DependentUpon>
@@ -211,6 +232,9 @@
     <EmbeddedResource Include="UCAbout.de.resx">
       <DependentUpon>UCAbout.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCAbout.it.resx">
+      <DependentUpon>UCAbout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCAbout.ja.resx">
       <DependentUpon>UCAbout.cs</DependentUpon>

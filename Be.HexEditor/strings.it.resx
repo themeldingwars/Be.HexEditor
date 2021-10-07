@@ -118,42 +118,42 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="English" xml:space="preserve">
-    <value>English</value>
+    <value>Inglese</value>
   </data>
   <data name="FileDoesNotExist" xml:space="preserve">
-    <value>The file does not exist!</value>
+    <value>Il file non esiste!</value>
   </data>
   <data name="FindOperationEndOfFile" xml:space="preserve">
-    <value>Find reached end of file!</value>
+    <value>La ricerca è giunta alla fine del file!</value>
   </data>
   <data name="German" xml:space="preserve">
-    <value>German</value>
+    <value>Tedesco</value>
   </data>
   <data name="ProgramRestartSettings" xml:space="preserve">
-    <value>Program restart required for settings to take affect!</value>
+    <value>Il programma deve essere riavviato per attivare le modifiche!</value>
   </data>
   <data name="SaveChangesQuestion" xml:space="preserve">
-    <value>Do you want to save changes?</value>
+    <value>Salvare le modifiche?</value>
   </data>
   <data name="Readonly" xml:space="preserve">
-    <value> [read-only]</value>
+    <value> [sola lettura]</value>
   </data>
   <data name="OpenFailed" xml:space="preserve">
-    <value>File is locked by another process and cannot be opened!</value>
+    <value>Il file è bloccato da un altro processo e non può essere aperto!</value>
   </data>
   <data name="OpenReadonly" xml:space="preserve">
-    <value>The file is locked. Do you want to open it in read-only mode?</value>
+    <value>Il file è bloccato. Aprirlo in sola lettura?</value>
   </data>
   <data name="Japanese" xml:space="preserve">
-    <value>Japanese</value>
+    <value>Giapponese</value>
   </data>
   <data name="Russian" xml:space="preserve">
-    <value>Russian</value>
+    <value>Russo</value>
   </data>
   <data name="SimplifiedChinese" xml:space="preserve">
-    <value>Simplified Chinese</value>
+    <value>Cinese semplificato</value>
   </data>
   <data name="Italian" xml:space="preserve">
-    <value>Italian</value>
+    <value>Italiano</value>
   </data>
 </root>

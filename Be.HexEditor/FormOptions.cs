@@ -53,6 +53,7 @@ namespace Be.HexEditor
             dt.Columns.Add("Value", typeof(string));
             dt.Rows.Add(strings.English, "en");
             dt.Rows.Add(strings.German, "de");
+			dt.Rows.Add(strings.Italian, "it");
             dt.Rows.Add(strings.Japanese, "ja");
             dt.Rows.Add(strings.Russian, "ru");
             dt.Rows.Add(strings.SimplifiedChinese, "zh-CN");

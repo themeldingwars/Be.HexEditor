@@ -153,4 +153,7 @@
   <data name="SimplifiedChinese" xml:space="preserve">
     <value>Chinesisch</value>
   </data>
+  <data name="Italian" xml:space="preserve">
+    <value>Italienisch</value>
+  </data>
 </root>
