@@ -130,11 +130,10 @@ namespace Be.HexEditor
 				| System.Windows.Forms.AnchorStyles.Right)));
 			this.hexBox.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.hexBox.HexCasing = Be.Windows.Forms.HexCasing.Lower;
+			this.hexBox.LineInfoForeColor = System.Drawing.Color.Gray;
 			this.hexBox.LineInfoVisible = true;
 			this.hexBox.Location = new System.Drawing.Point(8, 32);
 			this.hexBox.Name = "hexBox";
-			this.hexBox.SelectionLength = ((long)(0));
-			this.hexBox.SelectionStart = ((long)(-1));
 			this.hexBox.ShadowSelectionColor = System.Drawing.Color.FromArgb(((System.Byte)(100)), ((System.Byte)(60)), ((System.Byte)(188)), ((System.Byte)(255)));
 			this.hexBox.Size = new System.Drawing.Size(712, 480);
 			this.hexBox.StringViewVisible = true;

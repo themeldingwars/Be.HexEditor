@@ -1,5 +1,12 @@
 Version history
 
+1.1.3
+- Note: Thanks to Eric Lawrence
+- New feature: LineInfoForeColor property added
+- Bug fix: CanCut, CanPaste take regard of ReadOnly
+- Bug fix: Ensure that we don't paint LineInfo for empty lines when array is empty.
+- Bug fix: Use first byte of line as address in LineInfo to mimic classic HexEditors.
+
 1.1.2
 - Bug fix: Scrolling to the end is not working correctly.
 

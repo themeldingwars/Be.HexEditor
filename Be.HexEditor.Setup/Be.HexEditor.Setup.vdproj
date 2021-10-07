@@ -15,26 +15,26 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_6AFFA541662C4082846228698F849152"
+        "MsmKey" = "8:_713C2F74F6B604494882DC0F11D4BF73"
         "OwnerKey" = "8:_C0A8D383189B4BEB96A7188BE47774AA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6AFFA541662C4082846228698F849152"
-        "OwnerKey" = "8:_B3567EC1328A2CED33214C02E420AF79"
+        "MsmKey" = "8:_9471F3C221D747CA807863DBE0E1C1CC"
+        "OwnerKey" = "8:_C0A8D383189B4BEB96A7188BE47774AA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9471F3C221D747CA807863DBE0E1C1CC"
+        "OwnerKey" = "8:_713C2F74F6B604494882DC0F11D4BF73"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_AFA60DDF7EC04B868F09783393A500BD"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B3567EC1328A2CED33214C02E420AF79"
-        "OwnerKey" = "8:_C0A8D383189B4BEB96A7188BE47774AA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -108,34 +108,14 @@
         }
         "File"
         {
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_AFA60DDF7EC04B868F09783393A500BD"
-            {
-            "SourcePath" = "8:..\\Be.HexEditor\\img\\banner.JPG"
-            "TargetName" = "8:banner.JPG"
-            "Tag" = "8:"
-            "Folder" = "8:_0CAB17D6D1674070BB8C6BE67FE1F773"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_B3567EC1328A2CED33214C02E420AF79"
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_713C2F74F6B604494882DC0F11D4BF73"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Be.Windows.Forms.HexBox, Version=1.1.1.30692, Culture=neutral, PublicKeyToken=e0e5adf0ebc99863"
+            "AssemblyAsmDisplayName" = "8:Be.Windows.Forms.HexBox, Version=1.1.2.15820, Culture=neutral, PublicKeyToken=e0e5adf0ebc99863"
                 "ScatterAssemblies"
                 {
-                    "_B3567EC1328A2CED33214C02E420AF79"
+                    "_713C2F74F6B604494882DC0F11D4BF73"
                     {
                     "Name" = "8:Be.Windows.Forms.HexBox.dll"
                     "Attributes" = "3:512"
@@ -157,6 +137,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_AFA60DDF7EC04B868F09783393A500BD"
+            {
+            "SourcePath" = "8:..\\Be.HexEditor\\img\\banner.JPG"
+            "TargetName" = "8:banner.JPG"
+            "Tag" = "8:"
+            "Folder" = "8:_0CAB17D6D1674070BB8C6BE67FE1F773"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -236,13 +236,13 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Be.HexEditor"
-        "ProductCode" = "8:{A17F85E0-8C35-4FB4-85B7-B68C25B83B2D}"
-        "PackageCode" = "8:{500083E8-E8AB-49BC-AB41-C236414447BB}"
+        "ProductCode" = "8:{D9396F9D-96C4-40F8-82F5-B3F2BBC716D4}"
+        "PackageCode" = "8:{3D297EF1-3BD2-49B5-B6E4-91DDA75BBEF4}"
         "UpgradeCode" = "8:{18221954-2E4C-4C08-8D52-131154B26126}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "ProductVersion" = "8:1.1.2"
+        "ProductVersion" = "8:1.1.3"
         "Manufacturer" = "8:Be"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -758,7 +758,7 @@
         }
         "MergeModule"
         {
-            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_6AFFA541662C4082846228698F849152"
+            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_9471F3C221D747CA807863DBE0E1C1CC"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
@@ -777,7 +777,7 @@
         {
             "{8062640A-2EEE-46E9-AB67-688E9A886E9F}:_C0A8D383189B4BEB96A7188BE47774AA"
             {
-            "SourcePath" = "8:..\\Be.HexEditor\\obj\\Debug\\Be.HexEditor.exe"
+            "SourcePath" = "8:..\\Be.HexEditor\\obj\\Release\\Be.HexEditor.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0CAB17D6D1674070BB8C6BE67FE1F773"
