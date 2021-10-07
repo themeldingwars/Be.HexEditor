@@ -25,8 +25,7 @@ namespace Be.Windows.Forms
         /// Constructs a new <see cref="DynamicFileByteProvider" /> instance.
         /// </summary>
         /// <param name="fileName">The name of the file from which bytes should be provided.</param>
-        public DynamicFileByteProvider(string fileName) : this(fileName, false)
-        {}
+        public DynamicFileByteProvider(string fileName) : this(fileName, false) { }
 
         /// <summary>
         /// Constructs a new <see cref="DynamicFileByteProvider" /> instance.
@@ -467,7 +466,7 @@ namespace Be.Windows.Forms
         {
             if (findOffset < 0 || findOffset > _totalLength)
             {
-                throw new ArgumentOutOfRangeException("index");
+                throw new ArgumentOutOfRangeException("findOffset");
             }
 
             // Iterate over the blocks until the block containing the required offset is encountered.

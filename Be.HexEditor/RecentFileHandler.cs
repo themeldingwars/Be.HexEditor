@@ -13,17 +13,17 @@ namespace Be.HexEditor
     {
         public class FileMenuItem : ToolStripMenuItem
         {
-            string filename;
+            string fileName;
 
-            public string Filename
+            public string FileName
             {
-                get { return filename; }
-                set { filename = value; }
+                get { return fileName; }
+                set { fileName = value; }
             }
 
-            public FileMenuItem(string filename)
+            public FileMenuItem(string fileName)
             {
-                this.filename = filename;
+                this.fileName = fileName;
             }
 
             public override string Text
@@ -32,7 +32,7 @@ namespace Be.HexEditor
                 {
                     ToolStripMenuItem parent = (ToolStripMenuItem)this.OwnerItem;
                     int index = parent.DropDownItems.IndexOf(this);
-                    return string.Format("{0} {1}", index+1, filename);
+                    return string.Format("{0} {1}", index+1, fileName);
                 }
                 set
                 {
@@ -40,7 +40,7 @@ namespace Be.HexEditor
             }
         }
 
-        public const int MAXRECENTFILES = 24;
+        public const int MaxRecentFiles = 24;
 
         public RecentFileHandler()
         {
@@ -63,13 +63,13 @@ namespace Be.HexEditor
             Settings.Default.PropertyChanged += new PropertyChangedEventHandler(Default_PropertyChanged);
         }
 
-        public void AddFile(string filename)
+        public void AddFile(string fileName)
         {
             if (this.recentFileToolStripItem == null)
                 throw new OperationCanceledException("recentFileToolStripItem can not be null!");
 
             // check if the file is already in the collection
-            int alreadyIn = GetIndexOfRecentFile(filename);
+            int alreadyIn = GetIndexOfRecentFile(fileName);
             if (alreadyIn != -1) // remove it
             {
                 Settings.Default.RecentFiles.RemoveAt(alreadyIn);
@@ -82,12 +82,12 @@ namespace Be.HexEditor
             }
 
             // insert the file on top of the list
-            Settings.Default.RecentFiles.Insert(0, filename);
-            recentFileToolStripItem.DropDownItems.Insert(0, new FileMenuItem(filename));
+            Settings.Default.RecentFiles.Insert(0, fileName);
+            recentFileToolStripItem.DropDownItems.Insert(0, new FileMenuItem(fileName));
 
             // remove the last one, if max size is reached
-            if (Settings.Default.RecentFiles.Count > MAXRECENTFILES)
-                Settings.Default.RecentFiles.RemoveAt(MAXRECENTFILES);
+            if (Settings.Default.RecentFiles.Count > MaxRecentFiles)
+                Settings.Default.RecentFiles.RemoveAt(MaxRecentFiles);
             if (Settings.Default.RecentFiles.Count > Settings.Default.RecentFilesMax)
                 this.recentFileToolStripItem.DropDownItems.RemoveAt(Settings.Default.RecentFilesMax);
 
@@ -104,7 +104,7 @@ namespace Be.HexEditor
             for (int i = 0; i < Settings.Default.RecentFiles.Count; i++)
             {
                 string currentFile = Settings.Default.RecentFiles[i];
-                if (string.Equals(currentFile, filename, StringComparison.InvariantCultureIgnoreCase))
+                if (string.Equals(currentFile, filename, StringComparison.OrdinalIgnoreCase))
                 {
                     return i;
                 }

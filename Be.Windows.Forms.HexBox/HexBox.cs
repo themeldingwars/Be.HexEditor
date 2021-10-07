@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Security.Permissions;
 using System.Windows.Forms.VisualStyles;
-using Be.Windows.Forms.Design;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Be.Windows.Forms
 {
@@ -97,6 +97,13 @@ namespace Be.Windows.Forms
 		/// </summary>
 		class KeyInterpreter : IKeyInterpreter
 		{
+            /// <summary>
+            /// Delegate for key-down processing.
+            /// </summary>
+            /// <param name="m">the message object contains key data information</param>
+            /// <returns>True, if the message was processed</returns>
+            delegate bool MessageDelegate(ref Message m);
+
 			#region Fields
 			/// <summary>
 			/// Contains the parent HexBox control
@@ -119,6 +126,10 @@ namespace Be.Windows.Forms
 			/// Contains the current mouse selection position info
 			/// </summary>
 			BytePositionInfo _bpi;
+            /// <summary>
+            /// Contains all message handlers of key interpreter key down message
+            /// </summary>
+            Dictionary<Keys, MessageDelegate> _messageHandlers;
 			#endregion
 
 			#region Ctors
@@ -194,7 +205,7 @@ namespace Be.Windows.Forms
 				if(realselStart != _hexBox._bytePos || realselLength != _hexBox._selectionLength)
 				{
 					_hexBox.InternalSelect(realselStart, realselLength);
-                    _hexBox.ScrollByteIntoView(_bpi.Index); /// <--- This line is added
+                    _hexBox.ScrollByteIntoView(_bpi.Index); 
 				}
 			}
 
@@ -205,85 +216,31 @@ namespace Be.Windows.Forms
 			#endregion
 
 			#region PrePrcessWmKeyDown methods
-			public virtual bool PreProcessWmKeyDown(ref Message m)
-			{
-				System.Diagnostics.Debug.WriteLine("PreProcessWmKeyDown(ref Message m)", "KeyInterpreter");
+            public virtual bool PreProcessWmKeyDown(ref Message m)
+            {
+                System.Diagnostics.Debug.WriteLine("PreProcessWmKeyDown(ref Message m)", "KeyInterpreter");
 
-				Keys vc = (Keys)m.WParam.ToInt32();
+                Keys vc = (Keys)m.WParam.ToInt32();
 
-				Keys keyData = vc | Control.ModifierKeys;
+                Keys keyData = vc | Control.ModifierKeys;
 
-				switch(keyData)
-				{
-					case Keys.Left:						
-					case Keys.Up:						
-					case Keys.Right:					
-					case Keys.Down:						
-					case Keys.PageUp:					
-					case Keys.PageDown:					
-					case Keys.Left | Keys.Shift:
-					case Keys.Up | Keys.Shift:
-					case Keys.Right | Keys.Shift:
-					case Keys.Down | Keys.Shift:
-					case Keys.Tab:
-					case Keys.Back:
-					case Keys.Delete:
-					case Keys.Home:
-					case Keys.End:
-					case Keys.ShiftKey | Keys.Shift:
-					case Keys.C | Keys.Control:
-					case Keys.X | Keys.Control:
-					case Keys.V | Keys.Control:
-						if(RaiseKeyDown(keyData))
-							return true;
-						break;
-				}
+                // detect whether key down event should be raised
+                var hasMessageHandler = this.MessageHandlers.ContainsKey(keyData);
+                if (hasMessageHandler && RaiseKeyDown(keyData))
+                    return true;
 
-				switch(keyData)
-				{
-					case Keys.Left:						// move left
-						return PreProcessWmKeyDown_Left(ref m);
-					case Keys.Up:						// move up
-						return PreProcessWmKeyDown_Up(ref m);
-					case Keys.Right:					// move right
-						return PreProcessWmKeyDown_Right(ref m);
-					case Keys.Down:						// move down
-						return PreProcessWmKeyDown_Down(ref m);
-					case Keys.PageUp:					// move pageup
-						return PreProcessWmKeyDown_PageUp(ref m);
-					case Keys.PageDown:					// move pagedown
-						return PreProcessWmKeyDown_PageDown(ref m);
-					case Keys.Left | Keys.Shift:		// move left with selection
-						return PreProcessWmKeyDown_ShiftLeft(ref m);
-					case Keys.Up | Keys.Shift:			// move up with selection
-						return PreProcessWmKeyDown_ShiftUp(ref m);
-					case Keys.Right | Keys.Shift:		// move right with selection
-						return PreProcessWmKeyDown_ShiftRight(ref m);
-					case Keys.Down | Keys.Shift:		// move down with selection
-						return PreProcessWmKeyDown_ShiftDown(ref m);
-					case Keys.Tab:						// switch focus to string view
-						return PreProcessWmKeyDown_Tab(ref m);
-					case Keys.Back:						// back
-						return PreProcessWmKeyDown_Back(ref m);
-					case Keys.Delete:					// delete
-						return PreProcessWmKeyDown_Delete(ref m);
-					case Keys.Home:						// move to home
-						return PreProcessWmKeyDown_Home(ref m);
-					case Keys.End:						// move to end
-						return PreProcessWmKeyDown_End(ref m);
-					case Keys.ShiftKey | Keys.Shift:	// begin selection process
-						return PreProcessWmKeyDown_ShiftShiftKey(ref m);
-					case Keys.C | Keys.Control:			// copy
-						return PreProcessWmKeyDown_ControlC(ref m);
-					case Keys.X | Keys.Control:			// cut
-						return PreProcessWmKeyDown_ControlX(ref m);
-					case Keys.V | Keys.Control:			// paste
-						return PreProcessWmKeyDown_ControlV(ref m);
-					default:
-						_hexBox.ScrollByteIntoView();
-						return _hexBox.BasePreProcessMessage(ref m);
-				}
-			}
+                MessageDelegate messageHandler = hasMessageHandler 
+                    ? this.MessageHandlers[keyData] 
+                    : messageHandler = new MessageDelegate(PreProcessWmKeyDown_Default);
+
+                return messageHandler(ref m);
+            }
+
+            protected bool PreProcessWmKeyDown_Default(ref Message m)
+            {
+                _hexBox.ScrollByteIntoView();
+                return _hexBox.BasePreProcessMessage(ref m);
+            }
 
 			protected bool RaiseKeyDown(Keys keyData)
 			{
@@ -575,6 +532,9 @@ namespace Be.Windows.Forms
 				if(!_hexBox._byteProvider.SupportsDeleteBytes())
 					return true;
 
+                if (_hexBox.ReadOnly)
+                    return true;
+
 				long pos = _hexBox._bytePos;
 				long sel = _hexBox._selectionLength;
 				int cp = _hexBox._byteCharacterPos;
@@ -600,6 +560,9 @@ namespace Be.Windows.Forms
 			{
 				if(!_hexBox._byteProvider.SupportsDeleteBytes())
 					return true;
+
+                if (_hexBox.ReadOnly)
+                    return true;
 
 				long pos = _hexBox._bytePos;
 				long sel = _hexBox._selectionLength;
@@ -757,6 +720,7 @@ namespace Be.Windows.Forms
 					else
 						sNewCb = sCb.Substring(0, 1) + sNewCb;
 					byte newcb = byte.Parse(sNewCb, System.Globalization.NumberStyles.AllowHexSpecifier, System.Threading.Thread.CurrentThread.CurrentCulture);
+
 					if(isInsertMode)
 						_hexBox._byteProvider.InsertBytes(pos, new byte[]{newcb});
 					else
@@ -826,6 +790,37 @@ namespace Be.Windows.Forms
 			#endregion
 
 			#region Misc
+            Dictionary<Keys, MessageDelegate> MessageHandlers
+            {
+                get
+                {
+                    if (_messageHandlers == null)
+                    {
+                        _messageHandlers = new Dictionary<Keys, MessageDelegate>();
+                        _messageHandlers.Add(Keys.Left, new MessageDelegate(PreProcessWmKeyDown_Left)); // move left
+                        _messageHandlers.Add(Keys.Up, new MessageDelegate(PreProcessWmKeyDown_Up)); // move up
+                        _messageHandlers.Add(Keys.Right, new MessageDelegate(PreProcessWmKeyDown_Right)); // move right
+                        _messageHandlers.Add(Keys.Down, new MessageDelegate(PreProcessWmKeyDown_Down)); // move down
+                        _messageHandlers.Add(Keys.PageUp, new MessageDelegate(PreProcessWmKeyDown_PageUp)); // move pageup
+                        _messageHandlers.Add(Keys.PageDown | Keys.Shift, new MessageDelegate(PreProcessWmKeyDown_PageDown)); // move page down
+                        _messageHandlers.Add(Keys.Left | Keys.Shift, new MessageDelegate(PreProcessWmKeyDown_ShiftLeft)); // move left with selection
+                        _messageHandlers.Add(Keys.Up | Keys.Shift, new MessageDelegate(PreProcessWmKeyDown_ShiftUp)); // move up with selection
+                        _messageHandlers.Add(Keys.Right | Keys.Shift, new MessageDelegate(PreProcessWmKeyDown_ShiftRight)); // move right with selection
+                        _messageHandlers.Add(Keys.Down | Keys.Shift, new MessageDelegate(PreProcessWmKeyDown_ShiftDown)); // move down with selection
+                        _messageHandlers.Add(Keys.Tab, new MessageDelegate(PreProcessWmKeyDown_Tab)); // switch to string view
+                        _messageHandlers.Add(Keys.Back, new MessageDelegate(PreProcessWmKeyDown_Back)); // back
+                        _messageHandlers.Add(Keys.Delete, new MessageDelegate(PreProcessWmKeyDown_Delete)); // delete
+                        _messageHandlers.Add(Keys.Home, new MessageDelegate(PreProcessWmKeyDown_Home)); // move to home
+                        _messageHandlers.Add(Keys.End, new MessageDelegate(PreProcessWmKeyDown_End)); // move to end
+                        _messageHandlers.Add(Keys.ShiftKey | Keys.Shift, new MessageDelegate(PreProcessWmKeyDown_ShiftShiftKey)); // begin selection process
+                        _messageHandlers.Add(Keys.C | Keys.Control, new MessageDelegate(PreProcessWmKeyDown_ControlC)); // copy 
+                        _messageHandlers.Add(Keys.X | Keys.Control, new MessageDelegate(PreProcessWmKeyDown_ControlX)); // cut
+                        _messageHandlers.Add(Keys.V | Keys.Control, new MessageDelegate(PreProcessWmKeyDown_ControlV)); // paste
+                    }
+                    return _messageHandlers;
+                }
+            }
+
 			protected virtual bool PerformPosMoveLeft()
 			{
 				long pos = _hexBox._bytePos;
@@ -1071,10 +1066,11 @@ namespace Be.Windows.Forms
 
 				_hexBox.ReleaseSelection();
 
+                byte b = _hexBox.ByteCharConverter.ToByte(c);
 				if(isInsertMode)
-					_hexBox._byteProvider.InsertBytes(pos, new byte[]{(byte)c});
+					_hexBox._byteProvider.InsertBytes(pos, new byte[]{b});
 				else
-					_hexBox._byteProvider.WriteByte(pos, (byte)c);
+					_hexBox._byteProvider.WriteByte(pos, b);
 
 				PerformPosMoveRightByte();
 				_hexBox.Invalidate();
@@ -1658,7 +1654,7 @@ namespace Be.Windows.Forms
         /// <summary>
         /// Returns true if Select method could be invoked.
         /// </summary>
-        public bool CanSelect()
+        public bool CanSelectAll()
         {
             if (!this.Enabled)
                 return false;
@@ -1782,7 +1778,7 @@ namespace Be.Windows.Forms
 
 		void UpdateCaret()
 		{
-			if(_byteProvider == null || _keyInterpreter == null )
+            if (_byteProvider == null || _keyInterpreter == null)
 				return;
 
 			System.Diagnostics.Debug.WriteLine("UpdateCaret()", "HexBox");
@@ -1795,7 +1791,7 @@ namespace Be.Windows.Forms
 
 		void DestroyCaret()
 		{
-			if(!_caretVisible)
+            if (!_caretVisible)
 				return;
 
 			System.Diagnostics.Debug.WriteLine("DestroyCaret()", "HexBox");
@@ -1808,7 +1804,7 @@ namespace Be.Windows.Forms
 		{
 			System.Diagnostics.Debug.WriteLine("SetCaretPosition()", "HexBox");
 
-			if(_byteProvider == null || _keyInterpreter == null)
+            if (_byteProvider == null || _keyInterpreter == null)
 				return;
 
 			long pos = _bytePos;
@@ -2326,7 +2322,7 @@ namespace Be.Windows.Forms
 
 			for(int i = 0; i < maxLine; i++)
 			{
-				long firstLineByte = startByte + (_iHexMaxHBytes)*i;
+				long firstLineByte = (startByte + (_iHexMaxHBytes)*i) + _lineInfoOffset;
 
 				PointF bytePointF = GetBytePointF(new Point(0, 0+i));
 				string info = firstLineByte.ToString(_hexStringFormat, System.Threading.Thread.CurrentThread.CurrentCulture);
@@ -2433,15 +2429,7 @@ namespace Be.Windows.Forms
 					PaintHexString(g, b, brush, gridPoint);
 				}
 
-				string s;
-				if(b > 0x1F && !(b > 0x7E && b < 0xA0) )
-				{
-					s = ((char)b).ToString();
-				}
-				else
-				{
-					s = ".";
-				}
+                string s = new String(ByteCharConverter.ToChar(b), 1);
 
 				if(isSelectedByte && isStringKeyInterpreterActive)
 				{
@@ -2782,9 +2770,8 @@ namespace Be.Windows.Forms
 
 		/// <summary>
 		/// The font used to display text in the hexbox.
-		/// </summary>
-		[Editor(typeof(HexFontEditor), typeof(System.Drawing.Design.UITypeEditor))]
-		public override Font Font
+        /// </summary>
+    	public override Font Font
 		{
 			get
 			{
@@ -3017,6 +3004,24 @@ namespace Be.Windows.Forms
 				Invalidate();
 			}
 		} bool _lineInfoVisible;
+
+        /// <summary>
+        /// Gets or sets the offset of a line info.
+        /// </summary>
+        [DefaultValue((long)0), Category("Hex"), Description("Gets or sets the offset of the line info.")]
+        public long LineInfoOffset
+        {
+            get { return _lineInfoOffset; }
+            set
+            {
+                if (_lineInfoOffset == value)
+                    return;
+
+                _lineInfoOffset = value;
+
+                Invalidate();
+            }
+        } long _lineInfoOffset;
 
 		/// <summary>
 		/// Gets or sets the hex box´s border style.
@@ -3261,6 +3266,29 @@ namespace Be.Windows.Forms
         {
             get { return _builtInContextMenu; }
         } BuiltInContextMenu _builtInContextMenu;
+
+
+        /// <summary>
+        /// Gets or sets the converter that will translate between byte and character values.
+        /// </summary>
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IByteCharConverter ByteCharConverter
+        {
+            get 
+            {
+                if (_byteCharConverter == null)
+                    _byteCharConverter = new DefaultByteCharConverter();
+                return _byteCharConverter; 
+            }
+            set
+            {
+                if (value != null && value != _byteCharConverter)
+                {
+                    _byteCharConverter = value;
+                    Invalidate();
+                }
+            }
+        } IByteCharConverter _byteCharConverter;
 
 		#endregion
 

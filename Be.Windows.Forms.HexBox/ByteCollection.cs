@@ -12,8 +12,7 @@ namespace Be.Windows.Forms
 		/// <summary>
 		/// Initializes a new instance of ByteCollection class.
 		/// </summary>
-		public ByteCollection()
-		{}
+        public ByteCollection() { }
 
 		/// <summary>
 		/// Initializes a new instance of ByteCollection class.

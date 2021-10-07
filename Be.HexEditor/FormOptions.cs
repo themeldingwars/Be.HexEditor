@@ -21,7 +21,7 @@ namespace Be.HexEditor
             {
                 if (recentFilesMax == value)
                     return;
-                if (value < 0 || value > RecentFileHandler.MAXRECENTFILES)
+                if (value < 0 || value > RecentFileHandler.MaxRecentFiles)
                     return;
 
                 recentFilesMax = value; 
@@ -67,7 +67,7 @@ namespace Be.HexEditor
 
         void clearRecentFilesButton_Click(object sender, EventArgs e)
         {
-            Program.FormHexEditor.recentFileHandler.Clear();
+            Program.FormHexEditor.RecentFileHandler.Clear();
         }
 
         void okButton_Click(object sender, EventArgs e)

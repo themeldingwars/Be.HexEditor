@@ -40,25 +40,25 @@ namespace Be.HexEditor
 
 			// TODO: Add any initialization after the InitializeComponent call
 
-			try
-			{
-				Assembly ca = Assembly.GetExecutingAssembly();
+            try
+            {
+                Assembly ca = Assembly.GetExecutingAssembly();
 
-				string resThanksTo = "Be.HexEditor.Resources.ThanksTo.rtf";
-				txtThanksTo.LoadFile(ca.GetManifestResourceStream(resThanksTo), RichTextBoxStreamType.RichText);
+                string resThanksTo = "Be.HexEditor.Resources.ThanksTo.rtf";
+                txtThanksTo.LoadFile(ca.GetManifestResourceStream(resThanksTo), RichTextBoxStreamType.RichText);
 
-				string resLicense = "Be.HexEditor.Resources.License.rtf";
-				txtLicense.LoadFile(ca.GetManifestResourceStream(resLicense), RichTextBoxStreamType.RichText);
+                string resLicense = "Be.HexEditor.Resources.License.rtf";
+                txtLicense.LoadFile(ca.GetManifestResourceStream(resLicense), RichTextBoxStreamType.RichText);
 
-				string resChanges = "Be.HexEditor.Resources.Changes.rtf";
-				txtChanges.LoadFile(ca.GetManifestResourceStream(resChanges), RichTextBoxStreamType.RichText);			
+                string resChanges = "Be.HexEditor.Resources.Changes.rtf";
+                txtChanges.LoadFile(ca.GetManifestResourceStream(resChanges), RichTextBoxStreamType.RichText);
 
-				lblVersion.Text = ca.GetName().Version.ToString();
-			}
-			catch(Exception) 
-			{
-				return;
-			}
+                lblVersion.Text = ca.GetName().Version.ToString();
+            }
+            catch (Exception)
+            {
+                return;
+            }
 		}
 
 		/// <summary> 
@@ -274,7 +274,7 @@ namespace Be.HexEditor
 			{
 				System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(this.lnkWorkspace.Text));
 			}
-			catch(Exception ex1)
+			catch (Exception ex1)
 			{
 				MessageBox.Show(ex1.Message);
 			}

@@ -47,9 +47,9 @@ namespace Be.HexEditor
 
         static string ConvertToOneDigit(long size, long quan)
         {
-            double result = (double)size / (double)quan;
-            string sResult = result.ToString("0.#", CultureInfo.CurrentCulture);
-            return sResult;
+            double quotient = (double)size / (double)quan;
+            string result = quotient.ToString("0.#", CultureInfo.CurrentCulture);
+            return result;
         }
     }
 }

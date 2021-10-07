@@ -149,7 +149,7 @@ namespace Be.Windows.Forms
 				byte value = (byte)en.Value;
 				if(_fileStream.Position != index)
 					_fileStream.Position = index;
-				_fileStream.Write(new byte[]{value}, 0, 1);
+                _fileStream.Write(new byte[] { value }, 0, 1);
 			}
 			_writes.Clear();
 		}

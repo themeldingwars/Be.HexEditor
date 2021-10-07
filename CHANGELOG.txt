@@ -1,5 +1,17 @@
 Version history
 
+1.4.4
+- Improvement: Support for .NET Client Profile added
+- Bug fix: DEL and Back key are respecting Readonly property
+
+1.4.3
+- New feature: LineInfoOffset property added
+- New feature: EBCDIC 500 support added
+- Bug fix: Ask for "Save Changes" on form close
+- Bug fix: Find next is working correctly now
+- Bug fix: Copy and Copy Hex menu item clicks are correct now
+- Improvement: Cyclomatic Complexity of key-down processing improved 
+
 1.4.2
 - New feature: Russian language added
 - New feature: Select All menu item added

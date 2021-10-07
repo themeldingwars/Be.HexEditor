@@ -1,5 +1,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Resources;
 
 //
 // General Information about an assembly is controlled through the following 
@@ -15,4 +17,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
 
-[assembly: AssemblyVersion("1.4.2.*")]
+[assembly: AssemblyVersion("1.4.4.*")]
+
+[assembly: ComVisible(false)]
+[assembly: NeutralResourcesLanguage("en-US")]

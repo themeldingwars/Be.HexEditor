@@ -60,7 +60,7 @@ namespace Be.Windows.Forms
         /// </summary>
         void CheckBuiltInContextMenu()
         {
-            if (this.DesignMode)
+            if (Util.DesignMode)
                 return;
 
             if (this._contextMenuStrip == null)
@@ -78,13 +78,13 @@ namespace Be.Windows.Forms
                 _selectAllToolStripMenuItem = new ToolStripMenuItem(SelectAllMenuItemTextInternal, SelectAllMenuItemImage, new EventHandler(SelectAllMenuItem_Click));
                 cms.Items.Add(_selectAllToolStripMenuItem);
                 cms.Opening += new CancelEventHandler(BuildInContextMenuStrip_Opening);
-                
+
                 _contextMenuStrip = cms;
             }
 
-            if(this._hexBox.ByteProvider == null && this._hexBox.ContextMenuStrip != null)
+            if (this._hexBox.ByteProvider == null && this._hexBox.ContextMenuStrip != null)
                 this._hexBox.ContextMenuStrip = null;
-            else if(this._hexBox.ByteProvider != null && this._hexBox.ContextMenuStrip == null)
+            else if (this._hexBox.ByteProvider != null && this._hexBox.ContextMenuStrip == null)
                 this._hexBox.ContextMenuStrip = _contextMenuStrip;
         }
         /// <summary>
@@ -97,7 +97,7 @@ namespace Be.Windows.Forms
             _cutToolStripMenuItem.Enabled = this._hexBox.CanCut();
             _copyToolStripMenuItem.Enabled = this._hexBox.CanCopy();
             _pasteToolStripMenuItem.Enabled = this._hexBox.CanPaste();
-            _selectAllToolStripMenuItem.Enabled = this._hexBox.CanSelect();
+            _selectAllToolStripMenuItem.Enabled = this._hexBox.CanSelectAll();
         }
         /// <summary>
         /// The handler for the "Cut"-Click event

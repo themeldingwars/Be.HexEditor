@@ -55,14 +55,14 @@ namespace Be.HexEditor
             if (_fileName != null && _fileName.Length > 0)
             {
                 string textFormat = "{0}{1} - {2}";
-                string sReadOnly = ((DynamicFileByteProvider)hexBox.ByteProvider).ReadOnly
+                string readOnly = ((DynamicFileByteProvider)hexBox.ByteProvider).ReadOnly
                     ? strings.Readonly : "";
                 string text = Path.GetFileName(_fileName);
-                this.Text = string.Format(textFormat, text, sReadOnly, Program.SOFTWARENAME);
+                this.Text = string.Format(textFormat, text, readOnly, Program.SoftwareName);
             }
             else
             {
-                this.Text = Program.SOFTWARENAME;
+                this.Text = Program.SoftwareName;
             }
         }
 
@@ -131,11 +131,8 @@ namespace Be.HexEditor
                 return;
             }
 
-            if (hexBox.ByteProvider != null)
-            {
-                if (CloseFile() == DialogResult.Cancel)
-                    return;
-            }
+            if (CloseFile() == DialogResult.Cancel)
+                return;
 
             try
             {
@@ -166,7 +163,7 @@ namespace Be.HexEditor
                         return;
                     }
                 }
-                
+
                 hexBox.ByteProvider = dynamicFileByteProvider;
                 _fileName = fileName;
 
@@ -174,7 +171,7 @@ namespace Be.HexEditor
 
                 UpdateFileSizeStatus();
 
-                recentFileHandler.AddFile(fileName);
+                RecentFileHandler.AddFile(fileName);
             }
             catch (Exception ex1)
             {
@@ -183,6 +180,7 @@ namespace Be.HexEditor
             }
             finally
             {
+
                 ManageAbility();
             }
         }
@@ -225,7 +223,7 @@ namespace Be.HexEditor
                 if (hexBox.ByteProvider != null && hexBox.ByteProvider.HasChanges())
                 {
                     DialogResult res = MessageBox.Show(strings.SaveChangesQuestion,
-                        Program.SOFTWARENAME,
+                        Program.SoftwareName,
                         MessageBoxButtons.YesNoCancel,
                         MessageBoxIcon.Warning);
 
@@ -312,7 +310,7 @@ namespace Be.HexEditor
 
             if (res == -1) // -1 = no match
             {
-                MessageBox.Show(strings.FindOperationEndOfFile, Program.SOFTWARENAME,
+                MessageBox.Show(strings.FindOperationEndOfFile, Program.SoftwareName,
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (res == -2) // -2 = find was aborted
@@ -372,7 +370,6 @@ namespace Be.HexEditor
         /// </summary>
         void hexBox_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
         {
-            string[] formats = e.Data.GetFormats();
             object oFileNames = e.Data.GetData(DataFormats.FileDrop);
             string[] fileNames = (string[])oFileNames;
             if (fileNames.Length == 1)
@@ -457,6 +454,11 @@ namespace Be.HexEditor
             this.Find();
         }
 
+        void findNext_Click(object sender, EventArgs e)
+        {
+            this.FindNext();
+        }
+
         void goTo_Click(object sender, EventArgs e)
         {
             this.Goto();
@@ -480,7 +482,7 @@ namespace Be.HexEditor
         void recentFiles_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             RecentFileHandler.FileMenuItem fmi = (RecentFileHandler.FileMenuItem)e.ClickedItem;
-            this.OpenFile(fmi.Filename);
+            this.OpenFile(fmi.FileName);
         }
 
         void options_Click(object sender, EventArgs e)
@@ -488,6 +490,11 @@ namespace Be.HexEditor
             new FormOptions().ShowDialog();
         }
 
-
+        private void FormHexEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var result = CloseFile();
+            if (result == DialogResult.Cancel)
+                e.Cancel = true;
+        }
     }
 }

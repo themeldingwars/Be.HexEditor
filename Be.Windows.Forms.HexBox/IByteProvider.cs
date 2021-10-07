@@ -37,7 +37,7 @@ namespace Be.Windows.Forms
 		/// <summary>
 		/// Returns the total length of bytes the byte provider is providing.
 		/// </summary>
-		long Length {get;}
+        long Length { get; }
 		/// <summary>
 		/// Occurs, when the Length property changed.
 		/// </summary>

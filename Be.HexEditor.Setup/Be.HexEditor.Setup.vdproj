@@ -46,6 +46,33 @@
     }
     "Configurations"
     {
+        "ClientProfileRelease"
+        {
+        "DisplayName" = "8:ClientProfileRelease"
+        "IsDebugOnly" = "11:FALSE"
+        "IsReleaseOnly" = "11:FALSE"
+        "OutputFilename" = "8:ClientProfileRelease\\Be.HexEditor.Setup.msi"
+        "PackageFilesAs" = "3:2"
+        "PackageFileSize" = "3:-2147483648"
+        "CabType" = "3:1"
+        "Compression" = "3:2"
+        "SignOutput" = "11:FALSE"
+        "CertificateFile" = "8:"
+        "PrivateKeyFile" = "8:"
+        "TimeStampServer" = "8:"
+        "InstallerBootstrapper" = "3:1"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:FALSE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
+        }
         "Debug"
         {
         "DisplayName" = "8:Debug"
@@ -158,7 +185,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Be.Windows.Forms.HexBox, Version=1.4.2.24516, Culture=neutral, PublicKeyToken=e0e5adf0ebc99863, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Be.Windows.Forms.HexBox, Version=1.4.4.33079, Culture=neutral, PublicKeyToken=e0e5adf0ebc99863, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_BDDE4C33CCD2654C05EF6FDB3C2005B6"
@@ -274,15 +301,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Be.HexEditor"
-        "ProductCode" = "8:{291DA46F-DF7E-4A0C-92CE-066FEBD7E09F}"
-        "PackageCode" = "8:{8E49F4D4-0231-43B6-A146-77511EF3A008}"
+        "ProductCode" = "8:{F5FB8452-C2E8-4BE1-8903-9008701D23C0}"
+        "PackageCode" = "8:{018FE03C-4BD6-4FB7-953D-0319A09E9271}"
         "UpgradeCode" = "8:{18221954-2E4C-4C08-8D52-131154B26126}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.4.2"
+        "ProductVersion" = "8:1.4.4"
         "Manufacturer" = "8:Be"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

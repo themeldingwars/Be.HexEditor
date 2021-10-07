@@ -8,7 +8,7 @@ namespace Be.HexEditor
 {
     class Program
     {
-        public const string SOFTWARENAME = "Be.HexEditor";
+        public const string SoftwareName = "Be.HexEditor";
 
         public static FormHexEditor FormHexEditor;
 
@@ -39,7 +39,7 @@ namespace Be.HexEditor
 
         internal static DialogResult ShowError(string text)
         {
-            DialogResult result = MessageBox.Show(text, SOFTWARENAME,
+            DialogResult result = MessageBox.Show(text, SoftwareName,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             return result;
@@ -47,14 +47,14 @@ namespace Be.HexEditor
 
         public static void ShowMessage(string text)
         {
-            MessageBox.Show(text, SOFTWARENAME,
+            MessageBox.Show(text, SoftwareName,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
 
         public static DialogResult ShowQuestion(string text)
         {
-            DialogResult result = MessageBox.Show(text, SOFTWARENAME,
+            DialogResult result = MessageBox.Show(text, SoftwareName,
                MessageBoxButtons.YesNo,
                MessageBoxIcon.Question);
             return result;
