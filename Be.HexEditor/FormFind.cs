@@ -81,6 +81,16 @@ namespace Be.HexEditor
             // hexBox
             // 
             resources.ApplyResources(this.hexBox, "hexBox");
+            // 
+            // 
+            // 
+            this.hexBox.BuiltInContextMenu.CopyMenuItemImage = global::Be.HexEditor.images.CopyHS;
+            this.hexBox.BuiltInContextMenu.CopyMenuItemText = resources.GetString("resource.CopyMenuItemText");
+            this.hexBox.BuiltInContextMenu.CutMenuItemImage = global::Be.HexEditor.images.CutHS;
+            this.hexBox.BuiltInContextMenu.CutMenuItemText = resources.GetString("resource.CutMenuItemText");
+            this.hexBox.BuiltInContextMenu.PasteMenuItemImage = global::Be.HexEditor.images.PasteHS;
+            this.hexBox.BuiltInContextMenu.PasteMenuItemText = resources.GetString("resource.PasteMenuItemText");
+            this.hexBox.BuiltInContextMenu.SelectAllMenuItemText = resources.GetString("resource.SelectAllMenuItemText");
             this.hexBox.LineInfoForeColor = System.Drawing.Color.Empty;
             this.hexBox.Name = "hexBox";
             this.hexBox.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
@@ -92,8 +102,8 @@ namespace Be.HexEditor
             // 
             // rbString
             // 
-            this.rbString.Checked = true;
             resources.ApplyResources(this.rbString, "rbString");
+            this.rbString.Checked = true;
             this.rbString.Name = "rbString";
             this.rbString.TabStop = true;
             // 
@@ -104,8 +114,8 @@ namespace Be.HexEditor
             // 
             // label1
             // 
-            this.label1.ForeColor = System.Drawing.Color.Blue;
             resources.ApplyResources(this.label1, "label1");
+            this.label1.ForeColor = System.Drawing.Color.Blue;
             this.label1.Name = "label1";
             // 
             // btnOK

@@ -1,4 +1,5 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>9.0.30729</ProductVersion>
@@ -24,8 +25,10 @@
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <OldToolsVersion>2.0</OldToolsVersion>
+    <OldToolsVersion>3.5</OldToolsVersion>
     <SignAssembly>true</SignAssembly>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -38,7 +41,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -64,6 +66,7 @@
     <WarningLevel>4</WarningLevel>
     <DebugType>full</DebugType>
     <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -87,6 +90,7 @@
     <WarningLevel>4</WarningLevel>
     <DebugType>none</DebugType>
     <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
@@ -116,6 +120,9 @@
       <DependentUpon>FormAbout.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormAbout.ru.resx">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormFind.de.resx">
       <DependentUpon>FormFind.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -123,6 +130,9 @@
     <EmbeddedResource Include="FormFind.resx">
       <DependentUpon>FormFind.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFind.ru.resx">
+      <DependentUpon>FormFind.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFindCancel.de.resx">
       <DependentUpon>FormFindCancel.cs</DependentUpon>
@@ -132,6 +142,9 @@
       <DependentUpon>FormFindCancel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormFindCancel.ru.resx">
+      <DependentUpon>FormFindCancel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormGoTo.de.resx">
       <DependentUpon>FormGoTo.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -140,12 +153,18 @@
       <DependentUpon>FormGoTo.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormGoTo.ru.resx">
+      <DependentUpon>FormGoTo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormHexEditor.de.resx">
       <DependentUpon>FormHexEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormHexEditor.resx">
       <SubType>Designer</SubType>
+      <DependentUpon>FormHexEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHexEditor.ru.resx">
       <DependentUpon>FormHexEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormOptions.de.resx">
@@ -156,14 +175,8 @@
       <DependentUpon>FormOptions.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="images.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>images.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <SubType>Designer</SubType>
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="FormOptions.ru.resx">
+      <DependentUpon>FormOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\License.rtf" />
     <EmbeddedResource Include="Resources\ThanksTo.rtf" />
@@ -175,6 +188,7 @@
       <LastGenOutput>strings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="strings.ru.resx" />
     <EmbeddedResource Include="UCAbout.de.resx">
       <DependentUpon>UCAbout.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -190,9 +204,9 @@
       <DependentUpon>FormOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="images.Designer.cs">
+      <DependentUpon>images.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>images.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -216,11 +230,6 @@
       <DependentUpon>FormHexEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -264,6 +273,10 @@
     <EmbeddedResource Include="FormOptions.ja.resx">
       <DependentUpon>FormOptions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="images.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>images.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="strings.ja.resx" />
     <None Include="app.config" />
     <None Include="Be.HexEditor.snk" />
@@ -273,6 +286,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
       <Visible>False</Visible>
       <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
@@ -288,15 +306,20 @@
       <ProductName>.NET Framework 3.5</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\CopyHS.png" />
-    <Content Include="Images\CutHS.png" />
-    <Content Include="Images\FindHS.png" />
-    <Content Include="Images\FindNextHS.png" />
-    <Content Include="Images\openHS.png" />
-    <Content Include="Images\PasteHS.png" />
-    <Content Include="Images\saveHS.png" />
+    <None Include="Images\CopyHS.png" />
+    <None Include="Images\CutHS.png" />
+    <None Include="Images\FindHS.png" />
+    <None Include="Images\FindNextHS.png" />
+    <None Include="Images\openHS.png" />
+    <None Include="Images\PasteHS.png" />
+    <None Include="Images\saveHS.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

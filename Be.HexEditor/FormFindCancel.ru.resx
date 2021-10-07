@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,37 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="English" xml:space="preserve">
-    <value>English</value>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>Отмена</value>
   </data>
-  <data name="FileDoesNotExist" xml:space="preserve">
-    <value>The file does not exist!</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Искать...</value>
   </data>
-  <data name="FindOperationEndOfFile" xml:space="preserve">
-    <value>Find reached end of file!</value>
-  </data>
-  <data name="German" xml:space="preserve">
-    <value>German</value>
-  </data>
-  <data name="ProgramRestartSettings" xml:space="preserve">
-    <value>Program restart required for settings to take affect!</value>
-  </data>
-  <data name="SaveChangesQuestion" xml:space="preserve">
-    <value>Do you want to save changes?</value>
-  </data>
-  <data name="Readonly" xml:space="preserve">
-    <value> [read-only]</value>
-  </data>
-  <data name="OpenFailed" xml:space="preserve">
-    <value>File is locked by another process and cannot be opened!</value>
-  </data>
-  <data name="OpenReadonly" xml:space="preserve">
-    <value>The file is locked. Do you want to open it in read-only mode?</value>
-  </data>
-  <data name="Japanese" xml:space="preserve">
-    <value>Japanese</value>
-  </data>
-  <data name="Russian" xml:space="preserve">
-    <value>Russian</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Искать...</value>
   </data>
 </root>

@@ -10,47 +10,6 @@ using System.Text;
 
 namespace Be.Windows.Forms
 {
-	#region HexCasing enumeration
-	/// <summary>
-	/// Specifies the case of hex characters in the HexBox control
-	/// </summary>
-	public enum HexCasing 
-	{ 
-		/// <summary>
-		/// Converts all characters to uppercase.
-		/// </summary>
-		Upper = 0, 
-		/// <summary>
-		/// Converts all characters to lowercase.
-		/// </summary>
-		Lower = 1 
-	}
-	#endregion
-
-	#region BytePositionInfo structure
-	/// <summary>
-	/// Represents a position in the HexBox control
-	/// </summary>
-	struct BytePositionInfo
-	{
-		public BytePositionInfo(long index, int characterPosition)
-		{
-			_index = index;
-			_characterPosition = characterPosition;
-		}
-
-		public int CharacterPosition
-		{
-			get { return _characterPosition; }
-		} int _characterPosition;
-
-		public long Index
-		{
-			get { return _index; }
-		} long _index;
-	}
-	#endregion
-
 	/// <summary>
 	/// Represents a hex box control.
 	/// </summary>
@@ -189,6 +148,9 @@ namespace Be.Windows.Forms
 			void BeginMouseSelection(object sender, MouseEventArgs e)
 			{
 				System.Diagnostics.Debug.WriteLine("BeginMouseSelection()", "KeyInterpreter");
+
+                if (e.Button != MouseButtons.Left)
+                    return;
 
 				_mouseDown = true;
 
@@ -1387,25 +1349,28 @@ namespace Be.Windows.Forms
 		#endregion
 
 		#region Ctors
+
 		/// <summary>
 		/// Initializes a new instance of a HexBox class.
 		/// </summary>
 		public HexBox()
 		{
-			this._vScrollBar = new VScrollBar();
-			this._vScrollBar.Scroll += new ScrollEventHandler(_vScrollBar_Scroll);
+            this._vScrollBar = new VScrollBar();
+            this._vScrollBar.Scroll += new ScrollEventHandler(_vScrollBar_Scroll);
 
-			BackColor = Color.White;
-			Font = new Font("Courier New", 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-			_stringFormat = new StringFormat(StringFormat.GenericTypographic);
-			_stringFormat.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
+            this._builtInContextMenu = new BuiltInContextMenu(this);
 
-			ActivateEmptyKeyInterpreter();
-			
-			SetStyle(ControlStyles.UserPaint, true);
-			SetStyle(ControlStyles.DoubleBuffer, true);
-			SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-			SetStyle(ControlStyles.ResizeRedraw, true);
+            BackColor = Color.White;
+            Font = new Font("Courier New", 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            _stringFormat = new StringFormat(StringFormat.GenericTypographic);
+            _stringFormat.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
+
+            ActivateEmptyKeyInterpreter();
+
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.ResizeRedraw, true);
 
             _thumbTrackTimer.Interval = 50;
             _thumbTrackTimer.Tick += new EventHandler(PerformScrollThumbTrack);
@@ -1690,6 +1655,29 @@ namespace Be.Windows.Forms
 			Invalidate();
 		}
 
+        /// <summary>
+        /// Returns true if Select method could be invoked.
+        /// </summary>
+        public bool CanSelect()
+        {
+            if (!this.Enabled)
+                return false;
+            if (_byteProvider == null)
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Selects all bytes.
+        /// </summary>
+        public void SelectAll()
+        {
+            if (this.ByteProvider == null)
+                return;
+            this.Select(0, this.ByteProvider.Length);
+        }
+
 		/// <summary>
 		/// Selects the hex box.
 		/// </summary>
@@ -1697,6 +1685,11 @@ namespace Be.Windows.Forms
 		/// <param name="length">the length of the selection</param>
 		public void Select(long start, long length)
 		{
+            if (this.ByteProvider == null)
+                return;
+            if (!this.Enabled)
+                return;
+
 			InternalSelect(start, length);
 			ScrollByteIntoView();
 		}
@@ -2296,6 +2289,8 @@ namespace Be.Windows.Forms
 			if(_byteProvider == null)
 				return;
 
+            System.Diagnostics.Debug.WriteLine("OnPaint " + DateTime.Now.ToString(), "HexBox");
+
 			// draw only in the content rectangle, so exclude the border and the scrollbar.
 			Region r = new Region(ClientRectangle);
 			r.Exclude(_recContent);
@@ -2888,7 +2883,7 @@ namespace Be.Windows.Forms
 					return;
 
 				_bytesPerLine = value; 
-				OnByteProviderChanged(EventArgs.Empty);
+				OnBytesPerLineChanged(EventArgs.Empty);
 
 				UpdateRectanglePositioning();
 				Invalidate();
@@ -2997,10 +2992,11 @@ namespace Be.Windows.Forms
 				UpdateVisibilityBytes();
 				UpdateRectanglePositioning();
 				
-
 				Invalidate();
 			}
-		} IByteProvider _byteProvider;
+		}
+
+        IByteProvider _byteProvider;
 
 		/// <summary>
 		/// Gets or sets the visibility of a line info.
@@ -3256,6 +3252,15 @@ namespace Be.Windows.Forms
                 OnInsertActiveChanged(EventArgs.Empty);
             }
 		}
+
+        /// <summary>
+        /// Gets or sets the built-in context menu.
+        /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public BuiltInContextMenu BuiltInContextMenu
+        {
+            get { return _builtInContextMenu; }
+        } BuiltInContextMenu _builtInContextMenu;
 
 		#endregion
 
@@ -3598,7 +3603,8 @@ namespace Be.Windows.Forms
 			if(!Focused)
 				Focus();
 
-			SetCaretPosition(new Point(e.X, e.Y));
+            if(e.Button == MouseButtons.Left)
+			    SetCaretPosition(new Point(e.X, e.Y));
 
 			base.OnMouseDown (e);
 		}
@@ -3657,6 +3663,5 @@ namespace Be.Windows.Forms
 			UpdateScrollSize();
 		}
 		#endregion
-
     }
 }

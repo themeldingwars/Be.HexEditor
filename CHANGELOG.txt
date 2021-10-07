@@ -1,8 +1,17 @@
 Version history
 
+1.4.2
+- New feature: Russian language added
+- New feature: Select All menu item added
+- New feature: BuiltIn ContextMenu added for Copy, Cut, Paste
+- Bug fix: OnBytesPerLineChanged is invoked correctly now
+- Improvement: Dialog properties changed
+- Improvement: Selection is only available using left mouse button click
+- Improvement: Solution files updated to Visual Studio 2010
+
 1.4.1
 - New feature: Japanese language added
-- Bug fix: German translation of Copy, Copy Hex, Paste and Paste Hex added
+- Bug fix: German translation of Copy, Copy Hex,Paste and Paste Hex added
 
 1.4.0
 - New feature: Copy Hex and Paste Hex added

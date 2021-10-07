@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="rbString.Text" xml:space="preserve">
-    <value>Text</value>
+  <data name="resource.CopyMenuItemText" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="resource.CutMenuItemText" xml:space="preserve">
+    <value>Ausschneiden</value>
+  </data>
+  <data name="resource.PasteMenuItemText" xml:space="preserve">
+    <value>Einfügen</value>
+  </data>
+  <data name="resource.SelectAllMenuItemText" xml:space="preserve">
+    <value>Alles Markieren</value>
   </data>
   <data name="rbHex.Text" xml:space="preserve">
     <value>Hexadezimal</value>

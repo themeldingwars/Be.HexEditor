@@ -59,34 +59,27 @@ namespace Be.HexEditor
             // 
             // ucAbout1
             // 
-            this.ucAbout1.AccessibleDescription = null;
-            this.ucAbout1.AccessibleName = null;
             resources.ApplyResources(this.ucAbout1, "ucAbout1");
-            this.ucAbout1.BackgroundImage = null;
             this.ucAbout1.Name = "ucAbout1";
             // 
             // btnOK
             // 
-            this.btnOK.AccessibleDescription = null;
-            this.btnOK.AccessibleName = null;
             resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.BackgroundImage = null;
-            this.btnOK.Font = null;
             this.btnOK.Name = "btnOK";
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // FormAbout
             // 
             this.AcceptButton = this.btnOK;
-            this.AccessibleDescription = null;
-            this.AccessibleName = null;
             resources.ApplyResources(this, "$this");
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.BackgroundImage = null;
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.ucAbout1);
-            this.Icon = null;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormAbout";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.ResumeLayout(false);
 
 		}

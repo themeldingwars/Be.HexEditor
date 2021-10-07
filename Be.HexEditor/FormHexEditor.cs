@@ -78,6 +78,8 @@ namespace Be.HexEditor
                 findToolStripMenuItem.Enabled = false;
                 findNextToolStripMenuItem.Enabled = false;
                 goToToolStripMenuItem.Enabled = false;
+
+                selectAllToolStripMenuItem.Enabled = false;
             }
             else
             {
@@ -86,6 +88,8 @@ namespace Be.HexEditor
                 findToolStripMenuItem.Enabled = true;
                 findNextToolStripMenuItem.Enabled = true;
                 goToToolStripMenuItem.Enabled = true;
+
+                selectAllToolStripMenuItem.Enabled = true;
             }
 
             ManageAbilityForCopyAndPaste();
@@ -216,6 +220,7 @@ namespace Be.HexEditor
                 return DialogResult.OK;
 
             try
+
             {
                 if (hexBox.ByteProvider != null && hexBox.ByteProvider.HasChanges())
                 {
@@ -457,6 +462,11 @@ namespace Be.HexEditor
             this.Goto();
         }
 
+        void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.hexBox.SelectAll();
+        }
+
         void exit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -477,6 +487,7 @@ namespace Be.HexEditor
         {
             new FormOptions().ShowDialog();
         }
+
 
     }
 }

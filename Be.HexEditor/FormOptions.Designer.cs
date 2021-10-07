@@ -49,149 +49,100 @@
             // 
             // tabControl
             // 
-            this.tabControl.AccessibleDescription = null;
-            this.tabControl.AccessibleName = null;
             resources.ApplyResources(this.tabControl, "tabControl");
-            this.tabControl.BackgroundImage = null;
             this.tabControl.Controls.Add(this.generalTabPage);
-            this.tabControl.Font = null;
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             // 
             // generalTabPage
             // 
-            this.generalTabPage.AccessibleDescription = null;
-            this.generalTabPage.AccessibleName = null;
-            resources.ApplyResources(this.generalTabPage, "generalTabPage");
-            this.generalTabPage.BackgroundImage = null;
             this.generalTabPage.Controls.Add(this.languageSettingsGroupBox);
             this.generalTabPage.Controls.Add(this.recentFilesGroupBox);
-            this.generalTabPage.Font = null;
+            resources.ApplyResources(this.generalTabPage, "generalTabPage");
             this.generalTabPage.Name = "generalTabPage";
             this.generalTabPage.UseVisualStyleBackColor = true;
             // 
             // languageSettingsGroupBox
             // 
-            this.languageSettingsGroupBox.AccessibleDescription = null;
-            this.languageSettingsGroupBox.AccessibleName = null;
-            resources.ApplyResources(this.languageSettingsGroupBox, "languageSettingsGroupBox");
-            this.languageSettingsGroupBox.BackgroundImage = null;
             this.languageSettingsGroupBox.Controls.Add(this.selectLanguageLabel);
             this.languageSettingsGroupBox.Controls.Add(this.languageComboBox);
             this.languageSettingsGroupBox.Controls.Add(this.useSystemLanguageCheckBox);
-            this.languageSettingsGroupBox.Font = null;
+            resources.ApplyResources(this.languageSettingsGroupBox, "languageSettingsGroupBox");
             this.languageSettingsGroupBox.Name = "languageSettingsGroupBox";
             this.languageSettingsGroupBox.TabStop = false;
             // 
             // selectLanguageLabel
             // 
-            this.selectLanguageLabel.AccessibleDescription = null;
-            this.selectLanguageLabel.AccessibleName = null;
             resources.ApplyResources(this.selectLanguageLabel, "selectLanguageLabel");
-            this.selectLanguageLabel.Font = null;
             this.selectLanguageLabel.Name = "selectLanguageLabel";
             // 
             // languageComboBox
             // 
-            this.languageComboBox.AccessibleDescription = null;
-            this.languageComboBox.AccessibleName = null;
-            resources.ApplyResources(this.languageComboBox, "languageComboBox");
-            this.languageComboBox.BackgroundImage = null;
             this.languageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.languageComboBox.Font = null;
             this.languageComboBox.FormattingEnabled = true;
+            resources.ApplyResources(this.languageComboBox, "languageComboBox");
             this.languageComboBox.Name = "languageComboBox";
             // 
             // useSystemLanguageCheckBox
             // 
-            this.useSystemLanguageCheckBox.AccessibleDescription = null;
-            this.useSystemLanguageCheckBox.AccessibleName = null;
             resources.ApplyResources(this.useSystemLanguageCheckBox, "useSystemLanguageCheckBox");
-            this.useSystemLanguageCheckBox.BackgroundImage = null;
-            this.useSystemLanguageCheckBox.Font = null;
             this.useSystemLanguageCheckBox.Name = "useSystemLanguageCheckBox";
             this.useSystemLanguageCheckBox.UseVisualStyleBackColor = true;
             this.useSystemLanguageCheckBox.CheckedChanged += new System.EventHandler(this.useSystemLanguageCheckBox_CheckedChanged);
             // 
             // recentFilesGroupBox
             // 
-            this.recentFilesGroupBox.AccessibleDescription = null;
-            this.recentFilesGroupBox.AccessibleName = null;
-            resources.ApplyResources(this.recentFilesGroupBox, "recentFilesGroupBox");
-            this.recentFilesGroupBox.BackgroundImage = null;
             this.recentFilesGroupBox.Controls.Add(this.clearRecentFilesButton);
             this.recentFilesGroupBox.Controls.Add(this.recentFilesMaxlabel);
             this.recentFilesGroupBox.Controls.Add(this.recentFilesMaxTextBox);
-            this.recentFilesGroupBox.Font = null;
+            resources.ApplyResources(this.recentFilesGroupBox, "recentFilesGroupBox");
             this.recentFilesGroupBox.Name = "recentFilesGroupBox";
             this.recentFilesGroupBox.TabStop = false;
             // 
             // clearRecentFilesButton
             // 
-            this.clearRecentFilesButton.AccessibleDescription = null;
-            this.clearRecentFilesButton.AccessibleName = null;
             resources.ApplyResources(this.clearRecentFilesButton, "clearRecentFilesButton");
-            this.clearRecentFilesButton.BackgroundImage = null;
-            this.clearRecentFilesButton.Font = null;
             this.clearRecentFilesButton.Name = "clearRecentFilesButton";
             this.clearRecentFilesButton.UseVisualStyleBackColor = true;
             this.clearRecentFilesButton.Click += new System.EventHandler(this.clearRecentFilesButton_Click);
             // 
             // recentFilesMaxlabel
             // 
-            this.recentFilesMaxlabel.AccessibleDescription = null;
-            this.recentFilesMaxlabel.AccessibleName = null;
             resources.ApplyResources(this.recentFilesMaxlabel, "recentFilesMaxlabel");
-            this.recentFilesMaxlabel.Font = null;
             this.recentFilesMaxlabel.Name = "recentFilesMaxlabel";
             // 
             // recentFilesMaxTextBox
             // 
-            this.recentFilesMaxTextBox.AccessibleDescription = null;
-            this.recentFilesMaxTextBox.AccessibleName = null;
             resources.ApplyResources(this.recentFilesMaxTextBox, "recentFilesMaxTextBox");
-            this.recentFilesMaxTextBox.BackgroundImage = null;
-            this.recentFilesMaxTextBox.Font = null;
             this.recentFilesMaxTextBox.Name = "recentFilesMaxTextBox";
             // 
             // okButton
             // 
-            this.okButton.AccessibleDescription = null;
-            this.okButton.AccessibleName = null;
             resources.ApplyResources(this.okButton, "okButton");
-            this.okButton.BackgroundImage = null;
-            this.okButton.Font = null;
             this.okButton.Name = "okButton";
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.AccessibleDescription = null;
-            this.cancelButton.AccessibleName = null;
             resources.ApplyResources(this.cancelButton, "cancelButton");
-            this.cancelButton.BackgroundImage = null;
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Font = null;
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
             // FormOptions
             // 
-            this.AccessibleDescription = null;
-            this.AccessibleName = null;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = null;
             this.CancelButton = this.cancelButton;
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.tabControl);
-            this.Font = null;
-            this.Icon = null;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormOptions";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.tabControl.ResumeLayout(false);
             this.generalTabPage.ResumeLayout(false);
             this.languageSettingsGroupBox.ResumeLayout(false);

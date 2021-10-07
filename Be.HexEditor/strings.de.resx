@@ -147,4 +147,7 @@
   <data name="Japanese" xml:space="preserve">
     <value>Japanisch</value>
   </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Russisch</value>
+  </data>
 </root>
