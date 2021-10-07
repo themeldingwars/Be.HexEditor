@@ -1095,13 +1095,43 @@ namespace Be.Windows.Forms
 			}
 			#endregion
 		}
-		#endregion
+        #endregion
 
-		#region Fields
-		/// <summary>
-		/// Contains the hole content bounds of all text
+        #region Highlighted Region
+        /// <summary>
+		/// 
 		/// </summary>
-		Rectangle _recContent;
+        public class HighlightedRegion
+        {
+            public int Start;
+            public int Length;
+            public int End { get { return Start + Length - 1; } }
+            public Color Color;
+
+            public HighlightedRegion()
+            {
+
+            }
+
+            public HighlightedRegion(int Start, int Length, Color Color)
+            {
+                this.Start = Start;
+                this.Length = Length;
+                this.Color = Color;
+            }
+
+            public bool IsByteSelected(long BytePos)
+            {
+                return BytePos >= Start && BytePos <= End;
+            }
+        }
+        #endregion
+
+        #region Fields
+        /// <summary>
+        /// Contains the hole content bounds of all text
+        /// </summary>
+        Rectangle _recContent;
 		/// <summary>
 		/// Contains the line info bounds
 		/// </summary>
@@ -1249,13 +1279,15 @@ namespace Be.Windows.Forms
 		/// Contains a state value about Insert or Write mode. When this value is true and the ByteProvider SupportsInsert is true bytes are inserted instead of overridden.
 		/// </summary>
 		bool _insertActive;
-		#endregion
 
-		#region Events
-		/// <summary>
-		/// Occurs, when the value of InsertActive property has changed.
-		/// </summary>
-		[Description("Occurs, when the value of InsertActive property has changed.")]
+        public List<HighlightedRegion> HighligedRegions = new List<HighlightedRegion>();
+        #endregion
+
+        #region Events
+        /// <summary>
+        /// Occurs, when the value of InsertActive property has changed.
+        /// </summary>
+        [Description("Occurs, when the value of InsertActive property has changed.")]
 		public event EventHandler InsertActiveChanged;
 		/// <summary>
 		/// Occurs, when the value of ReadOnly property has changed.
@@ -2466,11 +2498,19 @@ namespace Be.Windows.Forms
 			}
 		}
 
-		void PaintHexString(Graphics g, byte b, Brush brush, Point gridPoint)
+		void PaintHexString(Graphics g, byte b, Brush brush, Point gridPoint, Brush brushBack = null)
 		{
 			PointF bytePointF = GetBytePointF(gridPoint);
 
 			string sB = ConvertByteToHex(b);
+
+            // Color the backgound over ere
+            if (brushBack != null)
+            {
+                bool isLastLineChar = (gridPoint.X + 1 == _iHexMaxHBytes);
+                float bcWidth = (isLastLineChar) ? _charSize.Width * 2 : _charSize.Width * 3;
+                g.FillRectangle(brushBack, bytePointF.X, bytePointF.Y, bcWidth, _charSize.Height);
+            }
 
 			g.DrawString(sB.Substring(0, 1), Font, brush, bytePointF, _stringFormat);
 			bytePointF.X += _charSize.Width;
@@ -2532,7 +2572,23 @@ namespace Be.Windows.Forms
 				}
 				else
 				{
-					PaintHexString(g, b, brush, gridPoint);
+                    // Check if its in a higlighted region
+                    bool paintedByte = false;
+                    foreach (var HiSection in HighligedRegions)
+                    {
+                        if (HiSection.IsByteSelected(i))
+                        {
+                            var colorBrush = new SolidBrush(HiSection.Color);
+                            PaintHexString(g, b, brush, gridPoint, colorBrush);
+                            paintedByte = true;
+                            break;
+                        }
+                    }
+
+                    if (!paintedByte)
+                    {
+                        PaintHexString(g, b, brush, gridPoint);
+                    }
 				}
 
 				string s = new String(ByteCharConverter.ToChar(b), 1);

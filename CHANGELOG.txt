@@ -1,7 +1,11 @@
 Version history
 
+1.7.0
+- New feature: Ability to color regions in the hex view with a different background color
+
+
 1.6.1
-- Pretend that native methods for caret manipulation are available on Linux
+- Improvement: Pretend that native methods for caret manipulation are available on Linux
 
 1.6.0
 - New feature: High DPI (DPI Aware) As-Per-Monitor Windows 8.1 support
