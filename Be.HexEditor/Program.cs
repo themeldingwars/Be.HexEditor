@@ -16,6 +16,11 @@ namespace Be.HexEditor
         [STAThread()]
         static void Main(string[] args)
         {
+			long length = 10;
+			for (long pos = 1; pos < length; pos++)
+			{
+				length = 4;
+			}
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

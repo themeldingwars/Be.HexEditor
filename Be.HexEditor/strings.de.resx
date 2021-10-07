@@ -136,7 +136,7 @@
     <value>Möchten Sie die Änderungen speichern?</value>
   </data>
   <data name="Readonly" xml:space="preserve">
-    <value> [Schreibgeschützt]</value>
+    <value> [schreibgeschützt]</value>
   </data>
   <data name="OpenFailed" xml:space="preserve">
     <value>Datei wird von einem anderen Prozess blockiert und kann nicht geöffnet werden!</value>

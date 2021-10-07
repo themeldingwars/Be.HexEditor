@@ -1,5 +1,16 @@
 Version history
 
+1.4.8
+- New feature: UseFixedBytes=false together with StringViewVisible=true 
+- New feature: ColumnInfo added
+- New feature: Byte grouping shown with vertical separator line added
+- New feature: Case insensitive Find operations added
+- Improvement: Find dialog is shown non-modal now
+- Improvement: Moved find cancel to Find dialog
+- Improvement: Shadow selection is now working when focus is away
+- Improvement: Some changes in main dialog. Removed all borders
+- Improvement: ShowInTaskbar is set to false for Goto and Find dialog
+
 1.4.7
 - Improvement: Be.HexEditor is now licensed under the MIT License
 - Improvement: Changes of the byte char converter implementations

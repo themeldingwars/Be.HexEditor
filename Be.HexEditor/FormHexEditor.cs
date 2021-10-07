@@ -12,10 +12,9 @@ namespace Be.HexEditor
 {
     public partial class FormHexEditor : Form
     {
-        FormFind _formFind = new FormFind();
-        FormFindCancel _formFindCancel;
+		FormFind _formFind;
+		FindOptions _findOptions = new FindOptions();
         FormGoTo _formGoto = new FormGoTo();
-        byte[] _findBuffer = new byte[0];
         string _fileName;
 
         public FormHexEditor()
@@ -273,57 +272,35 @@ namespace Be.HexEditor
         /// </summary>
         void Find()
         {
-            if (_formFind.ShowDialog() == DialogResult.OK)
-            {
-                _findBuffer = _formFind.GetFindBytes();
-                FindNext();
-            }
+			ShowFind();
         }
+
+		/// <summary>
+		/// Creates a new FormFind dialog
+		/// </summary>
+		/// <returns>the form find dialog</returns>
+		FormFind ShowFind()
+		{
+			if (_formFind == null || _formFind.IsDisposed)
+			{
+				_formFind = new FormFind();
+				_formFind.HexBox = this.hexBox;
+				_formFind.FindOptions = _findOptions;
+				_formFind.Show(this);
+			}
+			else
+			{
+				_formFind.Focus();
+			}
+			return _formFind;
+		}
 
         /// <summary>
         /// Find next match
         /// </summary>
         void FindNext()
         {
-            if (_findBuffer.Length == 0)
-            {
-                Find();
-                return;
-            }
-
-            // show cancel dialog
-            _formFindCancel = new FormFindCancel();
-            _formFindCancel.SetHexBox(hexBox);
-            _formFindCancel.Closed += new EventHandler(FormFindCancel_Closed);
-            _formFindCancel.Show();
-
-            // block activation of main form
-            Activated += new EventHandler(FocusToFormFindCancel);
-
-            // start find process
-            long res = hexBox.Find(_findBuffer, hexBox.SelectionStart + hexBox.SelectionLength);
-
-            _formFindCancel.Dispose();
-
-            // unblock activation of main form
-            Activated -= new EventHandler(FocusToFormFindCancel);
-
-            if (res == -1) // -1 = no match
-            {
-                MessageBox.Show(strings.FindOperationEndOfFile, Program.SoftwareName,
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else if (res == -2) // -2 = find was aborted
-            {
-                return;
-            }
-            else // something was found
-            {
-                if (!hexBox.Focused)
-                    hexBox.Focus();
-            }
-
-            ManageAbility();
+			ShowFind().FindNext();
         }
 
         /// <summary>
@@ -332,14 +309,6 @@ namespace Be.HexEditor
         void FormFindCancel_Closed(object sender, EventArgs e)
         {
             hexBox.AbortFind();
-        }
-
-        /// <summary>
-        /// Put focus back to the cancel form.
-        /// </summary>
-        void FocusToFormFindCancel(object sender, EventArgs e)
-        {
-            _formFindCancel.Focus();
         }
 
         /// <summary>
@@ -495,6 +464,6 @@ namespace Be.HexEditor
             var result = CloseFile();
             if (result == DialogResult.Cancel)
                 e.Cancel = true;
-        }
+		}
     }
 }
