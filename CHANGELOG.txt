@@ -1,5 +1,11 @@
 Version history
 
+1.2.0
+- Note: Thanks to Dave Cluderay
+- New feature: DynamicFileByteProvider with Insert/Delete support
+- New feature: Open Dynamic(Big files also) added
+
+
 1.1.3
 - Note: Thanks to Eric Lawrence
 - New feature: LineInfoForeColor property added

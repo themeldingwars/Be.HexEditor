@@ -49,6 +49,7 @@ namespace Be.HexEditor
 		private System.Windows.Forms.ToolBarButton btnPaste;
 		private System.Windows.Forms.MenuItem miFind;
 		private System.Windows.Forms.MenuItem miOpenDynamic;
+		private System.Windows.Forms.MenuItem menuItem1;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -95,6 +96,7 @@ namespace Be.HexEditor
 			this.miFile = new System.Windows.Forms.MenuItem();
 			this.miOpen = new System.Windows.Forms.MenuItem();
 			this.miOpenDynamic = new System.Windows.Forms.MenuItem();
+			this.menuItem1 = new System.Windows.Forms.MenuItem();
 			this.miSave = new System.Windows.Forms.MenuItem();
 			this.miClose = new System.Windows.Forms.MenuItem();
 			this.menuItem4 = new System.Windows.Forms.MenuItem();
@@ -163,6 +165,7 @@ namespace Be.HexEditor
 			this.miFile.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																				   this.miOpen,
 																				   this.miOpenDynamic,
+																				   this.menuItem1,
 																				   this.miSave,
 																				   this.miClose,
 																				   this.menuItem4,
@@ -182,10 +185,16 @@ namespace Be.HexEditor
 			this.miOpenDynamic.Text = "Open &Dynamic (Small files only)";
 			this.miOpenDynamic.Click += new System.EventHandler(this.miOpenDynamic_Click);
 			// 
+			// menuItem1
+			// 
+			this.menuItem1.Index = 2;
+			this.menuItem1.Text = "Open Dynamic (Big files also)";
+			this.menuItem1.Click += new System.EventHandler(this.miOpenFileDynamic_Click);
+			// 
 			// miSave
 			// 
 			this.miSave.Enabled = false;
-			this.miSave.Index = 2;
+			this.miSave.Index = 3;
 			this.miSave.Shortcut = System.Windows.Forms.Shortcut.CtrlS;
 			this.miSave.Text = "&Save";
 			this.miSave.Click += new System.EventHandler(this.miSave_Click);
@@ -193,18 +202,18 @@ namespace Be.HexEditor
 			// miClose
 			// 
 			this.miClose.Enabled = false;
-			this.miClose.Index = 3;
+			this.miClose.Index = 4;
 			this.miClose.Text = "&Close";
 			this.miClose.Click += new System.EventHandler(this.miClose_Click);
 			// 
 			// menuItem4
 			// 
-			this.menuItem4.Index = 4;
+			this.menuItem4.Index = 5;
 			this.menuItem4.Text = "-";
 			// 
 			// miExit
 			// 
-			this.miExit.Index = 5;
+			this.miExit.Index = 6;
 			this.miExit.Text = "E&xit";
 			this.miExit.Click += new System.EventHandler(this.miExit_Click);
 			// 
@@ -485,8 +494,58 @@ namespace Be.HexEditor
 			try
 			{
 				FileByteProvider fileByteProvider = new FileByteProvider(fileName);
-				fileByteProvider.Changed += new EventHandler(fileByteProvider_Changed);
+				fileByteProvider.Changed += new EventHandler(byteProvider_Changed);
 				hexBox.ByteProvider = fileByteProvider;
+				_fileName = fileName;
+
+				DisplayText(fileName);
+			}
+			catch(Exception ex1)
+			{
+				MessageBox.Show(ex1.Message, "Be.HexEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+			finally
+			{
+				ManageAbility();
+			}
+		}
+
+		/// <summary>
+		/// Shows the open file dialog.
+		/// </summary>
+		void OpenFileDynamicBig()
+		{
+			if(openFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				OpenFileDynamicBig(openFileDialog.FileName);
+			}
+		}
+
+
+		/// <summary>
+		/// Opens a file.
+		/// </summary>
+		/// <param name="fileName">the file name of the file to open</param>
+		void OpenFileDynamicBig(string fileName)
+		{
+			if(!File.Exists(fileName))
+			{
+				MessageBox.Show("File does not exist!");
+				return;
+			}
+
+			if(hexBox.ByteProvider != null)
+			{
+				if(CloseFile() == DialogResult.Cancel)
+					return;
+			}
+
+			try
+			{
+				DynamicFileByteProvider dynamicFileByteProvider = new DynamicFileByteProvider(fileName);
+				dynamicFileByteProvider.Changed += new EventHandler(byteProvider_Changed);
+				hexBox.ByteProvider = dynamicFileByteProvider;
 				_fileName = fileName;
 
 				DisplayText(fileName);
@@ -539,7 +598,7 @@ namespace Be.HexEditor
 					byte[] data = new byte[stream.Length];
 					stream.Read(data, 0, data.Length);
 					DynamicByteProvider dynamicByteProvider = new DynamicByteProvider(data);
-					dynamicByteProvider.Changed += new EventHandler(dynamicByteProvider_Changed);
+					dynamicByteProvider.Changed += new EventHandler(byteProvider_Changed);
 					hexBox.ByteProvider = dynamicByteProvider;
 					_fileName = fileName;
 					DisplayText(fileName);
@@ -568,13 +627,17 @@ namespace Be.HexEditor
 			{
 
 				FileByteProvider fileByteProvider = hexBox.ByteProvider as FileByteProvider;
+				DynamicByteProvider dynamicByteProvider = hexBox.ByteProvider as DynamicByteProvider;
+				DynamicFileByteProvider dynamicFileByteProvider = hexBox.ByteProvider as DynamicFileByteProvider;
 				if(fileByteProvider != null)
 				{
 					fileByteProvider.ApplyChanges();
 				}
-
-				DynamicByteProvider dynamicByteProvider = hexBox.ByteProvider as DynamicByteProvider;
-				if(dynamicByteProvider != null)
+				else if(dynamicFileByteProvider != null)
+				{
+					dynamicFileByteProvider.ApplyChanges();
+				}
+				else if(dynamicByteProvider != null)
 				{
 					byte[] data = dynamicByteProvider.Bytes.ToArray();
 					using(FileStream stream = File.Open(_fileName, FileMode.Create, FileAccess.Write, FileShare.Read))
@@ -746,7 +809,7 @@ namespace Be.HexEditor
 		/// <summary>
 		/// Enables drag&drop
 		/// </summary>
-		private void hexBox_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
+		void hexBox_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
 		{
 			e.Effect = DragDropEffects.All;
 		}
@@ -754,7 +817,7 @@ namespace Be.HexEditor
 		/// <summary>
 		/// Processes a file drop
 		/// </summary>
-		private void hexBox_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
+		void hexBox_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
 		{
 		 	string[] formats = e.Data.GetFormats();
 			object oFileNames = e.Data.GetData(DataFormats.FileDrop);
@@ -771,53 +834,48 @@ namespace Be.HexEditor
 				hexBox.CurrentLine, hexBox.CurrentPositionInLine);
 		}
 
-		private void fileByteProvider_Changed(object sender, EventArgs e)
+		void byteProvider_Changed(object sender, EventArgs e)
 		{
 			ManageAbility();
 		}
 
-		private void dynamicByteProvider_Changed(object sender, EventArgs e)
-		{
-			ManageAbility();
-		}
-
-		private void miExit_Click(object sender, System.EventArgs e)
+		void miExit_Click(object sender, System.EventArgs e)
 		{
 			Close();
 		}
 
-		private void FormHexEditor_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		void FormHexEditor_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			if(CloseFile() == DialogResult.Cancel)
 				e.Cancel = true;
 		}
 
-		private void miFind_Click(object sender, System.EventArgs e)
+		void miFind_Click(object sender, System.EventArgs e)
 		{
 			Find();
 		}
 
-		private void miFindNext_Click(object sender, System.EventArgs e)
+		void miFindNext_Click(object sender, System.EventArgs e)
 		{
 			FindNext();
 		}
 
-		private void miAbout_Click(object sender, System.EventArgs e)
+		void miAbout_Click(object sender, System.EventArgs e)
 		{
 			new FormAbout().ShowDialog();
 		}
 
-		private void miGoTo_Click(object sender, System.EventArgs e)
+		void miGoTo_Click(object sender, System.EventArgs e)
 		{
 			Goto();
 		}
 
-		private void FormHexEditor_Load(object sender, System.EventArgs e)
+		void FormHexEditor_Load(object sender, System.EventArgs e)
 		{
 		
 		}
 
-		private void tb_ButtonClick(object sender, System.Windows.Forms.ToolBarButtonClickEventArgs e)
+		void tb_ButtonClick(object sender, System.Windows.Forms.ToolBarButtonClickEventArgs e)
 		{
 			if(e.Button == btnOpen) OpenFile();
 			else if(e.Button == btnSave) SaveFile();
@@ -827,64 +885,69 @@ namespace Be.HexEditor
 			
 		}
 
-		private void miOpen_Click(object sender, System.EventArgs e)
+		void miOpen_Click(object sender, System.EventArgs e)
 		{
 			OpenFile();
 		}
 
-		private void miOpenDynamic_Click(object sender, System.EventArgs e)
+		void miOpenDynamic_Click(object sender, System.EventArgs e)
 		{
 			OpenFileDynamic();
 		}
 
-		private void miSave_Click(object sender, System.EventArgs e)
+		private void miOpenFileDynamic_Click(object sender, System.EventArgs e)
+		{
+			OpenFileDynamicBig();
+		}
+
+		void miSave_Click(object sender, System.EventArgs e)
 		{
 			SaveFile();
 		}
 
-		private void miClose_Click(object sender, System.EventArgs e)
+		void miClose_Click(object sender, System.EventArgs e)
 		{
 			CloseFile();
 		}
 
-		private void hexBox_SelectionLengthChanged(object sender, System.EventArgs e)
+		void hexBox_SelectionLengthChanged(object sender, System.EventArgs e)
 		{
 			ManageAbilityForCopyAndPaste();
 		}
 
-		private void hexBox_SelectionStartChanged(object sender, System.EventArgs e)
+		void hexBox_SelectionStartChanged(object sender, System.EventArgs e)
 		{
 			ManageAbilityForCopyAndPaste();
 		}
 
-		private void miCut_Click(object sender, System.EventArgs e)
+		void miCut_Click(object sender, System.EventArgs e)
 		{
 			hexBox.Cut();
 		}
 
-		private void miCopy_Click(object sender, System.EventArgs e)
+		void miCopy_Click(object sender, System.EventArgs e)
 		{
 			hexBox.Copy();
 		}
 
-		private void miPaste_Click(object sender, System.EventArgs e)
+		void miPaste_Click(object sender, System.EventArgs e)
 		{
 			hexBox.Paste();
 		}
 
-		private void hexBox_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+		void hexBox_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
 		{
 			// for testing purpose only - ignore this...
 			System.Diagnostics.Debug.WriteLine("hexBox_KeyDown");
 		}
 
-		private void hexBox_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+		void hexBox_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
 		{
 			// for testing purpose only - ignore this...
 			System.Diagnostics.Debug.WriteLine("hexBox_KeyPress");
 		}
 
-		private void hexBox_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
+		void hexBox_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
 		{
 			// for testing purpose only - ignore this...
 			System.Diagnostics.Debug.WriteLine("hexBox_KeyUp");

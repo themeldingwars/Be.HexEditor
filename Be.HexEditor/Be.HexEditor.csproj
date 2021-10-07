@@ -183,6 +183,10 @@
                     RelPath = "Resources\License.rtf"
                     BuildAction = "EmbeddedResource"
                 />
+                <File
+                    RelPath = "Resources\ThanksTo.rtf"
+                    BuildAction = "EmbeddedResource"
+                />
             </Include>
         </Files>
     </CSHARP>

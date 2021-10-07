@@ -15,20 +15,20 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_6D05E823984E4E03A1466FF9C5EAEEE5"
+        "OwnerKey" = "8:_C0A8D383189B4BEB96A7188BE47774AA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6D05E823984E4E03A1466FF9C5EAEEE5"
+        "OwnerKey" = "8:_713C2F74F6B604494882DC0F11D4BF73"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_713C2F74F6B604494882DC0F11D4BF73"
         "OwnerKey" = "8:_C0A8D383189B4BEB96A7188BE47774AA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9471F3C221D747CA807863DBE0E1C1CC"
-        "OwnerKey" = "8:_C0A8D383189B4BEB96A7188BE47774AA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9471F3C221D747CA807863DBE0E1C1CC"
-        "OwnerKey" = "8:_713C2F74F6B604494882DC0F11D4BF73"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -112,7 +112,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Be.Windows.Forms.HexBox, Version=1.1.2.15820, Culture=neutral, PublicKeyToken=e0e5adf0ebc99863"
+            "AssemblyAsmDisplayName" = "8:Be.Windows.Forms.HexBox, Version=1.1.3.13236, Culture=neutral, PublicKeyToken=e0e5adf0ebc99863"
                 "ScatterAssemblies"
                 {
                     "_713C2F74F6B604494882DC0F11D4BF73"
@@ -236,13 +236,13 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Be.HexEditor"
-        "ProductCode" = "8:{D9396F9D-96C4-40F8-82F5-B3F2BBC716D4}"
-        "PackageCode" = "8:{3D297EF1-3BD2-49B5-B6E4-91DDA75BBEF4}"
+        "ProductCode" = "8:{0DF235AD-8029-4775-A10E-C26CF29922B1}"
+        "PackageCode" = "8:{51908DB4-1673-42E6-B248-831F27A4F368}"
         "UpgradeCode" = "8:{18221954-2E4C-4C08-8D52-131154B26126}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "ProductVersion" = "8:1.1.3"
+        "ProductVersion" = "8:1.2.0"
         "Manufacturer" = "8:Be"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -758,7 +758,7 @@
         }
         "MergeModule"
         {
-            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_9471F3C221D747CA807863DBE0E1C1CC"
+            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_6D05E823984E4E03A1466FF9C5EAEEE5"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"

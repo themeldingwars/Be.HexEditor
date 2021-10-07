@@ -113,12 +113,32 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "DataBlock.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DataMap.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "DynamicByteProvider.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "DynamicFileByteProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "FileByteProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "FileDataBlock.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -142,6 +162,11 @@
                 />
                 <File
                     RelPath = "IByteProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "MemoryDataBlock.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

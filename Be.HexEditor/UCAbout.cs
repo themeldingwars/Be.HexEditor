@@ -19,13 +19,15 @@ namespace Be.HexEditor
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label lblAuthor;
 		private System.Windows.Forms.Label lblVersion;
-		private System.Windows.Forms.TabControl tc;
 		private System.Windows.Forms.TabPage tabLicense;
 		private System.Windows.Forms.RichTextBox txtLicense;
 		private System.Windows.Forms.TabPage tabChanges;
 		private System.Windows.Forms.RichTextBox txtChanges;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.LinkLabel lnkWorkspace;
+		private System.Windows.Forms.TabControl tabThanksTo;
+		private System.Windows.Forms.TabPage tabPage1;
+		private System.Windows.Forms.RichTextBox txtThanksTo;
 		/// <summary> 
 		/// Required designer variable.
 		/// </summary>
@@ -41,6 +43,9 @@ namespace Be.HexEditor
 			try
 			{
 				Assembly ca = Assembly.GetExecutingAssembly();
+
+				string resThanksTo = "Be.HexEditor.Resources.ThanksTo.rtf";
+				txtThanksTo.LoadFile(ca.GetManifestResourceStream(resThanksTo), RichTextBoxStreamType.RichText);
 
 				string resLicense = "Be.HexEditor.Resources.License.rtf";
 				txtLicense.LoadFile(ca.GetManifestResourceStream(resLicense), RichTextBoxStreamType.RichText);
@@ -85,15 +90,18 @@ namespace Be.HexEditor
 			this.label5 = new System.Windows.Forms.Label();
 			this.lblVersion = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
-			this.tc = new System.Windows.Forms.TabControl();
+			this.tabThanksTo = new System.Windows.Forms.TabControl();
 			this.tabLicense = new System.Windows.Forms.TabPage();
 			this.txtLicense = new System.Windows.Forms.RichTextBox();
 			this.tabChanges = new System.Windows.Forms.TabPage();
 			this.txtChanges = new System.Windows.Forms.RichTextBox();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
-			this.tc.SuspendLayout();
+			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.txtThanksTo = new System.Windows.Forms.RichTextBox();
+			this.tabThanksTo.SuspendLayout();
 			this.tabLicense.SuspendLayout();
 			this.tabChanges.SuspendLayout();
+			this.tabPage1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -128,7 +136,7 @@ namespace Be.HexEditor
 			this.lnkWorkspace.Size = new System.Drawing.Size(224, 16);
 			this.lnkWorkspace.TabIndex = 3;
 			this.lnkWorkspace.TabStop = true;
-			this.lnkWorkspace.Text = "http://workspaces.gotdotnet.com/hexbox";
+			this.lnkWorkspace.Text = "http://sourceforge.net/projects/hexbox";
 			this.lnkWorkspace.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCompany_LinkClicked);
 			// 
 			// label5
@@ -163,18 +171,19 @@ namespace Be.HexEditor
 			this.label7.Text = "Version:";
 			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// tc
+			// tabThanksTo
 			// 
-			this.tc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.tabThanksTo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 				| System.Windows.Forms.AnchorStyles.Left) 
 				| System.Windows.Forms.AnchorStyles.Right)));
-			this.tc.Controls.Add(this.tabLicense);
-			this.tc.Controls.Add(this.tabChanges);
-			this.tc.Location = new System.Drawing.Point(8, 80);
-			this.tc.Name = "tc";
-			this.tc.SelectedIndex = 0;
-			this.tc.Size = new System.Drawing.Size(448, 224);
-			this.tc.TabIndex = 9;
+			this.tabThanksTo.Controls.Add(this.tabPage1);
+			this.tabThanksTo.Controls.Add(this.tabLicense);
+			this.tabThanksTo.Controls.Add(this.tabChanges);
+			this.tabThanksTo.Location = new System.Drawing.Point(8, 80);
+			this.tabThanksTo.Name = "tabThanksTo";
+			this.tabThanksTo.SelectedIndex = 0;
+			this.tabThanksTo.Size = new System.Drawing.Size(448, 224);
+			this.tabThanksTo.TabIndex = 9;
 			// 
 			// tabLicense
 			// 
@@ -202,7 +211,7 @@ namespace Be.HexEditor
 			this.tabChanges.Controls.Add(this.txtChanges);
 			this.tabChanges.Location = new System.Drawing.Point(4, 22);
 			this.tabChanges.Name = "tabChanges";
-			this.tabChanges.Size = new System.Drawing.Size(328, 174);
+			this.tabChanges.Size = new System.Drawing.Size(440, 198);
 			this.tabChanges.TabIndex = 1;
 			this.tabChanges.Text = "Changes";
 			// 
@@ -212,7 +221,7 @@ namespace Be.HexEditor
 			this.txtChanges.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.txtChanges.Location = new System.Drawing.Point(0, 0);
 			this.txtChanges.Name = "txtChanges";
-			this.txtChanges.Size = new System.Drawing.Size(328, 174);
+			this.txtChanges.Size = new System.Drawing.Size(440, 198);
 			this.txtChanges.TabIndex = 0;
 			this.txtChanges.Text = "";
 			this.txtChanges.WordWrap = false;
@@ -226,10 +235,31 @@ namespace Be.HexEditor
 			this.pictureBox1.TabIndex = 10;
 			this.pictureBox1.TabStop = false;
 			// 
+			// tabPage1
+			// 
+			this.tabPage1.Controls.Add(this.txtThanksTo);
+			this.tabPage1.Location = new System.Drawing.Point(4, 22);
+			this.tabPage1.Name = "tabPage1";
+			this.tabPage1.Size = new System.Drawing.Size(440, 198);
+			this.tabPage1.TabIndex = 2;
+			this.tabPage1.Text = "Thanks to";
+			// 
+			// txtThanksTo
+			// 
+			this.txtThanksTo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.txtThanksTo.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txtThanksTo.Location = new System.Drawing.Point(0, 0);
+			this.txtThanksTo.Name = "txtThanksTo";
+			this.txtThanksTo.ReadOnly = true;
+			this.txtThanksTo.Size = new System.Drawing.Size(440, 198);
+			this.txtThanksTo.TabIndex = 8;
+			this.txtThanksTo.Text = "";
+			this.txtThanksTo.WordWrap = false;
+			// 
 			// UCAbout
 			// 
 			this.Controls.Add(this.pictureBox1);
-			this.Controls.Add(this.tc);
+			this.Controls.Add(this.tabThanksTo);
 			this.Controls.Add(this.lblVersion);
 			this.Controls.Add(this.label7);
 			this.Controls.Add(this.label5);
@@ -239,9 +269,10 @@ namespace Be.HexEditor
 			this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.Name = "UCAbout";
 			this.Size = new System.Drawing.Size(464, 312);
-			this.tc.ResumeLayout(false);
+			this.tabThanksTo.ResumeLayout(false);
 			this.tabLicense.ResumeLayout(false);
 			this.tabChanges.ResumeLayout(false);
+			this.tabPage1.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
