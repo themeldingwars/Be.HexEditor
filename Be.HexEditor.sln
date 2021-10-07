@@ -8,24 +8,18 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Be.HexEditor.Setup", "Be.He
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		ClientProfileRelease|Any CPU = ClientProfileRelease|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FF4ADB46-210E-429E-9176-68613F5CBE90}.ClientProfileRelease|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF4ADB46-210E-429E-9176-68613F5CBE90}.ClientProfileRelease|Any CPU.Build.0 = Debug|Any CPU
 		{FF4ADB46-210E-429E-9176-68613F5CBE90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF4ADB46-210E-429E-9176-68613F5CBE90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF4ADB46-210E-429E-9176-68613F5CBE90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF4ADB46-210E-429E-9176-68613F5CBE90}.Release|Any CPU.Build.0 = Release|Any CPU
-		{26C5F25F-B450-4CAF-AD8B-B8D11AE73457}.ClientProfileRelease|Any CPU.ActiveCfg = ClientProfileRelease|Any CPU
-		{26C5F25F-B450-4CAF-AD8B-B8D11AE73457}.ClientProfileRelease|Any CPU.Build.0 = ClientProfileRelease|Any CPU
 		{26C5F25F-B450-4CAF-AD8B-B8D11AE73457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{26C5F25F-B450-4CAF-AD8B-B8D11AE73457}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26C5F25F-B450-4CAF-AD8B-B8D11AE73457}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26C5F25F-B450-4CAF-AD8B-B8D11AE73457}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F4FD532E-2F83-4C58-BD32-F0DB462E3F5B}.ClientProfileRelease|Any CPU.ActiveCfg = ClientProfileRelease
 		{F4FD532E-2F83-4C58-BD32-F0DB462E3F5B}.Debug|Any CPU.ActiveCfg = Debug
 		{F4FD532E-2F83-4C58-BD32-F0DB462E3F5B}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection

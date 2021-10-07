@@ -117,25 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="English" xml:space="preserve">
+    <value>英语</value>
+  </data>
   <data name="FileDoesNotExist" xml:space="preserve">
-    <value>ファイルは存在しません!</value>
+    <value>文件不存在。</value>
   </data>
   <data name="FindOperationEndOfFile" xml:space="preserve">
-    <value>検索はファイルの終端に達しました!</value>
+    <value>查找已越过文件末尾。</value>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>德语</value>
   </data>
   <data name="ProgramRestartSettings" xml:space="preserve">
-    <value>設定を反映するためにプログラムの再起動が必要です!</value>
+    <value>程序需要重新启动来使设置生效。</value>
   </data>
   <data name="SaveChangesQuestion" xml:space="preserve">
-    <value>変更を保存しますか?</value>
+    <value>是否保存修改？</value>
   </data>
   <data name="Readonly" xml:space="preserve">
-    <value> [読み取り専用]</value>
+    <value> [只读]</value>
   </data>
   <data name="OpenFailed" xml:space="preserve">
-    <value>ファイルは別のプロセスにロックされていて開けません!</value>
+    <value>文件被其他进程占用，无法打开。</value>
   </data>
   <data name="OpenReadonly" xml:space="preserve">
-    <value>ファイルはロックされています。読み取り専用モードで開きますか?</value>
+    <value>此文件已被锁定。是否以只读方式打开？</value>
+  </data>
+  <data name="Japanese" xml:space="preserve">
+    <value>日语</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>俄语</value>
+  </data>
+  <data name="SimplifiedChinese" xml:space="preserve">
+    <value>中文(简体)</value>
   </data>
 </root>

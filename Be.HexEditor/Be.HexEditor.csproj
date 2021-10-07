@@ -123,6 +123,9 @@
     <EmbeddedResource Include="FormAbout.ru.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormAbout.zh-Hans.resx">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormFind.de.resx">
       <DependentUpon>FormFind.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -132,6 +135,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFind.ru.resx">
+      <DependentUpon>FormFind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFind.zh-Hans.resx">
       <DependentUpon>FormFind.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFindCancel.de.resx">
@@ -145,6 +151,9 @@
     <EmbeddedResource Include="FormFindCancel.ru.resx">
       <DependentUpon>FormFindCancel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormFindCancel.zh-Hans.resx">
+      <DependentUpon>FormFindCancel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormGoTo.de.resx">
       <DependentUpon>FormGoTo.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -154,6 +163,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGoTo.ru.resx">
+      <DependentUpon>FormGoTo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGoTo.zh-Hans.resx">
       <DependentUpon>FormGoTo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormHexEditor.de.resx">
@@ -167,6 +179,9 @@
     <EmbeddedResource Include="FormHexEditor.ru.resx">
       <DependentUpon>FormHexEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormHexEditor.zh-Hans.resx">
+      <DependentUpon>FormHexEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormOptions.de.resx">
       <DependentUpon>FormOptions.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -176,6 +191,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormOptions.ru.resx">
+      <DependentUpon>FormOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOptions.zh-Hans.resx">
       <DependentUpon>FormOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\License.rtf" />
@@ -189,9 +207,13 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="strings.ru.resx" />
+    <EmbeddedResource Include="strings.zh-Hans.resx" />
     <EmbeddedResource Include="UCAbout.de.resx">
       <DependentUpon>UCAbout.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCAbout.ja.resx">
+      <DependentUpon>UCAbout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCAbout.resx">
       <DependentUpon>UCAbout.cs</DependentUpon>
@@ -250,6 +272,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Util.cs" />
+    <EmbeddedResource Include="UCAbout.zh-Hans.resx">
+      <DependentUpon>UCAbout.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\documentation\Changes.rtf">

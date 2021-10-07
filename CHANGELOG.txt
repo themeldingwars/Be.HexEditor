@@ -1,5 +1,8 @@
 Version history
 
+1.4.5
+- New feature: Simplified Chinese language added
+
 1.4.4
 - Improvement: Support for .NET Client Profile added
 - Bug fix: DEL and Back key are respecting Readonly property

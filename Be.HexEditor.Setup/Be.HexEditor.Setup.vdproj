@@ -185,7 +185,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Be.Windows.Forms.HexBox, Version=1.4.4.33079, Culture=neutral, PublicKeyToken=e0e5adf0ebc99863, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Be.Windows.Forms.HexBox, Version=1.4.5.13603, Culture=neutral, PublicKeyToken=e0e5adf0ebc99863, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_BDDE4C33CCD2654C05EF6FDB3C2005B6"
@@ -301,15 +301,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Be.HexEditor"
-        "ProductCode" = "8:{F5FB8452-C2E8-4BE1-8903-9008701D23C0}"
-        "PackageCode" = "8:{018FE03C-4BD6-4FB7-953D-0319A09E9271}"
+        "ProductCode" = "8:{EEE45E6C-FE85-4F36-8522-848BBB6B9C2A}"
+        "PackageCode" = "8:{92CA011D-8149-468E-86AE-B078F923222D}"
         "UpgradeCode" = "8:{18221954-2E4C-4C08-8D52-131154B26126}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.4.4"
+        "ProductVersion" = "8:1.4.5"
         "Manufacturer" = "8:Be"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

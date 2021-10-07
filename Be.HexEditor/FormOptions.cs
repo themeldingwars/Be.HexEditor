@@ -55,6 +55,7 @@ namespace Be.HexEditor
             dt.Rows.Add(strings.German, "de");
             dt.Rows.Add(strings.Japanese, "ja");
             dt.Rows.Add(strings.Russian, "ru");
+            dt.Rows.Add(strings.SimplifiedChinese, "zh-CN");
             dt.DefaultView.Sort = "Name";
 
             this.languageComboBox.DataSource = dt.DefaultView;
