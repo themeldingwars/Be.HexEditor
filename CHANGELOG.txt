@@ -1,0 +1,39 @@
+Version history
+
+1.1.2
+- Bug fix: Scrolling to the end is not working correctly.
+
+1.1.1
+- Bug fix: Scrolling does not work as expected.
+- Bug fix: Exclude border region during text drawing.
+- New feature: InsertActive-property
+
+1.1
+- Improvement: Removed gradient style feature.
+- New feature: ReadOnly property added
+- Improvement: Keys events are firing correctly now
+- New feature: Activate/Deactivate insert with "Insert"-key
+- Improvement: Changes in Tab-key processing
+- New feature: Mouse wheel support
+- Improvement: Simplified scrolling methods
+
+
+1.0.2
+- New feature: HexEditor can open files using the DynamicByteProvider
+- Improvement: IByteProvider is now extended with Changed event
+- Improvement: Themes.dll is replaced with Win32 API�s
+- Bug fix: Another cursor hidden bug fix
+- Bug fix: Cannot move up with "Up"-key on special conditions
+
+1.0.1
+- Bug fix: Caret is hidden sometimes
+
+1.0.0
+- Windows XP style added
+- Improved support for Copy and Paste
+- Bug fix: Find doesn't work correctly
+
+0.9.1
+- Checked against FxCop (2004-11-29)
+- New feature: HexFontEditor class added (2004-11-20)
+- Performance improvement: HexBox.Find method (2004-10-14)
