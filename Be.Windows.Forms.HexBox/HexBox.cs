@@ -1278,7 +1278,7 @@ namespace Be.Windows.Forms
 		/// </summary>
 		bool _insertActive;
 
-        public List<HighlightedRegion> HighligedRegions = new List<HighlightedRegion>();
+        public List<HighlightedRegion> HighlightedRegions = new List<HighlightedRegion>();
         #endregion
 
         #region Events
@@ -2571,7 +2571,7 @@ namespace Be.Windows.Forms
 				{
                     // Check if its in a higlighted region
                     bool paintedByte = false;
-                    foreach (var HiSection in HighligedRegions)
+                    foreach (var HiSection in HighlightedRegions)
                     {
                         if (HiSection.IsByteSelected(i))
                         {
